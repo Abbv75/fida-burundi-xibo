@@ -1,1 +1,0 @@
-export default (params: number) =>`${params.toLocaleString()} CFA`
