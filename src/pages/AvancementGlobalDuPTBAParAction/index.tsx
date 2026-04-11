@@ -1,31 +1,74 @@
-import { useEffect } from "react";
-import { PAGE_T } from "../../types";
-import Component from "./Component";
-import { usePageLooperStore } from "../../store/usePageLooperStore";
-import { useApiRequestStore } from "../../store/apiRequestStore";
+import { Stack, Typography, Grid } from '@mui/joy';
+import { API_mobile_activite_T } from '../../types';
+import { green } from '@mui/material/colors';
+import TableCustom from '../../components/TableCustome';
 
-export default function AvancementGlobalDuPTBAParAction() {
-    const { API_mobile_actionData } = useApiRequestStore();
-    const { addPages } = usePageLooperStore();
-
-    useEffect(() => {
-        if (!API_mobile_actionData || API_mobile_actionData.length === 0) return;
-
-        const chunkSize = 11;
-        const newPages: PAGE_T[] = [];
-
-        for (let i = 0; i < API_mobile_actionData.length; i += chunkSize) {
-            const chunk = API_mobile_actionData.slice(i, i + chunkSize);
-            newPages.push({
-                id: `AvancementGlobalDuPTBAParAction-${i}`,
-                component: <Component nbrPage={i / chunkSize + 1} API_mobile_actionData={chunk} />,
-                duration: 30000,
-                preload: true
-            });
-        }
-
-        addPages(newPages, 'AvancementGlobalDuPTBAParAction');
-    }, [API_mobile_actionData, addPages]);
-
-    return null;
+interface AvancementGlobalDuPTBAParActionProps {
+    API_mobile_actionData: API_mobile_activite_T[];
+    nbrPage?: number;
 }
+
+const AvancementGlobalDuPTBAParAction = ({ API_mobile_actionData, nbrPage }: AvancementGlobalDuPTBAParActionProps) => {
+    return (
+        <Stack sx={{ gap: 3, p: 3 }}>
+            <Typography
+                level="h4"
+                fontSize="2vw"
+                textColor={green[50]}
+                fontWeight={700}
+            >
+                Avancement global du PTBA par action (Page {nbrPage})
+            </Typography>
+
+            <Grid container>
+                <Grid xs={12} md={12}>
+                    <TableCustom
+                        columns={[
+                            {
+                                key: 'libelle',
+                                label: 'Libelle'
+                            },
+                            {
+                                key: 'etapes',
+                                label: 'Avancement'
+                            },
+                            {
+                                key: 'pourcentage_decaissement',
+                                label: 'Décaissement (%)'
+                            },
+                            {
+                                key: 'pourcentage_engagement',
+                                label: 'Engagement (%)'
+                            },
+                            {
+                                key: 'cout_prevu',
+                                label: 'Cout prévu'
+                            },
+                            {
+                                key: 'cout_realise',
+                                label: 'Cout réalisé',
+                            },
+                            {
+                                key: 'cout_engage',
+                                label: 'Cout engagé'
+                            },
+                        ]}
+                        data={API_mobile_actionData.map(d => ({
+                            ...d,
+                            cout_prevu: d.cout_prevu.toLocaleString(),
+                            cout_realise: d.cout_realise.toLocaleString(),
+                            cout_engage: d.cout_engage.toLocaleString(),
+                        }))}
+                        theadSx={{
+                            "& *": {
+                                fontSize: '1vw !important'
+                            }
+                        }}
+                    />
+                </Grid>
+            </Grid>
+        </Stack>
+    )
+}
+
+export default AvancementGlobalDuPTBAParAction;

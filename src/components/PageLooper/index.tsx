@@ -1,8 +1,8 @@
-import { LinearProgress, Sheet, Stack, Typography } from "@mui/joy";
+import { Stack } from "@mui/joy";
 import Header from "../Header";
 import ActionZone from "./ActionZone";
 import { usePageLooperStore } from "../../store/usePageLooperStore";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import Background from "./Background";
 import Timer from "./Timer";
 
@@ -12,23 +12,9 @@ const PageLooper = () => {
         currentIndex,
     } = usePageLooperStore();
 
-    const [showLoader, setshowLoader] = useState(true);
-
     const currentPage = useMemo(() => pages[currentIndex], [pages, currentIndex]);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setshowLoader(false);
-        }, 3000);
-
-        return () => clearTimeout(timer);
-    }, [])
-
-    if (showLoader) {
-        return (
-            <LinearProgress />
-        )
-    }
+    if (!currentPage) return null;
 
     return (
         <>
@@ -44,7 +30,11 @@ const PageLooper = () => {
             <Stack
                 width={'100%'}
                 height={'100vh'}
-                sx={{ overflow: 'hidden' }}
+                sx={{ 
+                    overflow: 'hidden',
+                    position: 'relative',
+                    zIndex: 1
+                }}
             >
                 {!currentPage.id.startsWith('accueil') && (<Header />)}
 
