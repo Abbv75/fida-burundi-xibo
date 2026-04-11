@@ -4,7 +4,7 @@ import Component from './Component';
 import { PAGE_T } from '../../types';
 
 export default () => {
-    const { setPages, ptba_ziboData } = usePageLooper();
+    const { addPages, ptba_ziboData } = usePageLooper();
 
     useEffect(() => {
         const newPages: PAGE_T[] = ptba_ziboData.map((value, index) => {
@@ -16,14 +16,7 @@ export default () => {
             }
         })
 
-        setPages(
-            (prev: PAGE_T[]) => [
-                ...prev.filter(
-                    ({ id }) => id != 'PTBA_ZIBO'
-                ),
-                ...newPages
-            ]
-        );
+        addPages(newPages, 'PTBA_ZIBO');
     }, [ptba_ziboData])
 
     return (null)

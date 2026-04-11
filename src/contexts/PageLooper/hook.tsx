@@ -1,10 +1,5 @@
-import { useContext } from 'react';
-import { Context } from './context';
+import { usePageLooperStore } from '../../store/usePageLooperStore';
 
 export default () => {
-    const contextInstance = useContext(Context);
-    if (contextInstance === undefined) {
-        throw new Error('usePageLooper must be used within an PageLooperProvider');
-    }
-    return contextInstance;
+    return usePageLooperStore();
 };

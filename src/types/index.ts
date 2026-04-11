@@ -2,6 +2,11 @@ import { Dispatch, SetStateAction } from "react";
 
 export type USE_STATE_T<T = any> = Dispatch<SetStateAction<T>>
 
+export type ZUSTAND_T<T> = {
+  (partial: T | Partial<T> | ((state: T) => T | Partial<T>), replace?: false): void;
+  (state: T | ((state: T) => T), replace: true): void;
+}
+
 export type LOADING_STATE_T = "En cours de chargement."
   | "Chargement finit."
   | "Chargement échoué."

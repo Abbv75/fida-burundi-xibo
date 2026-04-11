@@ -4,7 +4,7 @@ import Component from "./Component";
 import { PAGE_T } from "../../types";
 
 export default () => {
-    const { API_mobile_actionData, setPages } = usePageLooper();
+    const { API_mobile_actionData, set } = usePageLooper();
 
     useEffect(() => {
         if (!API_mobile_actionData || API_mobile_actionData.length === 0) return;
@@ -23,11 +23,13 @@ export default () => {
             });
         }
 
-        setPages(prev => [
-            ...prev.filter(p => !p.id.startsWith("AvancementGlobalDuPTBAParAction")),
-            ...newPages
-        ]);
-    }, [API_mobile_actionData, setPages]);
+        set({
+            pages: (prev: PAGE_T[]) => [
+                ...prev.filter(p => !p.id.startsWith("AvancementGlobalDuPTBAParAction")),
+                ...newPages
+            ]
+        });
+    }, [API_mobile_actionData, set]);
 
     return null;
 }

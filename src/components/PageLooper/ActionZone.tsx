@@ -14,11 +14,13 @@ import { usePageLooper } from "../../contexts/PageLooper";
 const ActionZone = () => {
     const {
         isPlaying,
-        setIsPlaying,
         pages,
         nextPage,
-        setCurrentIndex,
+        set,
     } = usePageLooper();
+
+    const setCurrentIndex = (index: number | ((prev: number) => number)) => set((state) => ({ currentIndex: typeof index === 'function' ? index(state.currentIndex) : index }));
+    const setIsPlaying = (isPlaying: boolean | ((prev: boolean) => boolean)) => set((state) => ({ isPlaying: typeof isPlaying === 'function' ? isPlaying(state.isPlaying) : isPlaying }));
 
     const prevPage = () => setCurrentIndex((prev: number) => (prev === 0 ? pages.length - 1 : prev - 1));
     const firstPage = () => setCurrentIndex(0);

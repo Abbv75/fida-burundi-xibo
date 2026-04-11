@@ -4,7 +4,7 @@ import Component from "./Component";
 import { PAGE_T } from "../../types";
 
 export default () => {
-    const { API_mobile_programmeData, setPages } = usePageLooper();
+    const { API_mobile_programmeData, set } = usePageLooper();
 
     useEffect(() => {
         if (!API_mobile_programmeData || API_mobile_programmeData.length === 0) return;
@@ -23,11 +23,13 @@ export default () => {
             });
         }
 
-        setPages(prev => [
-            ...prev.filter(p => !p.id.startsWith("AvancementGlobalDuPTBAParProgramme")),
-            ...newPages
-        ]);
-    }, [API_mobile_programmeData, setPages]);
+        set({
+            pages: (prev: PAGE_T[]) => [
+                ...prev.filter(p => !p.id.startsWith("AvancementGlobalDuPTBAParProgramme")),
+                ...newPages
+            ]
+        });
+    }, [API_mobile_programmeData, set]);
 
     return null;
 }

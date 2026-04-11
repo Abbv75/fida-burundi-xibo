@@ -4,7 +4,7 @@ import Component from "./Component";
 import { usePageLooper } from "../../contexts/PageLooper";
 
 export default () => {
-    const { setPages, suiviIndicateurData } = usePageLooper();
+    const { addPages, suiviIndicateurData } = usePageLooper();
 
     useEffect(() => {
         const newPages: PAGE_T[] = suiviIndicateurData.map(value => {
@@ -16,14 +16,7 @@ export default () => {
             }
         })
 
-        setPages(
-            (prev: PAGE_T[]) => [
-                ...prev.filter(
-                    ({ id }) => id != 'SuiviDesIndicateurs'
-                ),
-                ...newPages
-            ]
-        );
+        addPages(newPages, 'SuiviDesIndicateurs');
     }, [suiviIndicateurData])
 
     return null

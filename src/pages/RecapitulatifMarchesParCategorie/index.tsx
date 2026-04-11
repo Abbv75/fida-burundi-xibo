@@ -5,7 +5,7 @@ import { usePageLooper } from "../../contexts/PageLooper";
 import { transformPPMDataForVersion } from "../../helpers/transformPPMDataForVersion";
 
 export default () => {
-    const { setPages, API_mobile_ppmData } = usePageLooper();
+    const { addPages, API_mobile_ppmData } = usePageLooper();
 
     useEffect(() => {
         if (!API_mobile_ppmData) return;
@@ -29,10 +29,7 @@ export default () => {
             })
             .filter((p) => p !== null);
 
-        setPages(prev => [
-            ...prev.filter(p => !p.id.startsWith("RecapitulatifMarchesParCategorie")),
-            ...newPages
-        ]);
+        addPages(newPages, "RecapitulatifMarchesParCategorie");
     }, [API_mobile_ppmData]);
 
     return null
