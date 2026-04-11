@@ -8,7 +8,6 @@ import {
     SxProps,
     Theme,
 } from "@mui/material";
-import { green } from "@mui/material/colors";
 
 interface Column {
     label: string;
@@ -18,64 +17,89 @@ interface Column {
 
 interface TableCustomProps {
     columns: Column[];
-    data: Record<string, any>[] | 'gap'[];
+    data: (Record<string, any> | 'gap')[];
     theadSx?: SxProps<Theme>;
     tbodySx?: SxProps<Theme>;
 }
 
-
 const TableCustom: React.FC<TableCustomProps> = ({ columns, data, theadSx, tbodySx }) => {
     return (
-        <Table>
+        <Table sx={{ borderCollapse: 'separate', borderSpacing: '0 8px' }}>
             <TableHead
                 sx={[{
-                    bgcolor: green[900],
-                    color: 'white',
+                    '& .MuiTableCell-root': {
+                        background: 'rgba(0, 50, 20, 0.6) !important',
+                        backdropFilter: 'blur(10px)',
+                        color: '#ffd700',
+                        fontWeight: '900',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        fontSize: '1vw',
+                        borderBottom: 'none',
+                        padding: '1.2vw 1vw',
+                        '&:first-of-type': {
+                            borderTopLeftRadius: '12px',
+                            borderBottomLeftRadius: '12px',
+                        },
+                        '&:last-of-type': {
+                            borderTopRightRadius: '12px',
+                            borderBottomRightRadius: '12px',
+                        }
+                    }
                 }, theadSx as any]}
             >
                 <TableRow>
                     {columns.map((col) => (
                         <TableCell
                             key={col.key}
-                            sx={{
-                                color: "white",
-                                fontWeight: "bold",
-                                textTransform: "uppercase",
-                                fontSize: '1.5vw',
-                                paddingY: '1vw',
-                                paddingX: '1vw',
-                            }}
                             align={col.center ? "center" : "left"}
-                        >{col.label}</TableCell>
+                        >
+                            {col.label}
+                        </TableCell>
                     ))}
                 </TableRow>
             </TableHead>
             <TableBody sx={tbodySx}>
-
-                {data.map((row, idx) => row == 'gap'
+                {data.map((row, idx) => row === 'gap'
                     ? (
-                        <TableRow sx={{ p: 10 }} children={<TableCell sx={{ border: 0 }} />} />
+                        <TableRow key={`gap-${idx}`} sx={{ height: '1.5vw' }}>
+                            <TableCell colSpan={columns.length} sx={{ border: 0, p: 0 }} />
+                        </TableRow>
                     )
                     : (
                         <TableRow
                             key={idx}
                             sx={{
-                                backgroundColor: idx % 2 === 0 ? "#f5f5f5" : "white",
-                                "&:hover": {
-                                    backgroundColor: "#e3f2fd",
+                                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                backdropFilter: 'blur(5px)',
+                                transition: 'all 0.2s',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    transform: 'scale(1.002)',
                                 },
+                                '& .MuiTableCell-root': {
+                                    color: 'white',
+                                    borderBottom: 'none',
+                                    padding: '0.8vw 1vw',
+                                    fontSize: '0.9vw',
+                                    '&:first-of-type': {
+                                        borderTopLeftRadius: '10px',
+                                        borderBottomLeftRadius: '10px',
+                                    },
+                                    '&:last-of-type': {
+                                        borderTopRightRadius: '10px',
+                                        borderBottomRightRadius: '10px',
+                                    }
+                                }
                             }}
                         >
                             {columns.map((col) => (
                                 <TableCell
                                     key={col.key}
-                                    sx={{
-                                        fontSize: "1.2vw",
-                                        paddingY: '0.5vw',
-                                        paddingX: '1vw',
-                                    }}
                                     align={col.center ? "center" : "left"}
-                                >{row[col.key]}</TableCell>
+                                >
+                                    {row[col.key]}
+                                </TableCell>
                             ))}
                         </TableRow>
                     ))}
