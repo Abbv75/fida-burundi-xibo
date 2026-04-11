@@ -1,39 +1,39 @@
-import React from "react";
-import { Stack, Typography } from "@mui/joy";
-import { IMAGES } from "../../constant";
-import { CardMedia } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { useEffect } from "react";
+import { usePageLooper } from "../../contexts/PageLooper";
+import Summary from "./slides/Summary";
+import Piparvb from "./slides/Piparvb";
+import Proder from "./slides/Proder";
+import Paifarb from "./slides/Paifarb";
 
-const PageAccueil: React.FC = () => {
-    return (
-        <Stack
-            sx={{
-                gap: 4,
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-            }}
-            height="100vh"
-        >
+const PageAccueil = () => {
+    const { addPages } = usePageLooper();
 
-            <Stack direction="row" gap={'1vw'} justifyContent="center" alignContent={'center'} flexWrap="wrap">
-                {[IMAGES.logo, IMAGES.minister1, IMAGES.minister2].map(value => (
-                    <CardMedia
-                        component="img"
-                        src={value}
-                        sx={{ width: '10vw', height: "auto", objectFit: 'contain' }}
-                    />
-                ))}
-            </Stack>
+    useEffect(() => {
+        addPages([
+            {
+                id: "accueil-1-summary",
+                component: <Summary />,
+                duration: 20000,
+            },
+            {
+                id: "accueil-2-piparvb",
+                component: <Piparvb />,
+                duration: 25000,
+            },
+            {
+                id: "accueil-3-proder",
+                component: <Proder />,
+                duration: 25000,
+            },
+            {
+                id: "accueil-4-paifarb",
+                component: <Paifarb />,
+                duration: 25000,
+            }
+        ], "accueil-");
+    }, [addPages]);
 
-            <Typography level="h2" fontSize="3vw" fontWeight="lg" textColor={green[50]}>
-               Fonds Commun PSFE
-            </Typography>
-            <Typography level="h4" fontSize="2.5vw" fontWeight="md" textColor={green[50]}>
-                Programme sectoriel forêts et environnement du Cameroun
-            </Typography>
-        </Stack>
-    );
+    return null;
 };
 
 export default PageAccueil;

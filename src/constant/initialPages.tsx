@@ -1,7 +1,10 @@
 import AvancementGlobalDuPTBAParAction from "../pages/AvancementGlobalDuPTBAParAction";
 import AvancementGlobalDuPTBAParActivite from "../pages/AvancementGlobalDuPTBAParActivite";
 import AvancementGlobalDuPTBAParProgramme from "../pages/AvancementGlobalDuPTBAParProgramme";
-import PageAccueil from "../pages/PageAccueil";
+import Summary from "../pages/PageAccueil/slides/Summary";
+import Piparvb from "../pages/PageAccueil/slides/Piparvb";
+import Proder from "../pages/PageAccueil/slides/Proder";
+import Paifarb from "../pages/PageAccueil/slides/Paifarb";
 import RecapitulatifMarchesParCategorie from "../pages/RecapitulatifMarchesParCategorie";
 import SuiviDesIndicateurs from "../pages/SuiviDesIndicateurs";
 import SuiviPTBA from "../pages/SuiviPTBA";
@@ -10,9 +13,24 @@ import SuiviPTBAProgramme from "../pages/SuiviPTBAProgramme";
 
 export default [
     {
-        id: "accueil",
-        component: <PageAccueil />,
-        duration: 30000,
+        id: "accueil-summary",
+        component: <Summary />,
+        duration: 20000,
+    },
+    {
+        id: "accueil-piparvb",
+        component: <Piparvb />,
+        duration: 25000,
+    },
+    {
+        id: "accueil-proder",
+        component: <Proder />,
+        duration: 25000,
+    },
+    {
+        id: "accueil-paifarb",
+        component: <Paifarb />,
+        duration: 25000,
     },
     {
         id: "SuiviDesIndicateurs",
