@@ -1,14 +1,14 @@
-import { usePageLooperStore } from '../store/usePageLooperStore';
+import { useApiRequestStore } from '../store/apiRequestStore';
 import { getAllSuiviIndicateurs } from '../service/suiviIndicateurs';
 import { getSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { getSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { getRealisationCumule } from '../service/realisationCumule';
 import { getPtba_zibo } from '../service/ptba_zibo';
-import { getAPI_mobile_action, getAPI_mobile_activite, getAPI_mobile_ppm, getAPI_mobile_programme } from '../service/be_repport_api';
+import { getAPI_mobile_action, getAPI_mobile_activite, getAPI_mobile_programme } from '../service/be_repport_api';
 import { useCallback } from 'react';
 
 export const useLoadData = () => {
-    const { set } = usePageLooperStore();
+    const { set } = useApiRequestStore();
 
     const loadData = useCallback(async () => {
         const [
@@ -17,7 +17,6 @@ export const useLoadData = () => {
             ptbaProgramme,
             realisationCumule,
             ptba_zibo,
-            ppm,
             activite,
             action,
             programme
@@ -27,7 +26,6 @@ export const useLoadData = () => {
             getSuiviPTBAProgramme(),
             getRealisationCumule(),
             getPtba_zibo(),
-            getAPI_mobile_ppm(),
             getAPI_mobile_activite(),
             getAPI_mobile_action(),
             getAPI_mobile_programme()
@@ -39,7 +37,6 @@ export const useLoadData = () => {
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
             ptba_ziboData: ptba_zibo || [],
-            API_mobile_ppmData: ppm || undefined,
             API_mobile_activiteData: activite || [],
             API_mobile_actionData: action || [],
             API_mobile_programmeData: programme || []

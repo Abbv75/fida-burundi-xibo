@@ -2,11 +2,11 @@ import { Stack, Typography, Grid } from '@mui/joy';
 import { API_mobile_activite_T } from '../../types';
 import { green, grey } from '@mui/material/colors';
 import TableCustom from '../../components/TableCustome';
-import { usePageLooperStore } from '../../store/usePageLooperStore';
+import { useApiRequestStore } from '../../store/apiRequestStore';
 import findResponsableByActivite from '../../helpers/activitePTBA/findResponsableByActivite';
 
 const Component = ({ API_mobile_activiteData, nbrPage }: { API_mobile_activiteData: API_mobile_activite_T[], nbrPage?: number }) => {
-    const { ptba_ziboData } = usePageLooperStore();
+    const { ptba_ziboData } = useApiRequestStore();
 
     return (
         <Stack sx={{ gap: 3, p: 3 }}>

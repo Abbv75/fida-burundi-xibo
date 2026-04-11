@@ -6,7 +6,6 @@ import Piparvb from "../pages/PageAccueil/slides/Piparvb";
 import Proder from "../pages/PageAccueil/slides/Proder";
 import Paifarb from "../pages/PageAccueil/slides/Paifarb";
 import MissionSupervision from "../pages/MissionSupervision";
-import RecapitulatifMarchesParCategorie from "../pages/RecapitulatifMarchesParCategorie";
 import SuiviDesIndicateurs from "../pages/SuiviDesIndicateurs";
 import SuiviPTBA from "../pages/SuiviPTBA";
 import SuiviPTBAConsolide from "../pages/SuiviPTBAConsolide";
@@ -56,11 +55,6 @@ export default [
     {
         id: "PTBA_ZIBO",
         component: <SuiviPTBA />,
-        duration: 1000,
-    },
-    {
-        id: "RecapitulatifMarchesParCategorie",
-        component: <RecapitulatifMarchesParCategorie />,
         duration: 1000,
     },
     {

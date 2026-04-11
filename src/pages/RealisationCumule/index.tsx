@@ -1,11 +1,11 @@
-import { usePageLooperStore } from "../../store/usePageLooperStore";
+import { useApiRequestStore } from "../../store/apiRequestStore";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Stack, Typography, Grid } from "@mui/joy";
 import { green, red, grey } from "@mui/material/colors";
 
 export default function RealisationCumulee() {
-    const { realisationCumuleData } = usePageLooperStore();
+    const { realisationCumuleData } = useApiRequestStore();
 
     const indicateurs = realisationCumuleData?.indicateurs || [];
 

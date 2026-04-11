@@ -1,4 +1,4 @@
-import { usePageLooperStore } from "../../store/usePageLooperStore";
+import { useApiRequestStore } from "../../store/apiRequestStore";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Box, Stack, Typography } from "@mui/joy";
@@ -6,7 +6,7 @@ import { green, red, amber } from "@mui/material/colors";
 import TableCustom from "../../components/TableCustome";
 
 export default function SuiviPTBAProgramme() {
-    const { suiviPTBAProgramme } = usePageLooperStore();
+    const { suiviPTBAProgramme } = useApiRequestStore();
     const graph = suiviPTBAProgramme?.donnees_graphique;
 
     const categories = graph?.categories ?? [];

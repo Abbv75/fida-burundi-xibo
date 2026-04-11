@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { PAGE_T } from "../../types";
 import Component from "./Component";
 import { usePageLooperStore } from "../../store/usePageLooperStore";
+import { useApiRequestStore } from "../../store/apiRequestStore";
 
 export default () => {
-    const { addPages, suiviIndicateurData } = usePageLooperStore();
+    const { addPages } = usePageLooperStore();
+    const { suiviIndicateurData } = useApiRequestStore();
 
     useEffect(() => {
         const newPages: PAGE_T[] = suiviIndicateurData.map(value => {
@@ -17,7 +19,7 @@ export default () => {
         })
 
         addPages(newPages, 'SuiviDesIndicateurs');
-    }, [suiviIndicateurData])
+    }, [suiviIndicateurData, addPages])
 
     return null
 }
