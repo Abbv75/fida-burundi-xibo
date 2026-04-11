@@ -1,33 +1,83 @@
 import React from "react";
-import { Stack, Typography, List, ListItem } from "@mui/joy";
+import { Stack, Typography, Grid, Box } from "@mui/joy";
 import { IMAGES } from "../../../constant";
 import SlideLayout from "./SlideLayout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSeedling, faWater, faUsersGear, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const Piparvb: React.FC = () => {
+    const points = [
+        { icon: faSeedling, title: "Intensification", text: "Filières Riz, Maïs et Lait pour une productivité accrue." },
+        { icon: faWater, title: "Environnement", text: "Aménagement des bassins versants et protection des sols." },
+        { icon: faUsersGear, title: "Appui Rural", text: "Soutien direct aux coopératives et agriculteurs familiaux." },
+        { icon: faLocationDot, title: "Zones d'Action", text: "Impact direct à Karusi, Kayanza, Gitega, Ngozi et Muyinga." },
+    ];
+
     return (
         <SlideLayout
             backgroundImage={IMAGES.burundi_rice}
             title="PIPARV-B"
             subtitle="Intensification Agricole et Réduction de la Vulnérabilité"
         >
-            <Stack gap={3}>
-                <Typography sx={{ color: "white", fontSize: "1.6vw", fontWeight: "bold" }}>
-                    Transformer l'agriculture pour éradiquer la pauvreté.
-                </Typography>
-                
-                <Typography sx={{ color: "white", fontSize: "1.3vw" }}>
-                    Le projet se concentre sur l'augmentation durable des revenus et l'amélioration des conditions de vie des ménages vulnérables.
+            <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
+                <Typography 
+                    sx={{ 
+                        color: "white", 
+                        fontSize: "1.4vw", 
+                        lineHeight: 1.6,
+                        opacity: 0.9,
+                        maxWidth: '900px'
+                    }}
+                >
+                    PIPARV-B transforme les exploitations familiales en leviers de croissance durable en améliorant les rendements et la résilience climatique.
                 </Typography>
 
-                <List sx={{
-                    fontSize: "1.2vw",
-                    gap: 1
-                }}>
-                    <ListItem sx={{ color: "white" }}>• Aménagement des bassins versants et protection des sols.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Intensification des filières Riz, Maïs et Lait.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Appui direct aux coopératives et agriculteurs familiaux.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Présent dans : Karusi, Kayanza, Ngozi, Gitega et Muyinga.</ListItem>
-                </List>
+                <Grid container spacing={3} justifyContent="center" sx={{ width: '100%', maxWidth: '1100px' }}>
+                    {points.map((p, i) => (
+                        <Grid key={i} xs={12} sm={6}>
+                            <Box
+                                sx={{
+                                    p: 3,
+                                    borderRadius: "20px",
+                                    background: "rgba(255, 255, 255, 0.12)",
+                                    backdropFilter: "blur(10px)",
+                                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 3,
+                                    textAlign: 'left',
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        background: "rgba(255, 255, 255, 0.18)",
+                                        transform: 'translateY(-5px)',
+                                        borderColor: "rgba(255, 215, 0, 0.4)"
+                                    }
+                                }}
+                            >
+                                <Box sx={{ 
+                                    width: '4vw', 
+                                    height: '4vw', 
+                                    minWidth: '4vw',
+                                    borderRadius: '12px',
+                                    background: 'rgba(255,215,0,0.15)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    <FontAwesomeIcon icon={p.icon} color="#ffd700" style={{ fontSize: '2vw' }} />
+                                </Box>
+                                <Stack>
+                                    <Typography sx={{ color: "#ffd700", fontSize: "1.2vw", fontWeight: "800", mb: 0.2 }}>
+                                        {p.title}
+                                    </Typography>
+                                    <Typography sx={{ color: "rgba(255,255,255,0.85)", fontSize: "0.95vw", fontWeight: 400, lineHeight: 1.3 }}>
+                                        {p.text}
+                                    </Typography>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
             </Stack>
         </SlideLayout>
     );

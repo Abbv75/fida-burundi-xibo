@@ -1,30 +1,83 @@
 import React from "react";
-import { Stack, Typography, List, ListItem } from "@mui/joy";
+import { Stack, Typography, Grid, Box } from "@mui/joy";
 import { IMAGES } from "../../../constant";
 import SlideLayout from "./SlideLayout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket, faChartPie, faBriefcase, faChalkboardUser } from "@fortawesome/free-solid-svg-icons";
 
 const Proder: React.FC = () => {
+    const points = [
+        { icon: faRocket, title: "Nouveaux Emplois", text: "Favorise la création d'emplois durables pour les jeunes." },
+        { icon: faChartPie, title: "Transformation", text: "Appui à la valeur ajoutée et à l'industrialisation rurale." },
+        { icon: faBriefcase, title: "Micro-Entreprises", text: "Éclosion de structures rurales compétitives et modernes." },
+        { icon: faChalkboardUser, title: "Agribusiness", text: "Accompagnement technique pour une rentabilité optimale." },
+    ];
+
     return (
         <SlideLayout
             backgroundImage={IMAGES.burundi_entrepreneur}
             title="PRODER"
             subtitle="Développement de l’Entrepreneuriat Rural"
         >
-            <Stack gap={3}>
-                <Typography sx={{ color: "white", fontSize: "1.6vw", fontWeight: "bold" }}>
-                    Cultiver l'esprit d'entreprise dans le monde rural.
-                </Typography>
-                
-                <Typography sx={{ color: "white", fontSize: "1.3vw" }}>
-                    PRODER favorise la création d'emplois durables, particulièrement pour les jeunes et les femmes, à travers l'agribusiness.
+            <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
+                <Typography 
+                    sx={{ 
+                        color: "white", 
+                        fontSize: "1.4vw", 
+                        lineHeight: 1.6,
+                        opacity: 0.9,
+                        maxWidth: '900px'
+                    }}
+                >
+                    PRODER favorise la création d'emplois durables à travers l'agribusiness pour les jeunes et les femmes vulnérables du Burundi.
                 </Typography>
 
-                <List sx={{ fontSize: "1.2vw", gap: 1 }}>
-                    <ListItem sx={{ color: "white" }}>• Accompagnement technique et financier des jeunes ruraux.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Appui à la transformation et à la commercialisation.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Création de micro-entreprises rurales compétitives.</ListItem>
-                    <ListItem sx={{ color: "white" }}>• Rayonnement national pour une transformation inclusive.</ListItem>
-                </List>
+                <Grid container spacing={3} justifyContent="center" sx={{ width: '100%', maxWidth: '1100px' }}>
+                    {points.map((p, i) => (
+                        <Grid key={i} xs={12} sm={6}>
+                            <Box
+                                sx={{
+                                    p: 3,
+                                    borderRadius: "20px",
+                                    background: "rgba(255, 255, 255, 0.12)",
+                                    backdropFilter: "blur(10px)",
+                                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 3,
+                                    textAlign: 'left',
+                                    transition: 'all 0.3s ease',
+                                    '&:hover': {
+                                        background: "rgba(255, 255, 255, 0.18)",
+                                        transform: 'translateY(-5px)',
+                                        borderColor: "rgba(255, 215, 0, 0.4)"
+                                    }
+                                }}
+                            >
+                                <Box sx={{ 
+                                    width: '4vw', 
+                                    height: '4vw', 
+                                    minWidth: '4vw',
+                                    borderRadius: '12px',
+                                    background: 'rgba(255,215,0,0.15)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                    <FontAwesomeIcon icon={p.icon} color="#ffd700" style={{ fontSize: '2vw' }} />
+                                </Box>
+                                <Stack>
+                                    <Typography sx={{ color: "#ffd700", fontSize: "1.2vw", fontWeight: "800", mb: 0.2 }}>
+                                        {p.title}
+                                    </Typography>
+                                    <Typography sx={{ color: "rgba(255,255,255,0.85)", fontSize: "0.95vw", fontWeight: 400, lineHeight: 1.3 }}>
+                                        {p.text}
+                                    </Typography>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                    ))}
+                </Grid>
             </Stack>
         </SlideLayout>
     );
