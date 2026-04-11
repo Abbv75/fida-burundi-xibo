@@ -30,8 +30,8 @@ const Component = ({ data }: { data: PTBA_ZIBO_T }) => {
                 ...act,
                 total_prop_percent,
                 taux_decaissement_percent,
-                total_prop: LinearProgressCustom(total_prop_percent, colors[0]),
-                taux_decaissement: LinearProgressCustom(taux_decaissement_percent, colors[1]),
+                total_prop: <LinearProgressCustom value={total_prop_percent} progressColor={colors[0]} />,
+                taux_decaissement: <LinearProgressCustom value={taux_decaissement_percent} progressColor={colors[1]} />,
             };
         });
     }, [data]);
@@ -59,13 +59,13 @@ const Component = ({ data }: { data: PTBA_ZIBO_T }) => {
     const pieOptions: Highcharts.Options = useMemo(() => ({
         chart: {
             type: "pie",
-            backgroundColor: "white",
+            backgroundColor: "transparent", // Updated for Burundi design
             height: "70%",
             animation: false,
         },
         title: {
             text: "Répartition du taux de réalisation par activités",
-            style: { fontSize: "16px", fontWeight: "bold" },
+            style: { fontSize: "1vw", fontWeight: "bold", color: "#fff" },
         },
         tooltip: {
             pointFormat: "<b>{point.percentage:.1f}%</b> ({point.y}%)",
@@ -80,7 +80,8 @@ const Component = ({ data }: { data: PTBA_ZIBO_T }) => {
                     style: {
                         color: "white",
                         fontWeight: "bold",
-                        textOutline: "1px contrast",
+                        textOutline: "2px rgba(0,0,0,0.5)",
+                        fontSize: '0.8vw'
                     },
                 },
             },
@@ -99,11 +100,12 @@ const Component = ({ data }: { data: PTBA_ZIBO_T }) => {
         <Stack sx={{ gap: 3, p: 3 }}>
             <Typography
                 level="h4"
-                fontSize={"2vw"}
-                textColor={green[50]}
+                fontSize={"2.5vw"}
+                textColor={"white"}
                 fontWeight={300}
+                sx={{ textAlign: 'center' }}
             >
-                Suivi des tâches de <Typography fontWeight={700} textColor={green[50]} >{data.responsable}</Typography>
+                Suivi des tâches de <Typography fontWeight={900} textColor={"#ffd700"} >{data.responsable}</Typography>
             </Typography>
 
             <Grid container spacing={2}>
@@ -120,10 +122,20 @@ const Component = ({ data }: { data: PTBA_ZIBO_T }) => {
 
                 {!allZero && pieSeries?.length  && (
                     <Grid xs={12} md={4}>
-                        <HighchartsReact
-                            highcharts={Highcharts}
-                            options={pieOptions}
-                        />
+                         <Box 
+                            sx={{ 
+                                background: 'rgba(255, 255, 255, 0.03)',
+                                backdropFilter: 'blur(5px)',
+                                borderRadius: '24px',
+                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                p: 2
+                            }} 
+                        >
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={pieOptions}
+                            />
+                        </Box>
                     </Grid>
                 )}
             </Grid>

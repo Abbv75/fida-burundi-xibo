@@ -19,7 +19,7 @@ const Component = ({ data }: { data: SUIVI_INDICATEUR_T }) => {
         title: { text: "" },
 
         xAxis: {
-            categories,
+            categories: categories as any[],
             labels: { 
                 style: { 
                     fontSize: "1.2vw", 
@@ -28,7 +28,8 @@ const Component = ({ data }: { data: SUIVI_INDICATEUR_T }) => {
                 } 
             },
             lineColor: 'rgba(255,255,255,0.3)',
-        },
+            tickColor: 'rgba(255,255,255,0.3)',
+        } as any,
 
         yAxis: {
             min: 0,
