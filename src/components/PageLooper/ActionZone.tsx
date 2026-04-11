@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 
 const ActionZone = () => {
     const {
@@ -17,7 +17,7 @@ const ActionZone = () => {
         pages,
         nextPage,
         set,
-    } = usePageLooper();
+    } = usePageLooperStore();
 
     const setCurrentIndex = (index: number | ((prev: number) => number)) => set((state) => ({ currentIndex: typeof index === 'function' ? index(state.currentIndex) : index }));
     const setIsPlaying = (isPlaying: boolean | ((prev: boolean) => boolean)) => set((state) => ({ isPlaying: typeof isPlaying === 'function' ? isPlaying(state.isPlaying) : isPlaying }));
@@ -42,7 +42,7 @@ const ActionZone = () => {
 
         window.addEventListener("keydown", handleKey);
         return () => window.removeEventListener("keydown", handleKey);
-    }, [pages]);
+    }, [pages, nextPage]); // Added nextPage to dependencies
 
     return (
         < Sheet
@@ -63,30 +63,35 @@ const ActionZone = () => {
                 level="body-md"
                 textAlign={'center'}
                 fontSize={'1vw'}
+                sx={{ cursor: 'pointer' }}
                 onClick={() => setIsPlaying(p => !p)}
             ><FontAwesomeIcon icon={isPlaying ? faPause : faPlay} /> Tab</Typography>
             <Typography
                 level="body-md"
                 textAlign={'center'}
                 fontSize={'1vw'}
+                sx={{ cursor: 'pointer' }}
                 onClick={() => prevPage()}
             ><FontAwesomeIcon icon={faArrowLeft} /> Précédent</Typography>
             <Typography
                 level="body-md"
                 textAlign={'center'}
                 fontSize={'1vw'}
+                sx={{ cursor: 'pointer' }}
                 onClick={() => nextPage()}
             ><FontAwesomeIcon icon={faArrowRight} /> Suivant</Typography>
             <Typography
                 level="body-md"
                 textAlign={'center'}
                 fontSize={'1vw'}
+                sx={{ cursor: 'pointer' }}
                 onClick={() => lastPage()}
             ><FontAwesomeIcon icon={faArrowUp} /> Dernière</Typography>
             <Typography
                 level="body-md"
                 textAlign={'center'}
                 fontSize={'1vw'}
+                sx={{ cursor: 'pointer' }}
                 onClick={() => firstPage()}
 
             ><FontAwesomeIcon icon={faArrowDown} /> Première</Typography>

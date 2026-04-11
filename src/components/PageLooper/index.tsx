@@ -1,7 +1,7 @@
 import { LinearProgress, Sheet, Stack, Typography } from "@mui/joy";
 import Header from "../Header";
 import ActionZone from "./ActionZone";
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import { useEffect, useMemo, useState } from "react";
 import Background from "./Background";
 import Timer from "./Timer";
@@ -10,7 +10,7 @@ const PageLooper = () => {
     const {
         pages,
         currentIndex,
-    } = usePageLooper();
+    } = usePageLooperStore();
 
     const [showLoader, setshowLoader] = useState(true);
 

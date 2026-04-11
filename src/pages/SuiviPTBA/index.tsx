@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import usePageLooper from '../../contexts/PageLooper/hook';
+import { usePageLooperStore } from '../../store/usePageLooperStore';
 import Component from './Component';
 import { PAGE_T } from '../../types';
 
 export default () => {
-    const { addPages, ptba_ziboData } = usePageLooper();
+    const { addPages, ptba_ziboData } = usePageLooperStore();
 
     useEffect(() => {
         const newPages: PAGE_T[] = ptba_ziboData.map((value, index) => {

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { PAGE_T } from "../../types";
 import Component from "./Component";
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import { transformPPMDataForVersion } from "../../helpers/transformPPMDataForVersion";
 
 export default () => {
-    const { addPages, API_mobile_ppmData } = usePageLooper();
+    const { addPages, API_mobile_ppmData } = usePageLooperStore();
 
     useEffect(() => {
         if (!API_mobile_ppmData) return;

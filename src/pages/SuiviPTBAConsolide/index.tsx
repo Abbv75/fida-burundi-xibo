@@ -1,4 +1,4 @@
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Stack, Typography } from "@mui/joy";
@@ -6,7 +6,7 @@ import { blue, green, orange, red, purple, grey } from "@mui/material/colors";
 import { useMemo } from "react";
 
 export default function SuiviPTBAConsolide() {
-    const { suiviPTBAConsolide } = usePageLooper();
+    const { suiviPTBAConsolide } = usePageLooperStore();
     const graph = suiviPTBAConsolide?.donnees_graphique;
 
     const labels = graph?.series.map(s => s.name) ?? [];

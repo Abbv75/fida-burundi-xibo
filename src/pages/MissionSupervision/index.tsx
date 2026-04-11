@@ -1,4 +1,4 @@
-import { useMissionSupervision } from "../../service/mission_supervision";
+import { getMissionSupervision } from "../../service/mission_supervision";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Box, Stack, Typography, CircularProgress } from "@mui/joy";
@@ -7,7 +7,7 @@ import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
 export default function MissionSupervision() {
-    const { data: missionSupervisionData = [], isLoading } = useMissionSupervision();
+    const { data: missionSupervisionData = [], isLoading } = getMissionSupervision();
     
     if (isLoading) {
         return (

@@ -1,11 +1,11 @@
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Stack, Typography, Grid } from "@mui/joy";
 import { green, red, grey } from "@mui/material/colors";
 
 export default function RealisationCumulee() {
-    const { realisationCumuleData } = usePageLooper();
+    const { realisationCumuleData } = usePageLooperStore();
 
     const indicateurs = realisationCumuleData?.indicateurs || [];
 

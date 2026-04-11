@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { PAGE_T } from "../../types";
 import Component from "./Component";
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 
 export default () => {
-    const { addPages, suiviIndicateurData } = usePageLooper();
+    const { addPages, suiviIndicateurData } = usePageLooperStore();
 
     useEffect(() => {
         const newPages: PAGE_T[] = suiviIndicateurData.map(value => {

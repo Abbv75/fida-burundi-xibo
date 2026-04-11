@@ -1,10 +1,10 @@
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import { useEffect } from "react";
 import Component from "./Component";
 import { PAGE_T } from "../../types";
 
 export default () => {
-    const { API_mobile_activiteData, addPages } = usePageLooper();
+    const { API_mobile_activiteData, addPages } = usePageLooperStore();
 
     useEffect(() => {
         if (!API_mobile_activiteData || API_mobile_activiteData.length === 0) return;

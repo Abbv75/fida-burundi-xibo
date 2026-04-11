@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { usePageLooper } from "../../contexts/PageLooper";
+import { usePageLooperStore } from "../../store/usePageLooperStore";
 import Summary from "./slides/Summary";
 import Piparvb from "./slides/Piparvb";
 import Proder from "./slides/Proder";
 import Paifarb from "./slides/Paifarb";
 
 const PageAccueil = () => {
-    const { addPages } = usePageLooper();
+    const { addPages } = usePageLooperStore();
 
     useEffect(() => {
         addPages([
