@@ -1,35 +1,35 @@
 import React from "react";
 import { Stack, Typography, Grid, Box } from "@mui/joy";
-import { IMAGES } from "../../../constant";
-import SlideLayout from "./SlideLayout";
+import { IMAGES } from "../../constant";
+import SlideLayout from "./Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSeedling, faWater, faUsersGear, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faPiggyBank, faHandHoldingHeart, faUsers, faGlobeAfrica } from "@fortawesome/free-solid-svg-icons";
 
-const Piparvb: React.FC = () => {
+const Paifarb: React.FC = () => {
     const points = [
-        { icon: faSeedling, title: "Intensification", text: "Filières Riz, Maïs et Lait pour une productivité accrue." },
-        { icon: faWater, title: "Environnement", text: "Aménagement des bassins versants et protection des sols." },
-        { icon: faUsersGear, title: "Appui Rural", text: "Soutien direct aux coopératives et agriculteurs familiaux." },
-        { icon: faLocationDot, title: "Zones d'Action", text: "Impact direct à Karusi, Kayanza, Gitega, Ngozi et Muyinga." },
+        { icon: faPiggyBank, title: "Services Financiers", text: "Offre de crédit et d'épargne adaptée au milieu rural." },
+        { icon: faHandHoldingHeart, title: "Inclusion Sociale", text: "Inclusion des ménages vulnérables et des femmes." },
+        { icon: faUsers, title: "Renforcement IMF", text: "Renforcement des Institutions de Microfinance." },
+        { icon: faGlobeAfrica, title: "Assurance Agricole", text: "Promotion de la protection contre les risques climatiques." },
     ];
 
     return (
         <SlideLayout
-            backgroundImage={IMAGES.burundi_rice}
-            title="PIPARV-B"
-            subtitle="Intensification Agricole et Réduction de la Vulnérabilité"
+            backgroundImage={IMAGES.burundi_finance}
+            title="PAIFAR-B"
+            subtitle="Inclusion Financière Agricole et Rurale"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
-                <Typography 
-                    sx={{ 
-                        color: "white", 
-                        fontSize: "1.4vw", 
+                <Typography
+                    sx={{
+                        color: "white",
+                        fontSize: "1.4vw",
                         lineHeight: 1.6,
                         opacity: 0.9,
                         maxWidth: '900px'
                     }}
                 >
-                    PIPARV-B transforme les exploitations familiales en leviers de croissance durable en améliorant les rendements et la résilience climatique.
+                    PAIFAR-B comble le fossé entre les populations rurale et les institutions financières en démocratisant l'accès au crédit.
                 </Typography>
 
                 <Grid container spacing={3} justifyContent="center" sx={{ width: '100%', maxWidth: '1100px' }}>
@@ -54,9 +54,9 @@ const Piparvb: React.FC = () => {
                                     }
                                 }}
                             >
-                                <Box sx={{ 
-                                    width: '4vw', 
-                                    height: '4vw', 
+                                <Box sx={{
+                                    width: '4vw',
+                                    height: '4vw',
                                     minWidth: '4vw',
                                     borderRadius: '12px',
                                     background: 'rgba(255,215,0,0.15)',
@@ -83,4 +83,4 @@ const Piparvb: React.FC = () => {
     );
 };
 
-export default Piparvb;
+export default Paifarb;

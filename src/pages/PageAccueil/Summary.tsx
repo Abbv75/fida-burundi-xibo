@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Typography } from "@mui/joy";
-import { IMAGES } from "../../../constant";
-import SlideLayout from "./SlideLayout";
+import { IMAGES } from "../../constant";
+import SlideLayout from "./Layout";
 import { CardMedia } from "@mui/material";
 
 const Summary: React.FC = () => {
