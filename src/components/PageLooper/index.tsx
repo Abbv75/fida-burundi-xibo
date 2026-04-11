@@ -44,8 +44,9 @@ const PageLooper = () => {
             <Stack
                 width={'100%'}
                 height={'100vh'}
+                sx={{ overflow: 'hidden' }}
             >
-                {currentPage.id != 'accueil' && (<Header />)}
+                {!currentPage.id.startsWith('accueil') && (<Header />)}
 
                 {currentPage?.component}
             </Stack>

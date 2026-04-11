@@ -190,18 +190,49 @@ export interface transformPPMDataForVersion_T {
 }
 
 export interface API_mobile_activite_T {
-    code: string;
-    libelle: string;
-    etapes?: string;  // parfois "-"
-    etapes_valeur?: number;
-    indicateurs?: string; // parfois "-"
-    indicateurs_valeur?: number;
-    pourcentage_decaissement: string;
-    pourcentage_decaissement_valeur: number;
-    pourcentage_engagement: string;
-    pourcentage_engagement_valeur: number;
-    has_engagement_issue: boolean;
-    cout_prevu: number;
-    cout_realise: number;
-    cout_engage: number;
+  code: string;
+  libelle: string;
+  etapes?: string;  // parfois "-"
+  etapes_valeur?: number;
+  indicateurs?: string; // parfois "-"
+  indicateurs_valeur?: number;
+  pourcentage_decaissement: string;
+  pourcentage_decaissement_valeur: number;
+  pourcentage_engagement: string;
+  pourcentage_engagement_valeur: number;
+  has_engagement_issue: boolean;
+  cout_prevu: number;
+  cout_realise: number;
+  cout_engage: number;
+}
+
+export interface MISSION_SUPERVISION_T {
+  projet: {
+    id: string;
+    intitule: string;
+    sigle: string;
+  };
+  derniere_mission: {
+    id_mission: string;
+    type: string;
+    debut: string;
+    fin: string;
+    objet: string;
+    projet: string;
+  } | null;
+  recommandations: {
+    total: number;
+    statistiques: {
+      encours: number;
+      execute: number;
+      non_execute: number;
+      non_entame: number;
+      pourcentages: {
+        encours: number;
+        execute: number;
+        non_execute: number;
+        non_entame: number;
+      }
+    }
+  };
 }

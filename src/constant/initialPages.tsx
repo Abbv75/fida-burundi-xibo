@@ -5,6 +5,7 @@ import Summary from "../pages/PageAccueil/slides/Summary";
 import Piparvb from "../pages/PageAccueil/slides/Piparvb";
 import Proder from "../pages/PageAccueil/slides/Proder";
 import Paifarb from "../pages/PageAccueil/slides/Paifarb";
+import MissionSupervision from "../pages/MissionSupervision";
 import RecapitulatifMarchesParCategorie from "../pages/RecapitulatifMarchesParCategorie";
 import SuiviDesIndicateurs from "../pages/SuiviDesIndicateurs";
 import SuiviPTBA from "../pages/SuiviPTBA";
@@ -31,6 +32,11 @@ export default [
         id: "accueil-paifarb",
         component: <Paifarb />,
         duration: 25000,
+    },
+    {
+        id: "MissionSupervision",
+        component: <MissionSupervision />,
+        duration: 30000,
     },
     {
         id: "SuiviDesIndicateurs",

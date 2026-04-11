@@ -14,7 +14,7 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
         <Box
             sx={{
                 width: "100%",
-                height: "100vh",
+                height: "100%", // Changed from 100vh to 100% to fit flex parent
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -22,6 +22,7 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                 alignItems: "center",
                 justifyContent: "center",
                 position: "relative",
+                overflow: "hidden",
                 "&::before": {
                     content: '""',
                     position: "absolute",
@@ -29,7 +30,7 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    backgroundColor: "rgba(0, 0, 0, 0.4)", // Dark overlay for readability
+                    backgroundColor: "rgba(0, 0, 0, 0.4)",
                 },
             }}
         >
@@ -37,26 +38,26 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                 sx={{
                     position: "relative",
                     zIndex: 1,
-                    width: "80%",
-                    maxWidth: "1200px",
-                    p: 6,
+                    width: "85%",
+                    maxWidth: "1400px",
+                    p: 4, // Slightly reduced padding
                     borderRadius: "24px",
-                    background: "rgba(255, 255, 255, 0.1)", // Glassmorphism
+                    background: "rgba(255, 255, 255, 0.1)",
                     backdropFilter: "blur(20px)",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-                    gap: 4,
+                    gap: 3, // Slightly reduced gap
                 }}
             >
                 <Stack>
                     <Typography
                         level="h1"
                         sx={{
-                            fontSize: "4vw",
+                            fontSize: "3.5vw", // Slightly smaller
                             fontWeight: "900",
                             color: "#fff",
                             textShadow: "2px 2px 10px rgba(0,0,0,0.5)",
-                            mb: 1,
+                            mb: 0.5,
                         }}
                     >
                         {title}
@@ -65,11 +66,11 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                         <Typography
                             level="h4"
                             sx={{
-                                fontSize: "1.8vw",
+                                fontSize: "1.5vw", // Slightly smaller
                                 fontWeight: "500",
                                 color: green[200],
                                 textTransform: "uppercase",
-                                letterSpacing: "0.2rem",
+                                letterSpacing: "0.15rem",
                             }}
                         >
                             {subtitle}
@@ -77,7 +78,7 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                     )}
                 </Stack>
 
-                <Box sx={{ color: "#fff", fontSize: "1.4vw", lineHeight: 1.6 }}>
+                <Box sx={{ color: "#fff", fontSize: "1.2vw", lineHeight: 1.5, minHeight: 0 }}>
                     {children}
                 </Box>
             </Stack>

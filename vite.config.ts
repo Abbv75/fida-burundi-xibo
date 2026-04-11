@@ -8,8 +8,25 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    proxy: {
+      '/api-piparvb': {
+        target: 'https://piparvb.fidaburundi.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-piparvb/, ''),
+      },
+      '/api-proder': {
+        target: 'https://proder.fidaburundi.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-proder/, ''),
+      },
+      '/api-paifarb': {
+        target: 'https://paifarb.fidaburundi.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-paifarb/, ''),
+      },
+    },
   },
   build: {
-    outDir: 'build', // Keeping it 'build' to match CRA's default if preferred, or 'dist'
+    outDir: 'build',
   },
 });
