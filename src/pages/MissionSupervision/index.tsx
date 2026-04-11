@@ -1,19 +1,20 @@
-import { getMissionSupervision } from "../../service/mission_supervision";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Box, Stack, Typography, CircularProgress } from "@mui/joy";
+import { Box, Stack, Typography } from "@mui/joy";
 import Marquee from "react-fast-marquee";
 import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
+import { useApiRequestStore } from "../../store/apiRequestStore";
 
 export default function MissionSupervision() {
-    const { data: missionSupervisionData = [], isLoading } = getMissionSupervision();
+    const { missionSupervisionData } = useApiRequestStore();
     
-    if (isLoading) {
+    if (!missionSupervisionData || missionSupervisionData.length === 0) {
         return (
             <Stack sx={{ height: '70vh', justifyContent: 'center', alignItems: 'center' }}>
-                <CircularProgress size="lg" />
-                <Typography level="body-lg" sx={{ color: '#fff', mt: 2 }}>Chargement des données de supervision...</Typography>
+                <Typography level="h4" sx={{ color: '#fff', opacity: 0.7 }}>
+                    Aucune donnée de supervision disponible.
+                </Typography>
             </Stack>
         );
     }
@@ -186,8 +187,6 @@ export default function MissionSupervision() {
                 </Typography>
             </Box>
 
-            
-
             <Box 
                 sx={{ 
                     flex: 1, 
@@ -196,25 +195,17 @@ export default function MissionSupervision() {
                     width: '100%',
                 }}
             >
-                {missionSupervisionData.length > 0 ? (
-                    <HighchartsReact 
-                        highcharts={Highcharts} 
-                        options={options} 
-                        containerProps={{ 
-                            style: { 
-                                height: "100%", 
-                                width: "100%", 
-                                position: 'absolute'
-                            } 
-                        }}
-                    />
-                ) : (
-                    <Stack sx={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Typography level="h4" sx={{ color: '#fff', opacity: 0.7 }}>
-                            Chargement des données...
-                        </Typography>
-                    </Stack>
-                )}
+                <HighchartsReact 
+                    highcharts={Highcharts} 
+                    options={options} 
+                    containerProps={{ 
+                        style: { 
+                            height: "100%", 
+                            width: "100%", 
+                            position: 'absolute'
+                        } 
+                    }}
+                />
             </Box>
 
             {/* Scrolling Mission Info */}

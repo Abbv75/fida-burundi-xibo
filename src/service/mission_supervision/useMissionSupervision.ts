@@ -41,7 +41,7 @@ const fetchMissionSupervision = async (): Promise<MISSION_SUPERVISION_T[]> => {
   }
 };
 
-export const getMissionSupervision = () => {
+export const useMissionSupervision = () => {
     return useQuery({
         queryKey: ["missionSupervision"],
         queryFn: fetchMissionSupervision,

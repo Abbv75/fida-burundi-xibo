@@ -5,6 +5,7 @@ import { useSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { useRealisationCumule } from '../service/realisationCumule';
 import { usePtbaZibo } from '../service/ptba_zibo';
 import { useApiMobileAction, useApiMobileActivite, useApiMobileProgramme } from '../service/be_repport_api';
+import { useMissionSupervision } from '../service/mission_supervision';
 import { useCallback } from 'react';
 
 export const useLoadData = () => {
@@ -19,6 +20,7 @@ export const useLoadData = () => {
     const { refetch: refetchActivite } = useApiMobileActivite();
     const { refetch: refetchAction } = useApiMobileAction();
     const { refetch: refetchProgramme } = useApiMobileProgramme();
+    const { refetch: refetchMissionSupervision } = useMissionSupervision();
 
     const loadData = useCallback(async () => {
         // We trigger refetch for all and wait for the results
@@ -30,7 +32,8 @@ export const useLoadData = () => {
             { data: ptba_zibo },
             { data: activite },
             { data: action },
-            { data: programme }
+            { data: programme },
+            { data: missionSupervision }
         ] = await Promise.all([
             refetchIndicateurs(),
             refetchPTBAConsolide(),
@@ -39,7 +42,8 @@ export const useLoadData = () => {
             refetchPtbaZibo(),
             refetchActivite(),
             refetchAction(),
-            refetchProgramme()
+            refetchProgramme(),
+            refetchMissionSupervision()
         ]);
 
         set({
@@ -50,7 +54,8 @@ export const useLoadData = () => {
             ptba_ziboData: ptba_zibo || [],
             API_mobile_activiteData: activite || [],
             API_mobile_actionData: action || [],
-            API_mobile_programmeData: programme || []
+            API_mobile_programmeData: programme || [],
+            missionSupervisionData: missionSupervision || []
         });
     }, [
         set, 
@@ -61,7 +66,8 @@ export const useLoadData = () => {
         refetchPtbaZibo, 
         refetchActivite, 
         refetchAction, 
-        refetchProgramme
+        refetchProgramme,
+        refetchMissionSupervision
     ]);
 
     return { loadData };
