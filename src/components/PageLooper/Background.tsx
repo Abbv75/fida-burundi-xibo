@@ -14,7 +14,7 @@ export default () => {
             >
                 <CardCover
                     component={'img'}
-                    src={IMAGES.backgroundForet}
+                    src={IMAGES.burundi_hills}
                 />
                 <CardCover>
                     <Box

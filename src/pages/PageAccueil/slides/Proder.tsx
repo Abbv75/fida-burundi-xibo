@@ -19,11 +19,11 @@ const Proder: React.FC = () => {
                     PRODER favorise la création d'emplois durables, particulièrement pour les jeunes et les femmes, à travers l'agribusiness.
                 </Typography>
 
-                <List sx={{ color: "white", fontSize: "1.2vw", gap: 1 }}>
-                    <ListItem>• Accompagnement technique et financier des jeunes ruraux.</ListItem>
-                    <ListItem>• Appui à la transformation et à la commercialisation.</ListItem>
-                    <ListItem>• Création de micro-entreprises rurales compétitives.</ListItem>
-                    <ListItem>• Rayonnement national pour une transformation inclusive.</ListItem>
+                <List sx={{ fontSize: "1.2vw", gap: 1 }}>
+                    <ListItem sx={{ color: "white" }}>• Accompagnement technique et financier des jeunes ruraux.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Appui à la transformation et à la commercialisation.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Création de micro-entreprises rurales compétitives.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Rayonnement national pour une transformation inclusive.</ListItem>
                 </List>
             </Stack>
         </SlideLayout>

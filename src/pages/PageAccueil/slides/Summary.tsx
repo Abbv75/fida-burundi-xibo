@@ -43,13 +43,13 @@ const Summary: React.FC = () => {
                     ))}
                 </Stack>
 
-                <Stack direction="row" gap={4} justifyContent="center" sx={{ mt: 2 }}>
-                    {[IMAGES.logo, IMAGES.minister1, IMAGES.minister2].map((img, index) => (
+                <Stack direction="row" gap={4} justifyContent="center" >
+                    {[IMAGES.armoirie, IMAGES.logo_fida].map((img, index) => (
                         <CardMedia
                             key={index}
                             component="img"
                             src={img}
-                            sx={{ width: "8vw", height: "auto", objectFit: "contain", filter: "brightness(0) invert(1)" }}
+                            sx={{ width: "8vw", height: "auto", objectFit: "contain", }}
                         />
                     ))}
                 </Stack>

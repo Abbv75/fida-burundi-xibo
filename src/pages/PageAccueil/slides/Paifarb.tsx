@@ -19,11 +19,11 @@ const Paifarb: React.FC = () => {
                     PAIFAR-B comble le fossé entre les populations rurales et les institutions financières.
                 </Typography>
 
-                <List sx={{ color: "white", fontSize: "1.2vw", gap: 1 }}>
-                    <ListItem>• Amélioration de l'offre de crédit et d'épargne en milieu rural.</ListItem>
-                    <ListItem>• Renforcement des Institutions de Microfinance (IMF).</ListItem>
-                    <ListItem>• Promotion de l'assurance agricole et de l'éducation financière.</ListItem>
-                    <ListItem>• Inclusion des ménages très vulnérables et des femmes.</ListItem>
+                <List sx={{ fontSize: "1.2vw", gap: 1 }}>
+                    <ListItem sx={{ color: "white" }}>• Amélioration de l'offre de crédit et d'épargne en milieu rural.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Renforcement des Institutions de Microfinance (IMF).</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Promotion de l'assurance agricole et de l'éducation financière.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Inclusion des ménages très vulnérables et des femmes.</ListItem>
                 </List>
             </Stack>
         </SlideLayout>

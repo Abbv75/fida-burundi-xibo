@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Grid, Stack, Typography } from "@mui/joy";
 import { IMAGES } from "../../constant";
 import { green, red, yellow } from "@mui/material/colors";
+import { CardMedia } from "@mui/material";
 
 const Header: React.FC = () => {
     return (
@@ -20,12 +21,17 @@ const Header: React.FC = () => {
             >
                 {/* Logo projet */}
                 <Stack gap={1} direction={'row'} >
-                    {[IMAGES.logo, IMAGES.minister1, IMAGES.minister2].map((logo, index) => (
-                        <Box
+                    {[IMAGES.armoirie, IMAGES.logo_fida].map((logo, index) => (
+                        <CardMedia
+                            key={index}
                             component="img"
                             src={logo}
                             alt=""
-                            sx={{ height: '3vw', width: "auto" }}
+                            sx={{
+                                height: '3vw',
+                                width: "auto",
+                                filter: "brightness(0) invert(1)"
+                            }}
                         />
                     ))}
                 </Stack>
@@ -34,22 +40,20 @@ const Header: React.FC = () => {
                 {/* Titre du projet */}
                 <Stack spacing={0} sx={{ textAlign: "center" }}>
                     <Typography level="h4" fontWeight="lg" fontSize={'1.2vw'} textColor={green[50]}>
-                        PSFE Cameroun
+                        Programmes FIDA Burundi
                     </Typography>
                     <Typography level="body-md" fontWeight="md" fontSize={'1vw'} textColor={green[50]}>
-                        Programme sectoriel forêts et environnement du Cameroun
+                        Projets PIPARV-B, PRODER et PAIFAR-B
                     </Typography>
                 </Stack>
 
                 {/* Logos bailleurs / partenaires */}
-                <Stack direction="row" spacing={2}>
-                    <Box component="img" src={IMAGES.Flag_of_Cameroon} alt="Flag_of_Cameroon" sx={{ height: '3vw', width: "auto" }} />
-                    {/* <Box component="img" src="/assets/bailleur2.png" alt="Bailleur 2" sx={{ height: 50, width: "auto" }} /> */}
-                    {/* Ajouter d'autres bailleurs si nécessaire */}
+                <Stack direction="row" spacing={2} alignItems="center">
+                    <Box component="img" src={IMAGES.flag_burundi} alt="Flag_of_Burundi" sx={{ height: '2.5vw', width: "auto" }} />
                 </Stack>
             </Stack>
             <Grid container >
-                {[green[700], red[700], yellow[700]].map((color, index) => (
+                {['#009b3a', '#ffffff', '#ce1126'].map((color, index) => (
                     <Grid xs={4} p={'5px'} bgcolor={color} key={index} />
                 ))}
             </Grid>

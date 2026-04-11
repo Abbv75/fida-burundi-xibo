@@ -19,11 +19,14 @@ const Piparvb: React.FC = () => {
                     Le projet se concentre sur l'augmentation durable des revenus et l'amélioration des conditions de vie des ménages vulnérables.
                 </Typography>
 
-                <List sx={{ color: "white", fontSize: "1.2vw", gap: 1 }}>
-                    <ListItem>• Aménagement des bassins versants et protection des sols.</ListItem>
-                    <ListItem>• Intensification des filières Riz, Maïs et Lait.</ListItem>
-                    <ListItem>• Appui direct aux coopératives et agriculteurs familiaux.</ListItem>
-                    <ListItem>• Présent dans : Karusi, Kayanza, Ngozi, Gitega et Muyinga.</ListItem>
+                <List sx={{
+                    fontSize: "1.2vw",
+                    gap: 1
+                }}>
+                    <ListItem sx={{ color: "white" }}>• Aménagement des bassins versants et protection des sols.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Intensification des filières Riz, Maïs et Lait.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Appui direct aux coopératives et agriculteurs familiaux.</ListItem>
+                    <ListItem sx={{ color: "white" }}>• Présent dans : Karusi, Kayanza, Ngozi, Gitega et Muyinga.</ListItem>
                 </List>
             </Stack>
         </SlideLayout>
