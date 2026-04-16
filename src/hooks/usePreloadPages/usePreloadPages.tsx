@@ -50,7 +50,7 @@ export const usePreloadPages = () => {
                 allPages.push(...indicateurPages);
             } catch (e) { console.error("Failed to register Indicators:", e); }
 
-            // ✨ INTERLEAVE: Impact Agri (Reliable Data from Search)
+            // INTERLEAVE: Impact Agri (Reliable Data from Search)
             allPages.push({ 
                 id: "impact-agri", 
                 component: <FeatureSlide 
@@ -69,7 +69,7 @@ export const usePreloadPages = () => {
                 allPages.push(...ptbaPages);
             } catch (e) { console.error("Failed to register PTBA:", e); }
 
-            // ✨ INTERLEAVE: Impact Proder (Reliable Data from Search)
+            // INTERLEAVE: Impact Proder (Reliable Data from Search)
             allPages.push({ 
                 id: "impact-proder", 
                 component: <FeatureSlide 
