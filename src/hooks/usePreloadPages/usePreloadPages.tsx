@@ -55,26 +55,26 @@ export const usePreloadPages = () => {
 
             // --- STEP 3: Granular & Isolated Dynamic Registration ---
             // Indicators
-            try {
-                const indicateurPages = registerSuiviIndicateurs(data.suiviIndicateurData);
-                allPages.push(...indicateurPages);
-            } catch (e) { console.error("Failed to register Indicators:", e); }
-            setPercentageLoadingValue(65);
+            // try {
+            //     const indicateurPages = registerSuiviIndicateurs(data.suiviIndicateurData);
+            //     allPages.push(...indicateurPages);
+            // } catch (e) { console.error("Failed to register Indicators:", e); }
+            // setPercentageLoadingValue(65);
 
-            // PTBA Tasks
-            try {
-                const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
-                allPages.push(...ptbaPages);
-            } catch (e) { console.error("Failed to register PTBA:", e); }
-            setPercentageLoadingValue(80);
+            // // PTBA Tasks
+            // try {
+            //     const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
+            //     allPages.push(...ptbaPages);
+            // } catch (e) { console.error("Failed to register PTBA:", e); }
+            // setPercentageLoadingValue(80);
 
-            // Global Progress
-            try {
-                const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
-                const actionPages = registerAvancementAction(data.API_mobile_actionData);
-                const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
-                allPages.push(...activitePages, ...actionPages, ...programmePages);
-            } catch (e) { console.error("Failed to register Global Progress:", e); }
+            // // Global Progress
+            // try {
+            //     const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
+            //     const actionPages = registerAvancementAction(data.API_mobile_actionData);
+            //     const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
+            //     allPages.push(...activitePages, ...actionPages, ...programmePages);
+            // } catch (e) { console.error("Failed to register Global Progress:", e); }
 
             // Suivi des Projets
             try {
