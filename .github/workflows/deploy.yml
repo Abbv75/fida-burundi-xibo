@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
@@ -25,7 +25,9 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_PIPARVB_URL: ${{ secrets.VITE_PIPARVB_URL }}
+          VITE_PRODER_URL: ${{ secrets.VITE_PRODER_URL }}
+          VITE_PAIFARB_URL: ${{ secrets.VITE_PAIFARB_URL }}
 
       - name: Upload build folder via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -36,4 +38,3 @@ jobs:
           local-dir: ./build/
           server-dir: /
           protocol: ftp
-
