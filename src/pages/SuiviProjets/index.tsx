@@ -73,12 +73,12 @@ export default function SuiviProjets() {
                 sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}
             >
                 {/* Left: Table */}
-                <Grid xs={12} md={4} >
+                <Grid xs={12} md={7} >
                     <TablePanel projets={projets} />
                 </Grid>
 
                 {/* Right: Chart */}
-                <Grid xs={12} md={8} sx={{ display: 'flex' }} flex={1} >
+                <Grid xs={12} md={5} sx={{ display: 'flex' }} flex={1} >
                     <ChartPanel projets={projets} />
                 </Grid>
             </Grid>

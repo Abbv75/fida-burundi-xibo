@@ -19,6 +19,7 @@ export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (
             height: "100%",
             display: "flex",
             flexDirection: "column",
+            flex : 1
         }}
     >
         {/* Header */}

@@ -112,6 +112,7 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
+                flex : 1
             }}
         >
             <Box
