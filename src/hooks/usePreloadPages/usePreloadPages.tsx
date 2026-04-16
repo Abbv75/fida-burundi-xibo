@@ -16,6 +16,7 @@ import Piparvb from '../../pages/PageAccueil/Piparvb';
 import Proder from '../../pages/PageAccueil/Proder';
 import Paifarb from '../../pages/PageAccueil/Paifarb';
 import MissionSupervision from '../../pages/MissionSupervision';
+import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
 
 export const usePreloadPages = () => {
@@ -75,13 +76,24 @@ export const usePreloadPages = () => {
                 allPages.push(...activitePages, ...actionPages, ...programmePages);
             } catch (e) { console.error("Failed to register Global Progress:", e); }
 
-            // PTBA Consolidé
+            // Suivi des Projets
+            try {
+                if (data.suiviProjetsData.length > 0) {
+                    allPages.push({
+                        id: "suivi-projets-1",
+                        component: <SuiviProjets />,
+                        duration: 35000
+                    });
+                }
+            } catch (e) { console.error("Failed to register Suivi Projets:", e); }
+
+            // PTBA Consolidé (REAL)
             try {
                 if (data.suiviPTBAConsolide.length > 0) {
                     allPages.push({
                         id: "suivi-ptba-consolide-1",
                         component: <SuiviPTBAConsolide />,
-                        duration: 40000
+                        duration: 45000
                     });
                 }
             } catch (e) { console.error("Failed to register PTBA Consolidé:", e); }

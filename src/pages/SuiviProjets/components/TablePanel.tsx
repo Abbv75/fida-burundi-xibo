@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Typography } from "@mui/joy";
-import { ProjetConsolideEntry } from "../../../service/suiviPTBAConsolide";
+import { ProjetSimpleEntry } from "../../../service/suiviProjets";
 import { PALETTE } from "./constants";
 import { fmt, ProgressBar } from "./Utils";
 
 interface TablePanelProps {
-    projets: ProjetConsolideEntry[];
+    projets: ProjetSimpleEntry[];
 }
 
 export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (

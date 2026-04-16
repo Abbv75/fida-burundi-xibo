@@ -1,5 +1,6 @@
 import { useApiRequestStore } from '../store/apiRequestStore';
 import { useSuiviIndicateurs } from '../service/suiviIndicateurs';
+import { useSuiviProjets } from '../service/suiviProjets';
 import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { useRealisationCumule } from '../service/realisationCumule';
@@ -13,6 +14,7 @@ export const useLoadData = () => {
 
     // Instantiate all TanStack Query hooks at the top level
     const { refetch: refetchIndicateurs } = useSuiviIndicateurs();
+    const { refetch: refetchProjets } = useSuiviProjets();
     const { refetch: refetchPTBAConsolide } = useSuiviPTBAConsolide();
     const { refetch: refetchPTBAProgramme } = useSuiviPTBAProgramme();
     const { refetch: refetchRealisation } = useRealisationCumule();
@@ -26,6 +28,7 @@ export const useLoadData = () => {
         // We trigger refetch for all and wait for the results
         const [
             { data: suiviIndicateur },
+            { data: suiviProjets },
             { data: ptbaConsolide },
             { data: ptbaProgramme },
             { data: realisationCumule },
@@ -36,6 +39,7 @@ export const useLoadData = () => {
             { data: missionSupervision }
         ] = await Promise.all([
             refetchIndicateurs(),
+            refetchProjets(),
             refetchPTBAConsolide(),
             refetchPTBAProgramme(),
             refetchRealisation(),
@@ -48,6 +52,7 @@ export const useLoadData = () => {
 
         set({
             suiviIndicateurData: suiviIndicateur || [],
+            suiviProjetsData: suiviProjets || [],
             suiviPTBAConsolide: ptbaConsolide || [],
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
@@ -60,6 +65,7 @@ export const useLoadData = () => {
     }, [
         set, 
         refetchIndicateurs, 
+        refetchProjets,
         refetchPTBAConsolide, 
         refetchPTBAProgramme, 
         refetchRealisation, 
