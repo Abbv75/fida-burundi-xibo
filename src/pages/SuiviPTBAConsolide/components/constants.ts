@@ -1,4 +1,4 @@
-export const PTBA_PALETTE = [
+export const PALETTE = [
     "#4CAF91", // teal-green
     "#F5A623", // amber
     "#E05252", // red

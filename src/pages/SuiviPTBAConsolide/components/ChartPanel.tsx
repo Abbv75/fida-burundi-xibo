@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
-import { Box } from "@mui/joy";
+import { Box, Typography } from "@mui/joy";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { ProjetConsolideEntry } from "../../service/suiviPTBAConsolide";
-import { PTBA_PALETTE } from "../../constant/ptbaColors";
+import { ProjetConsolideEntry } from "../../../service/suiviPTBAConsolide";
+import { PALETTE } from "./constants";
 
 interface ChartPanelProps {
     projets: ProjetConsolideEntry[];
@@ -11,7 +11,7 @@ interface ChartPanelProps {
 
 export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
     const chartColors = useMemo(
-        () => projets.map((_, i) => PTBA_PALETTE[i % PTBA_PALETTE.length]),
+        () => projets.map((_, i) => PALETTE[i % PALETTE.length]),
         [projets]
     );
 
@@ -23,17 +23,17 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 animation: false,
                 spacingBottom: 20,
                 spacingTop: 10,
-                spacingLeft: 0,
-                spacingRight: 10,
+                spacingLeft: 20,
+                spacingRight: 20,
             },
             title: { text: "" },
             xAxis: {
                 categories: projets.map((p) => p.sigle),
                 labels: {
                     style: {
-                        fontSize: "1vw",
-                        color: "#fff",
-                        fontWeight: "bold",
+                        fontSize: "0.85vw",
+                        color: "rgba(255,255,255,0.7)",
+                        fontWeight: "500",
                     },
                 },
                 lineColor: "rgba(255,255,255,0.2)",
@@ -43,14 +43,14 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 min: 0,
                 max: 100,
                 title: {
-                    text: "Taux de réalisation (%)",
-                    style: { color: "rgba(255,255,255,0.6)", fontSize: "0.85vw" },
+                    text: "Pourcentage (%)",
+                    style: { color: "rgba(255,255,255,0.5)", fontSize: "0.75vw" },
                 },
                 labels: {
-                    style: { color: "rgba(255,255,255,0.6)", fontSize: "0.8vw" },
+                    style: { color: "rgba(255,255,255,0.4)", fontSize: "0.7vw" },
                     format: "{value}%",
                 },
-                gridLineColor: "rgba(255,255,255,0.07)",
+                gridLineColor: "rgba(255,255,255,0.05)",
             },
             legend: { enabled: false },
             tooltip: {
@@ -73,15 +73,15 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                         style: {
                             color: "#fff",
                             fontWeight: "bold",
-                            fontSize: "0.85vw",
-                            textOutline: "2px rgba(0,0,0,0.7)",
+                            fontSize: "0.9vw",
+                            textOutline: "2px rgba(0,0,0,0.8)",
                         },
                     },
                 },
                 column: {
                     borderRadius: 8,
-                    pointPadding: 0.1,
-                    groupPadding: 0.15,
+                    pointPadding: 0.15,
+                    groupPadding: 0.1,
                     borderWidth: 0,
                     shadow: false,
                 },
@@ -109,22 +109,54 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 backdropFilter: "blur(12px)",
                 borderRadius: "20px",
                 border: "1px solid rgba(255,255,255,0.1)",
-                position: "relative",
+                display: "flex",
+                flexDirection: "column",
                 overflow: "hidden",
             }}
         >
-            <HighchartsReact
-                highcharts={Highcharts}
-                options={chartOptions}
-                containerProps={{
-                    style: {
-                        height: "100%",
-                        width: "100%",
-                        position: "absolute",
-                        inset: 0,
-                    },
+            <Box
+                sx={{
+                    px: "1.5vw",
+                    py: "1vw",
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    background: "rgba(255,255,255,0.03)",
                 }}
-            />
+            >
+                <Typography
+                    sx={{
+                        color: "#fff",
+                        fontSize: "1.1vw",
+                        fontWeight: 800,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                    }}
+                >
+                    Comparatif des Taux de Réalisation
+                </Typography>
+                <Typography
+                    sx={{
+                        color: "rgba(255,255,255,0.5)",
+                        fontSize: "0.75vw",
+                    }}
+                >
+                    Visualisation graphique de l'avancement cumulé par sous-projet
+                </Typography>
+            </Box>
+
+            <Box sx={{ flex: 1, position: "relative", mt: 10 }}>
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={chartOptions}
+                    containerProps={{
+                        style: {
+                            height: "100%",
+                            width: "100%",
+                            position: "absolute",
+                            inset: 0,
+                        },
+                    }}
+                />
+            </Box>
         </Box>
     );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/joy";
-import { ProjetConsolideEntry } from "../../service/suiviPTBAConsolide";
-import { PTBA_PALETTE } from "../../constant/ptbaColors";
+import { ProjetConsolideEntry } from "../../../service/suiviPTBAConsolide";
+import { PALETTE } from "./constants";
 import { fmt, ProgressBar } from "./Utils";
 
 interface TablePanelProps {
@@ -52,7 +52,7 @@ export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (
         {/* Rows */}
         <Box sx={{ overflowY: "auto", flex: 1 }}>
             {projets.map((p, i) => {
-                const color = PTBA_PALETTE[i % PTBA_PALETTE.length];
+                const color = PALETTE[i % PALETTE.length];
                 return (
                     <Box
                         key={`${p.code}-${i}`}

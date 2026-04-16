@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Stack, Typography, Grid } from "@mui/joy";
 import { useApiRequestStore } from "../../store/apiRequestStore";
-import { TablePanel } from "../../components/SuiviPTBA/TablePanel";
-import { ChartPanel } from "../../components/SuiviPTBA/ChartPanel";
+import { TablePanel } from "./components/TablePanel";
+import { ChartPanel } from "./components/ChartPanel";
 
 export default function SuiviPTBAConsolide() {
     const { suiviPTBAConsolide: projets } = useApiRequestStore();
@@ -73,12 +73,12 @@ export default function SuiviPTBAConsolide() {
                 sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}
             >
                 {/* Left: Table */}
-                <Grid xs={12} md={4} sx={{ height: "100%" }}>
+                <Grid xs={12} md={4} >
                     <TablePanel projets={projets} />
                 </Grid>
 
                 {/* Right: Chart */}
-                <Grid xs={12} md={8} sx={{ height: "100%" }}>
+                <Grid xs={12} md={8} flex={1} >
                     <ChartPanel projets={projets} />
                 </Grid>
             </Grid>
