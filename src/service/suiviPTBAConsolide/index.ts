@@ -19,9 +19,9 @@ export type SUIVI_PTBA_CONSOLIDE_T = ProjetConsolideEntry[];
 // ─── Endpoints ────────────────────────────────────────────────────────────────
 
 const ENDPOINTS: { pays: string; url: string }[] = [
-  { pays: "PIPARV-B", url: "/api-piparvb/ApiConsolide/API_Suivi_PTBA_consolide.php" },
-  { pays: "PRODER",   url: "/api-proder/ApiConsolide/API_Suivi_PTBA_consolide.php" },
-  { pays: "PAIFARB",  url: "/api-paifarb/ApiConsolide/API_Suivi_PTBA_consolide.php" },
+  { pays: "PIPARV-B", url: "/api-piparvb/ApiConsolide/ApiProjets.php" },
+  { pays: "PRODER",   url: "/api-proder/ApiConsolide/ApiProjets.php" },
+  { pays: "PAIFARB",  url: "/api-paifarb/ApiConsolide/ApiProjets.php" },
 ];
 
 // ─── Fetcher ──────────────────────────────────────────────────────────────────
