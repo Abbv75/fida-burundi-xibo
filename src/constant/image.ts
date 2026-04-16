@@ -8,6 +8,11 @@ import burundi_entrepreneur from "../assets/images/burundi/burundi_entrepreneur.
 import burundi_finance from "../assets/images/burundi/burundi_finance.png"
 import sable from "../assets/images/sable.png"
 
+// Generated Impact Images
+import burundi_agriculture_impact from "../assets/images/generated/agriculture.png"
+import burundi_rural_entrepreneurship from "../assets/images/generated/entrepreneur.png"
+import burundi_financial_inclusion from "../assets/images/generated/finance.png"
+
 export default {
     armoirie,
     logo_fida, 
@@ -17,5 +22,8 @@ export default {
     burundi_rice,
     burundi_entrepreneur,
     burundi_finance,
-    sable
+    sable,
+    burundi_agriculture_impact,
+    burundi_rural_entrepreneurship,
+    burundi_financial_inclusion
 }

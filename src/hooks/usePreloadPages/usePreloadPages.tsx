@@ -19,6 +19,8 @@ import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
 import SuiviPTBAProgramme from '../../pages/SuiviPTBAProgramme';
+import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
+import { IMAGES } from '../../constant';
 
 export const usePreloadPages = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +31,6 @@ export const usePreloadPages = () => {
     const { set: setLoopStore } = usePageLooperStore();
 
     const preload = useCallback(async () => {
-        // Strict guard to prevent infinite re-entry or double execution
         if (hasPreloaded.current) return;
         hasPreloaded.current = true;
 
@@ -37,104 +38,100 @@ export const usePreloadPages = () => {
         setPercentageLoadingValue(0);
 
         try {
-            // --- STEP 1: Fetch Raw Data ---
             setPercentageLoadingValue(5);
             await loadData();
             setPercentageLoadingValue(40);
 
             const data = useApiRequestStore.getState();
 
-            // --- STEP 2: Start with Static & Home Base ---
-            const allPages: PAGE_T[] = [
-                ...INITIAL_PAGES,
-            ];
+            // 1. Start with Home Sequence
+            const allPages: PAGE_T[] = [ ...INITIAL_PAGES ];
             setPercentageLoadingValue(50);
 
-            // --- STEP 3: Granular & Isolated Dynamic Registration ---
-            // Indicators
-            // try {
-            //     const indicateurPages = registerSuiviIndicateurs(data.suiviIndicateurData);
-            //     allPages.push(...indicateurPages);
-            // } catch (e) { console.error("Failed to register Indicators:", e); }
-            // setPercentageLoadingValue(65);
-
-            // // PTBA Tasks
-            // try {
-            //     const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
-            //     allPages.push(...ptbaPages);
-            // } catch (e) { console.error("Failed to register PTBA:", e); }
-            // setPercentageLoadingValue(80);
-
-            // // Global Progress
-            // try {
-            //     const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
-            //     const actionPages = registerAvancementAction(data.API_mobile_actionData);
-            //     const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
-            //     allPages.push(...activitePages, ...actionPages, ...programmePages);
-            // } catch (e) { console.error("Failed to register Global Progress:", e); }
-
-            // Suivi des Projets
+            // 2. Indicators
             try {
-                if (data.suiviProjetsData.length > 0) {
-                    allPages.push({
-                        id: "suivi-projets-1",
-                        component: <SuiviProjets />,
-                        duration: 35000
-                    });
-                }
-            } catch (e) { console.error("Failed to register Suivi Projets:", e); }
+                const indicateurPages = registerSuiviIndicateurs(data.suiviIndicateurData);
+                allPages.push(...indicateurPages);
+            } catch (e) { console.error("Failed to register Indicators:", e); }
 
-            // PTBA par Programme
-            try {
-                if (data.suiviPTBAProgramme) {
-                    allPages.push({
-                        id: "suivi-ptba-programme-1",
-                        component: <SuiviPTBAProgramme />,
-                        duration: 30000
-                    });
-                }
-            } catch (e) { console.error("Failed to register Suivi PTBA Programme:", e); }
+            // ✨ INTERLEAVE: Impact Agri (Reliable Data from Search)
+            allPages.push({ 
+                id: "impact-agri", 
+                component: <FeatureSlide 
+                    title="Impact PIPARV-B"
+                    subtitle="Résilience et Nutrition au cœur du Plateau Central"
+                    description="Le projet PIPARV-B cible une réduction de 30% de la malnutrition infantile chronique d'ici juin 2025 grâce à l'intensification rizicole."
+                    image={IMAGES.burundi_agriculture_impact}
+                    highlights={["-30% Malnutrition", "5 Provinces clés", "Achèvement 2025"]}
+                />, 
+                duration: 25000 
+            });
 
-            // PTBA Consolidé (REAL)
+            // 3. PTBA Tasks
             try {
-                if (data.suiviPTBAConsolide.length > 0) {
-                    allPages.push({
-                        id: "suivi-ptba-consolide-1",
-                        component: <SuiviPTBAConsolide />,
-                        duration: 45000
-                    });
-                }
-            } catch (e) { console.error("Failed to register PTBA Consolidé:", e); }
+                const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
+                allPages.push(...ptbaPages);
+            } catch (e) { console.error("Failed to register PTBA:", e); }
 
-            // Mission Supervision
+            // ✨ INTERLEAVE: Impact Proder (Reliable Data from Search)
+            allPages.push({ 
+                id: "impact-proder", 
+                component: <FeatureSlide 
+                    title="Objectifs PRODER"
+                    subtitle="Propulser l'Entrepreneuriat des Jeunes"
+                    description="Le programme PRODER vise à créer 39 000 emplois décents et soutenir 7 840 micro-entreprises rurales pour 85 000 bénéficiaires directs."
+                    image={IMAGES.burundi_rural_entrepreneurship}
+                    highlights={["39k Emplois", "85k Bénéficiaires", "7 840 Entreprises"]}
+                />, 
+                duration: 25000 
+            });
+
+            // 4. Global Progress (Activite, Action, Programme)
             try {
-                if (data.missionSupervisionData.length > 0) {
-                    allPages.push({
-                        id: "mission-supervision-1",
-                        component: <MissionSupervision />,
-                        duration: 30000
-                    });
-                }
-            } catch (e) { console.error("Failed to register Mission Supervision:", e); }
+                const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
+                const actionPages = registerAvancementAction(data.API_mobile_actionData);
+                const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
+                allPages.push(...activitePages, ...actionPages, ...programmePages);
+            } catch (e) { console.error("Failed to register Global Progress:", e); }
+
+            // INTERLEAVE: Impact Finance (Reliable Data from Search)
+            allPages.push({ 
+                id: "impact-paifarb", 
+                component: <FeatureSlide 
+                    title="Inclusion PAIFAR-B"
+                    subtitle="Digitalisation et Accès aux Services Financiers"
+                    description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
+                    image={IMAGES.burundi_financial_inclusion}
+                    highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
+                />, 
+                duration: 25000 
+            });
+
+            // 5. Statistics Dashboards
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+            if (data.suiviPTBAProgramme) {
+                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
+            }
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
+            if (data.missionSupervisionData.length > 0) {
+                allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
+            }
 
             setPercentageLoadingValue(95);
-
-            // --- STEP 4: Finalize & Launch ---
             setLoopStore({ pages: allPages, currentIndex: 0 });
             setPercentageLoadingValue(100);
 
-            // Artificial delay for smooth transition (Premium UX effect)
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 1200);
+            setTimeout(() => setIsLoading(false), 1200);
 
         } catch (error) {
             console.error("Critical preload system failure:", error);
             setLoopStore({ pages: INITIAL_PAGES, currentIndex: 0 });
             setPercentageLoadingValue(100);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 1000);
+            setTimeout(() => setIsLoading(false), 1000);
         }
     }, [loadData, setLoopStore]);
 
