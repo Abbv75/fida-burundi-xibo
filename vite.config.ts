@@ -24,6 +24,16 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-paifarb/, ''),
       },
+      '/api-sise': {
+        target: 'https://sise.fc-psfe.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-sise/, ''),
+      },
+      '/api-suivi': {
+        target: 'https://suivi.fc-psfe.org',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-suivi/, ''),
+      },
     },
   },
   build: {
