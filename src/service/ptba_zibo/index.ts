@@ -21,7 +21,7 @@ export interface PTBA_ZIBO_T {
 }
 
 export const fetchPtbaZibo = async (): Promise<PTBA_ZIBO_T[]> => {
-    const { data } = await axios.get(`https://suivi.fc-psfe.org/api/ptba_zibo.php`);
+    const { data } = await axios.get(`/api-suivi/api/ptba_zibo.php`);
     return data.responsables as PTBA_ZIBO_T[];
 };
 

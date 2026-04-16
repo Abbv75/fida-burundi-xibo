@@ -30,7 +30,7 @@ export interface REALISATION_CUMULE_T {
 }
 
 export const fetchRealisationCumule = async (): Promise<REALISATION_CUMULE_T> => {
-    const { data } = await axios.get(`https://sise.fc-psfe.org/API_Realisations_cumulees.php`);
+    const { data } = await axios.get(`/api-sise/API_Realisations_cumulees.php`);
     return data as REALISATION_CUMULE_T;
 };
 

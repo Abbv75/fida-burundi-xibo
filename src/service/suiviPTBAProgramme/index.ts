@@ -35,7 +35,7 @@ export interface SUIVI_PTBA_PROGRAMME_T {
 }
 
 export const fetchSuiviPTBAProgramme = async (): Promise<SUIVI_PTBA_PROGRAMME_T> => {
-    const { data } = await axios.get(`https://sise.fc-psfe.org/API_Suivi_PTBA_rogramme.php`);
+    const { data } = await axios.get(`/api-sise/API_Suivi_PTBA_rogramme.php`);
     return data as SUIVI_PTBA_PROGRAMME_T;
 };
 

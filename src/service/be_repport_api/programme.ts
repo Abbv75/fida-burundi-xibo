@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { API_mobile_activite_T } from "../../types";
 
 export const fetchAPI_mobile_programme = async (): Promise<API_mobile_activite_T[]> => {
-    const { data } = await axios.get(`https://sise.fc-psfe.org/API_mobile_programme.php`);
+    const { data } = await axios.get(`/api-sise/API_mobile_programme.php`);
     return data.data.activites as API_mobile_activite_T[];
 };
 
