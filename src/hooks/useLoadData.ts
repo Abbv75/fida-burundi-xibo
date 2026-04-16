@@ -48,7 +48,7 @@ export const useLoadData = () => {
 
         set({
             suiviIndicateurData: suiviIndicateur || [],
-            suiviPTBAConsolide: ptbaConsolide || undefined,
+            suiviPTBAConsolide: ptbaConsolide || [],
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
             ptba_ziboData: ptba_zibo || [],

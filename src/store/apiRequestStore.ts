@@ -8,7 +8,7 @@ import { SUIVI_PTBA_PROGRAMME_T } from '../service/suiviPTBAProgramme';
 interface ApiRequestState {
   set : ZUSTAND_T<ApiRequestState>;
   suiviIndicateurData: SUIVI_INDICATEUR_T[];
-  suiviPTBAConsolide?: SUIVI_PTBA_CONSOLIDE_T;
+  suiviPTBAConsolide: SUIVI_PTBA_CONSOLIDE_T;
   suiviPTBAProgramme?: SUIVI_PTBA_PROGRAMME_T;
   realisationCumuleData?: REALISATION_CUMULE_T;
   ptba_ziboData: PTBA_ZIBO_T[];
@@ -21,6 +21,7 @@ interface ApiRequestState {
 export const useApiRequestStore = create<ApiRequestState>((set) => ({
   set,
   suiviIndicateurData: [],
+  suiviPTBAConsolide: [],
   ptba_ziboData: [],
   API_mobile_activiteData: [],
   API_mobile_actionData: [],
