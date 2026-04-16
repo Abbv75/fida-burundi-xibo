@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useLoadData } from '../useLoadData';
 import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
@@ -11,10 +11,6 @@ import {
     registerAvancementProgramme
 } from './registerers';
 import { PAGE_T } from '../../types';
-import Summary from '../../pages/PageAccueil/Summary';
-import Piparvb from '../../pages/PageAccueil/Piparvb';
-import Proder from '../../pages/PageAccueil/Proder';
-import Paifarb from '../../pages/PageAccueil/Paifarb';
 import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
