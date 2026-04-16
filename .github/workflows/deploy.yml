@@ -36,9 +36,4 @@ jobs:
           local-dir: ./build/
           server-dir: /
           protocol: ftp
-          # Optionally exclude files
-          # exclude: |
-          #   **/.git*
-          #   **/.git*/**
-          #   node_modules/**
 
