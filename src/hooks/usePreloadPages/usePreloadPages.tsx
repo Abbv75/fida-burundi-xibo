@@ -18,6 +18,7 @@ import Paifarb from '../../pages/PageAccueil/Paifarb';
 import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
+import SuiviPTBAProgramme from '../../pages/SuiviPTBAProgramme';
 
 export const usePreloadPages = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -46,10 +47,6 @@ export const usePreloadPages = () => {
             // --- STEP 2: Start with Static & Home Base ---
             const allPages: PAGE_T[] = [
                 ...INITIAL_PAGES,
-                { id: "accueil-1-summary", component: <Summary />, duration: 20000 },
-                { id: "accueil-2-piparvb", component: <Piparvb />, duration: 25000 },
-                { id: "accueil-3-proder", component: <Proder />, duration: 25000 },
-                { id: "accueil-4-paifarb", component: <Paifarb />, duration: 25000 },
             ];
             setPercentageLoadingValue(50);
 
@@ -86,6 +83,17 @@ export const usePreloadPages = () => {
                     });
                 }
             } catch (e) { console.error("Failed to register Suivi Projets:", e); }
+
+            // PTBA par Programme
+            try {
+                if (data.suiviPTBAProgramme) {
+                    allPages.push({
+                        id: "suivi-ptba-programme-1",
+                        component: <SuiviPTBAProgramme />,
+                        duration: 30000
+                    });
+                }
+            } catch (e) { console.error("Failed to register Suivi PTBA Programme:", e); }
 
             // PTBA Consolidé (REAL)
             try {

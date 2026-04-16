@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { Box, Typography } from "@mui/joy";
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { ProjetConsolideEntry } from "../../../service/suiviPTBAConsolide";
+import { ProjetSimpleEntry } from "../../../service/suiviProjets";
 import { PALETTE } from "./constants";
 
 interface ChartPanelProps {
-    projets: ProjetConsolideEntry[];
+    projets: ProjetSimpleEntry[];
 }
 
 export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
@@ -143,7 +143,7 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 </Typography>
             </Box>
 
-            <Box sx={{ flex: 1, position: "relative", mt: 10 }}>
+            <Box sx={{ flex: 1, position: "relative" }}>
                 <HighchartsReact
                     highcharts={Highcharts}
                     options={chartOptions}
