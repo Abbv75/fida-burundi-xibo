@@ -38,5 +38,14 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          charts: ['highcharts', 'highcharts-react-official'],
+          ui: ['@mui/joy', '@emotion/react', '@emotion/styled'],
+        },
+      },
+    },
   },
 });
