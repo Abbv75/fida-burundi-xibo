@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getApiUrl } from "../../config/api";
+
 
 interface IndicateurSuivi {
   id_ref_ind: number;
@@ -30,7 +32,7 @@ export interface REALISATION_CUMULE_T {
 }
 
 export const fetchRealisationCumule = async (): Promise<REALISATION_CUMULE_T> => {
-    const { data } = await axios.get(`/api-sise/API_Realisations_cumulees.php`);
+    const { data } = await axios.get(getApiUrl("sise", "/API_Realisations_cumulees.php"));
     return data as REALISATION_CUMULE_T;
 };
 

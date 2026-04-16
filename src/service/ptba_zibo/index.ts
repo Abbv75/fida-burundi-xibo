@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getApiUrl } from "../../config/api";
+
 
 export interface ActivitePTBA {
   code_activite_ptba: string;
@@ -21,7 +23,7 @@ export interface PTBA_ZIBO_T {
 }
 
 export const fetchPtbaZibo = async (): Promise<PTBA_ZIBO_T[]> => {
-    const { data } = await axios.get(`/api-suivi/api/ptba_zibo.php`);
+    const { data } = await axios.get(getApiUrl("suivi", "/api/ptba_zibo.php"));
     return data.responsables as PTBA_ZIBO_T[];
 };
 

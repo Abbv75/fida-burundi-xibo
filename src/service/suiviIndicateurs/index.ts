@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { SUIVI_INDICATEUR_T } from "../../types";
+import { getApiUrl } from "../../config/api";
 
 export const fetchSuiviIndicateurs = async (): Promise<SUIVI_INDICATEUR_T[]> => {
-    const { data } = await axios.get(`/api-sise/API_Suivi_Indicateurs.php`);
+    const { data } = await axios.get(getApiUrl("sise", "/API_Suivi_Indicateurs.php"));
     return data as SUIVI_INDICATEUR_T[];
 };
+
 
 export const useSuiviIndicateurs = () => {
     return useQuery({

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getApiUrl } from "../../config/api";
 
 // ─── API Response Types (Flexible) ────────────────────────────────────────────
 
@@ -19,9 +20,9 @@ export type SUIVI_PROJETS_T = ProjetSimpleEntry[];
 // ─── Endpoints ────────────────────────────────────────────────────────────────
 
 const ENDPOINTS: { pays: string; url: string }[] = [
-  { pays: "PIPARV-B", url: "/api-piparvb/ApiConsolide/ApiProjets.php" },
-  { pays: "PRODER",   url: "/api-proder/ApiConsolide/ApiProjets.php" },
-  { pays: "PAIFARB",  url: "/api-paifarb/ApiConsolide/ApiProjets.php" },
+  { pays: "PIPARV-B", url: getApiUrl("piparvb", "/ApiConsolide/ApiProjets.php") },
+  { pays: "PRODER",   url: getApiUrl("proder",   "/ApiConsolide/ApiProjets.php") },
+  { pays: "PAIFARB",  url: getApiUrl("paifarb",  "/ApiConsolide/ApiProjets.php") },
 ];
 
 // ─── Fetcher ──────────────────────────────────────────────────────────────────
