@@ -5,7 +5,6 @@ import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
     registerSuiviIndicateurs,
-    registerSuiviPTBA,
     registerAvancementActivite,
     registerAvancementAction,
     registerAvancementProgramme
@@ -63,11 +62,7 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 3. PTBA Tasks
-            try {
-                const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
-                allPages.push(...ptbaPages);
-            } catch (e) { console.error("Failed to register PTBA:", e); }
+
 
             // INTERLEAVE: Impact Proder (Reliable Data from Search)
             allPages.push({ 
