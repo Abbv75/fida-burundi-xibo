@@ -46,7 +46,9 @@ export const usePreloadPages = () => {
                 allPages.push(...indicateurPages);
             } catch (e) { console.error("Failed to register Indicators:", e); }
 
-            // INTERLEAVE: Impact Agri (Reliable Data from Search)
+
+
+            // INTERLEAVE: Impact Agri
             allPages.push({ 
                 id: "impact-agri", 
                 component: <FeatureSlide 
@@ -59,9 +61,15 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
+            // 5. Statistics Dashboards
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+            if (data.suiviPTBAProgramme) {
+                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
+            }
 
-
-            // INTERLEAVE: Impact Proder (Reliable Data from Search)
+            // INTERLEAVE: Impact Proder
             allPages.push({ 
                 id: "impact-proder", 
                 component: <FeatureSlide 
@@ -74,9 +82,11 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
 
-
-            // INTERLEAVE: Impact Finance (Reliable Data from Search)
+            // INTERLEAVE: Impact Finance
             allPages.push({ 
                 id: "impact-paifarb", 
                 component: <FeatureSlide 
@@ -89,16 +99,6 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 5. Statistics Dashboards
-            if (data.suiviProjetsData.length > 0) {
-                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
-            }
-            if (data.suiviPTBAProgramme) {
-                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
-            }
-            if (data.suiviPTBAConsolide.length > 0) {
-                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
-            }
             if (data.missionSupervisionData.length > 0) {
                 allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
             }
