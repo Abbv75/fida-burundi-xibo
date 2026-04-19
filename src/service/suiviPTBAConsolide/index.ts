@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getApiUrl } from "../../config/api";
 
 // ─── API Response Types (Consolidated PTBA) ───────────────────────────────────
 
@@ -16,10 +17,11 @@ export type SUIVI_PTBA_CONSOLIDE_T = PTBAConsolideProject[];
 // ─── Endpoints ────────────────────────────────────────────────────────────────
 
 const ENDPOINTS: { pays: string; url: string }[] = [
-  { pays: "PIPARV-B", url: "/api-piparvb/ApiConsolide/API_Suivi_PTBA_consolide.php" },
-  { pays: "PRODER",   url: "/api-proder/ApiConsolide/API_Suivi_PTBA_consolide.php" },
-  { pays: "PAIFARB",  url: "/api-paifarb/ApiConsolide/API_Suivi_PTBA_consolide.php" },
+  { pays: "PIPARV-B", url: getApiUrl("piparvb", "/ApiConsolide/API_Suivi_PTBA_consolide.php") },
+  { pays: "PRODER",   url: getApiUrl("proder",   "/ApiConsolide/API_Suivi_PTBA_consolide.php") },
+  { pays: "PAIFARB",  url: getApiUrl("paifarb",  "/ApiConsolide/API_Suivi_PTBA_consolide.php") },
 ];
+
 
 // ─── Fetcher ──────────────────────────────────────────────────────────────────
 

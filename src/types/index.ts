@@ -154,3 +154,22 @@ export interface MISSION_SUPERVISION_T {
     }
   };
 }
+
+export interface SUIVI_ACTIVITE_RESPONSABLE_ITEM_T {
+  responsable: string;
+  activites_prevues: string;
+  activites_en_cours: string;
+  activites_en_retard: string;
+  activites_realisees: string;
+  taches_prevues: string;
+  taches_en_cours: string;
+  taches_en_retard: string;
+  taches_realisees: string;
+  projet?: string; // To distinguish between PIPARVB, PRODER, PAIFAR-B
+}
+
+export interface SUIVI_ACTIVITE_RESPONSABLE_DATA_T {
+  piparvb: SUIVI_ACTIVITE_RESPONSABLE_ITEM_T[];
+  proder: SUIVI_ACTIVITE_RESPONSABLE_ITEM_T[];
+  paifarb: SUIVI_ACTIVITE_RESPONSABLE_ITEM_T[];
+}

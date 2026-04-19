@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { SUIVI_INDICATEUR_T, API_mobile_activite_T, ZUSTAND_T, MISSION_SUPERVISION_T } from '../types';
-import { PTBA_ZIBO_T } from '../service/ptba_zibo';
+import { SUIVI_INDICATEUR_T, API_mobile_activite_T, ZUSTAND_T, MISSION_SUPERVISION_T, SUIVI_ACTIVITE_RESPONSABLE_DATA_T } from '../types';
+
 import { REALISATION_CUMULE_T } from '../service/realisationCumule';
 import { SUIVI_PROJETS_T } from '../service/suiviProjets';
 import { SUIVI_PTBA_CONSOLIDE_T } from '../service/suiviPTBAConsolide';
@@ -13,11 +13,8 @@ interface ApiRequestState {
   suiviPTBAConsolide: SUIVI_PTBA_CONSOLIDE_T;
   suiviPTBAProgramme?: SUIVI_PTBA_PROGRAMME_T;
   realisationCumuleData?: REALISATION_CUMULE_T;
-  ptba_ziboData: PTBA_ZIBO_T[];
-  API_mobile_activiteData: API_mobile_activite_T[];
-  API_mobile_actionData: API_mobile_activite_T[];
-  API_mobile_programmeData: API_mobile_activite_T[];
   missionSupervisionData: MISSION_SUPERVISION_T[];
+  suiviActiviteResponsableData: SUIVI_ACTIVITE_RESPONSABLE_DATA_T;
 }
 
 export const useApiRequestStore = create<ApiRequestState>((set) => ({
@@ -25,9 +22,6 @@ export const useApiRequestStore = create<ApiRequestState>((set) => ({
   suiviIndicateurData: [],
   suiviProjetsData: [],
   suiviPTBAConsolide: [],
-  ptba_ziboData: [],
-  API_mobile_activiteData: [],
-  API_mobile_actionData: [],
-  API_mobile_programmeData: [],
   missionSupervisionData: [],
+  suiviActiviteResponsableData: { piparvb: [], proder: [], paifarb: [] },
 }));

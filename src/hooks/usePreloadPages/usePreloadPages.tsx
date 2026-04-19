@@ -5,10 +5,7 @@ import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
     registerSuiviIndicateurs,
-    registerSuiviPTBA,
-    registerAvancementActivite,
-    registerAvancementAction,
-    registerAvancementProgramme
+    registerSuiviActiviteResponsable
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
@@ -50,7 +47,9 @@ export const usePreloadPages = () => {
                 allPages.push(...indicateurPages);
             } catch (e) { console.error("Failed to register Indicators:", e); }
 
-            // INTERLEAVE: Impact Agri (Reliable Data from Search)
+
+
+            // INTERLEAVE: Impact Agri
             allPages.push({ 
                 id: "impact-agri", 
                 component: <FeatureSlide 
@@ -63,13 +62,15 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 3. PTBA Tasks
-            try {
-                const ptbaPages = registerSuiviPTBA(data.ptba_ziboData);
-                allPages.push(...ptbaPages);
-            } catch (e) { console.error("Failed to register PTBA:", e); }
+            // 5. Statistics Dashboards
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+            if (data.suiviPTBAProgramme) {
+                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
+            }
 
-            // INTERLEAVE: Impact Proder (Reliable Data from Search)
+            // INTERLEAVE: Impact Proder
             allPages.push({ 
                 id: "impact-proder", 
                 component: <FeatureSlide 
@@ -82,15 +83,11 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 4. Global Progress (Activite, Action, Programme)
-            try {
-                const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
-                const actionPages = registerAvancementAction(data.API_mobile_actionData);
-                const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
-                allPages.push(...activitePages, ...actionPages, ...programmePages);
-            } catch (e) { console.error("Failed to register Global Progress:", e); }
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
 
-            // INTERLEAVE: Impact Finance (Reliable Data from Search)
+            // INTERLEAVE: Impact Finance
             allPages.push({ 
                 id: "impact-paifarb", 
                 component: <FeatureSlide 
@@ -103,21 +100,18 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 5. Statistics Dashboards
-            if (data.suiviProjetsData.length > 0) {
-                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
-            }
-            if (data.suiviPTBAProgramme) {
-                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
-            }
-            if (data.suiviPTBAConsolide.length > 0) {
-                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
-            }
             if (data.missionSupervisionData.length > 0) {
                 allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
             }
 
             setPercentageLoadingValue(95);
+
+            // 6. Suivi Activité Responsables
+            try {
+                const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
+                allPages.push(...responsablePages);
+            } catch (e) { console.error("Failed to register Responsable Tracking:", e); }
+
             setLoopStore({ pages: allPages, currentIndex: 0 });
             setPercentageLoadingValue(100);
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getApiUrl } from "../../config/api";
 
 interface VersionPtba {
   id_version_ptba: number;
@@ -35,7 +36,7 @@ export interface SUIVI_PTBA_PROGRAMME_T {
 }
 
 export const fetchSuiviPTBAProgramme = async (): Promise<SUIVI_PTBA_PROGRAMME_T> => {
-    const { data } = await axios.get(`/api-sise/API_Suivi_PTBA_rogramme.php`);
+    const { data } = await axios.get(getApiUrl("sise", "/API_Suivi_PTBA_rogramme.php"));
     return data as SUIVI_PTBA_PROGRAMME_T;
 };
 

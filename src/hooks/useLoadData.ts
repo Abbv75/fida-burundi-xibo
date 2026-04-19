@@ -4,8 +4,9 @@ import { useSuiviProjets } from '../service/suiviProjets';
 import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { useRealisationCumule } from '../service/realisationCumule';
-import { usePtbaZibo } from '../service/ptba_zibo';
-import { useApiMobileAction, useApiMobileActivite, useApiMobileProgramme } from '../service/be_repport_api';
+import { useSuiviActiviteResponsable } from '../service/suiviActiviteResponsable';
+
+
 import { useMissionSupervision } from '../service/mission_supervision';
 import { useCallback } from 'react';
 
@@ -18,10 +19,11 @@ export const useLoadData = () => {
     const { refetch: refetchPTBAConsolide } = useSuiviPTBAConsolide();
     const { refetch: refetchPTBAProgramme } = useSuiviPTBAProgramme();
     const { refetch: refetchRealisation } = useRealisationCumule();
-    const { refetch: refetchPtbaZibo } = usePtbaZibo();
-    const { refetch: refetchActivite } = useApiMobileActivite();
-    const { refetch: refetchAction } = useApiMobileAction();
-    const { refetch: refetchProgramme } = useApiMobileProgramme();
+    const { refetch: refetchSuiviResponsable } = useSuiviActiviteResponsable();
+
+
+
+
     const { refetch: refetchMissionSupervision } = useMissionSupervision();
 
     const loadData = useCallback(async () => {
@@ -32,10 +34,7 @@ export const useLoadData = () => {
             { data: ptbaConsolide },
             { data: ptbaProgramme },
             { data: realisationCumule },
-            { data: ptba_zibo },
-            { data: activite },
-            { data: action },
-            { data: programme },
+            { data: suiviResponsable },
             { data: missionSupervision }
         ] = await Promise.all([
             refetchIndicateurs(),
@@ -43,10 +42,7 @@ export const useLoadData = () => {
             refetchPTBAConsolide(),
             refetchPTBAProgramme(),
             refetchRealisation(),
-            refetchPtbaZibo(),
-            refetchActivite(),
-            refetchAction(),
-            refetchProgramme(),
+            refetchSuiviResponsable(),
             refetchMissionSupervision()
         ]);
 
@@ -56,10 +52,7 @@ export const useLoadData = () => {
             suiviPTBAConsolide: ptbaConsolide || [],
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
-            ptba_ziboData: ptba_zibo || [],
-            API_mobile_activiteData: activite || [],
-            API_mobile_actionData: action || [],
-            API_mobile_programmeData: programme || [],
+            suiviActiviteResponsableData: suiviResponsable || { piparvb: [], proder: [], paifarb: [] },
             missionSupervisionData: missionSupervision || []
         });
     }, [
@@ -69,10 +62,7 @@ export const useLoadData = () => {
         refetchPTBAConsolide, 
         refetchPTBAProgramme, 
         refetchRealisation, 
-        refetchPtbaZibo, 
-        refetchActivite, 
-        refetchAction, 
-        refetchProgramme,
+        refetchSuiviResponsable,
         refetchMissionSupervision
     ]);
 
