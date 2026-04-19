@@ -19,7 +19,7 @@ export default function SuiviPTBAConsolide() {
                 </Typography>
             </Box>
 
-            <Grid container spacing={3} sx={{ flex: 1 }}>
+            <Grid container spacing={3} sx={{ flex: 1, minHeight: 0, maxHeight: "80vh", alignSelf: "center", width: "100%" }}>
                 {METRICS.map((m) => (
                     <Grid key={m.key} xs={12} md={4}>
                         <MetricChart
