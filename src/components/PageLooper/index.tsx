@@ -36,7 +36,7 @@ const PageLooper = () => {
                     zIndex: 1
                 }}
             >
-                {!currentPage.id.startsWith('accueil') && (<Header />)}
+                <Header />
 
                 {currentPage?.component}
             </Stack>
