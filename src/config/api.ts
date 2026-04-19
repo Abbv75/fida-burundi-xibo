@@ -11,10 +11,6 @@ export const API_CONFIG = {
     proxy: "/api-paifarb",
     baseUrl: import.meta.env.VITE_PAIFARB_URL || "https://paifarb.fidaburundi.org",
   },
-  paifarb: {
-    proxy: "/api-paifarb",
-    baseUrl: import.meta.env.VITE_PAIFARB_URL || "https://paifarb.fidaburundi.org",
-  },
   "suivi-piparvb": {
     proxy: "/api-suivi-piparvb",
     baseUrl: "https://suivipiparvb.fidaburundi.org",
