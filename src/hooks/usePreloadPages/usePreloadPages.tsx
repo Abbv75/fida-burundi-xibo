@@ -35,7 +35,6 @@ export const usePreloadPages = () => {
 
             const data = useApiRequestStore.getState();
 
-            // --- RECONSTRUCT ALL PAGES IN LOGICAL BLOCKS ---
             const allPages: PAGE_T[] = [];
 
             // 0. Initial Data
@@ -45,14 +44,16 @@ export const usePreloadPages = () => {
             const homePaifarb = INITIAL_PAGES.find(p => p.id === "accueil-paifarb");
 
             const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
-            const piparvbResp = responsablePages.filter(p => p.id.includes("piparvb"));
-            const proderResp = responsablePages.filter(p => p.id.includes("proder"));
-            const paifarbResp = responsablePages.filter(p => p.id.includes("paifarb"));
 
-            // 1. PROJECT BLOCKS
-            
-            // --- PIPARV-B BLOCK ---
+            // 1. HOME PAGES
+            if (homeSummary) allPages.push(homeSummary);
             if (homePiparvb) allPages.push(homePiparvb);
+            if (homeProder) allPages.push(homeProder);
+            if (homePaifarb) allPages.push(homePaifarb);
+
+            // 2. MIXED STATS & INTERMEDIATE (Impact) PAGES
+            
+            // PIPARV-B Context
             allPages.push({ 
                 id: "impact-agri", 
                 component: <FeatureSlide 
@@ -64,10 +65,12 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
-            allPages.push(...piparvbResp);
 
-            // --- PRODER BLOCK ---
-            if (homeProder) allPages.push(homeProder);
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+
+            // PRODER Context
             allPages.push({ 
                 id: "impact-proder", 
                 component: <FeatureSlide 
@@ -79,10 +82,12 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
-            allPages.push(...proderResp);
 
-            // --- PAIFAR-B BLOCK ---
-            if (homePaifarb) allPages.push(homePaifarb);
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
+
+            // PAIFAR-B Context
             allPages.push({ 
                 id: "impact-paifarb", 
                 component: <FeatureSlide 
@@ -94,22 +99,13 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
-            allPages.push(...paifarbResp);
-
-            // 2. GLOBAL STATISTICS (At the end)
-            if (homeSummary) allPages.push(homeSummary);
-
-            if (data.suiviProjetsData.length > 0) {
-                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
-            }
-
-            if (data.suiviPTBAConsolide.length > 0) {
-                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
-            }
 
             if (data.missionSupervisionData.length > 0) {
                 allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
             }
+
+            // 3. ALL SUIVI ACTIVITE RESPONSABLES (Continuous block at the end)
+            allPages.push(...responsablePages);
 
             setPercentageLoadingValue(95);
 
