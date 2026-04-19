@@ -4,14 +4,12 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviIndicateurs,
     registerSuiviActiviteResponsable
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
-import SuiviPTBAProgramme from '../../pages/SuiviPTBAProgramme';
 import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
 import { IMAGES } from '../../constant';
 
@@ -37,19 +35,24 @@ export const usePreloadPages = () => {
 
             const data = useApiRequestStore.getState();
 
-            // 1. Start with Home Sequence
-            const allPages: PAGE_T[] = [ ...INITIAL_PAGES ];
-            setPercentageLoadingValue(50);
+            // --- RECONSTRUCT ALL PAGES IN LOGICAL BLOCKS ---
+            const allPages: PAGE_T[] = [];
 
-            // 2. Indicators
-            try {
-                const indicateurPages = registerSuiviIndicateurs(data.suiviIndicateurData);
-                allPages.push(...indicateurPages);
-            } catch (e) { console.error("Failed to register Indicators:", e); }
+            // 0. Initial Data
+            const homeSummary = INITIAL_PAGES.find(p => p.id === "accueil-summary");
+            const homePiparvb = INITIAL_PAGES.find(p => p.id === "accueil-piparvb");
+            const homeProder = INITIAL_PAGES.find(p => p.id === "accueil-proder");
+            const homePaifarb = INITIAL_PAGES.find(p => p.id === "accueil-paifarb");
 
+            const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
+            const piparvbResp = responsablePages.filter(p => p.id.includes("piparvb"));
+            const proderResp = responsablePages.filter(p => p.id.includes("proder"));
+            const paifarbResp = responsablePages.filter(p => p.id.includes("paifarb"));
 
-
-            // INTERLEAVE: Impact Agri
+            // 1. PROJECT BLOCKS
+            
+            // --- PIPARV-B BLOCK ---
+            if (homePiparvb) allPages.push(homePiparvb);
             allPages.push({ 
                 id: "impact-agri", 
                 component: <FeatureSlide 
@@ -61,16 +64,10 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
+            allPages.push(...piparvbResp);
 
-            // 5. Statistics Dashboards
-            if (data.suiviProjetsData.length > 0) {
-                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
-            }
-            if (data.suiviPTBAProgramme) {
-                allPages.push({ id: "suivi-ptba-programme-1", component: <SuiviPTBAProgramme />, duration: 30000 });
-            }
-
-            // INTERLEAVE: Impact Proder
+            // --- PRODER BLOCK ---
+            if (homeProder) allPages.push(homeProder);
             allPages.push({ 
                 id: "impact-proder", 
                 component: <FeatureSlide 
@@ -82,12 +79,10 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
+            allPages.push(...proderResp);
 
-            if (data.suiviPTBAConsolide.length > 0) {
-                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
-            }
-
-            // INTERLEAVE: Impact Finance
+            // --- PAIFAR-B BLOCK ---
+            if (homePaifarb) allPages.push(homePaifarb);
             allPages.push({ 
                 id: "impact-paifarb", 
                 component: <FeatureSlide 
@@ -99,18 +94,24 @@ export const usePreloadPages = () => {
                 />, 
                 duration: 25000 
             });
+            allPages.push(...paifarbResp);
+
+            // 2. GLOBAL STATISTICS (At the end)
+            if (homeSummary) allPages.push(homeSummary);
+
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
 
             if (data.missionSupervisionData.length > 0) {
                 allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
             }
 
             setPercentageLoadingValue(95);
-
-            // 6. Suivi Activité Responsables
-            try {
-                const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
-                allPages.push(...responsablePages);
-            } catch (e) { console.error("Failed to register Responsable Tracking:", e); }
 
             setLoopStore({ pages: allPages, currentIndex: 0 });
             setPercentageLoadingValue(100);
