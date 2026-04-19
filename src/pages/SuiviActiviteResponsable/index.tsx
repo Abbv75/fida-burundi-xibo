@@ -63,7 +63,7 @@ const SuiviActiviteResponsable: React.FC<PageProps> = ({ data, projectName, desc
                         opacity: 0.85,
                     }}
                 >
-                    {description || "(PTBA 2025-2026 Révisé)"} {currentPage && totalPages && `· Page ${currentPage}/${totalPages}`}
+                    {description || "Suivi des Activités des Responsables"} {currentPage && totalPages && `· Page ${currentPage}/${totalPages}`}
                 </Typography>
             </Box>
 
