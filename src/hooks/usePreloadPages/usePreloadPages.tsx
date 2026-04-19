@@ -4,7 +4,8 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviIndicateurs
+    registerSuiviIndicateurs,
+    registerSuiviActiviteResponsable
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
@@ -104,6 +105,13 @@ export const usePreloadPages = () => {
             }
 
             setPercentageLoadingValue(95);
+
+            // 6. Suivi Activité Responsables
+            try {
+                const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
+                allPages.push(...responsablePages);
+            } catch (e) { console.error("Failed to register Responsable Tracking:", e); }
+
             setLoopStore({ pages: allPages, currentIndex: 0 });
             setPercentageLoadingValue(100);
 

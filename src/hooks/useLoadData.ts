@@ -4,6 +4,7 @@ import { useSuiviProjets } from '../service/suiviProjets';
 import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { useRealisationCumule } from '../service/realisationCumule';
+import { useSuiviActiviteResponsable } from '../service/suiviActiviteResponsable';
 
 
 import { useMissionSupervision } from '../service/mission_supervision';
@@ -18,6 +19,7 @@ export const useLoadData = () => {
     const { refetch: refetchPTBAConsolide } = useSuiviPTBAConsolide();
     const { refetch: refetchPTBAProgramme } = useSuiviPTBAProgramme();
     const { refetch: refetchRealisation } = useRealisationCumule();
+    const { refetch: refetchSuiviResponsable } = useSuiviActiviteResponsable();
 
 
 
@@ -32,10 +34,7 @@ export const useLoadData = () => {
             { data: ptbaConsolide },
             { data: ptbaProgramme },
             { data: realisationCumule },
-
-
-
-
+            { data: suiviResponsable },
             { data: missionSupervision }
         ] = await Promise.all([
             refetchIndicateurs(),
@@ -43,10 +42,7 @@ export const useLoadData = () => {
             refetchPTBAConsolide(),
             refetchPTBAProgramme(),
             refetchRealisation(),
-
-
-
-
+            refetchSuiviResponsable(),
             refetchMissionSupervision()
         ]);
 
@@ -56,10 +52,7 @@ export const useLoadData = () => {
             suiviPTBAConsolide: ptbaConsolide || [],
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
-
-
-
-
+            suiviActiviteResponsableData: suiviResponsable || { piparvb: [], proder: [], paifarb: [] },
             missionSupervisionData: missionSupervision || []
         });
     }, [
@@ -69,6 +62,7 @@ export const useLoadData = () => {
         refetchPTBAConsolide, 
         refetchPTBAProgramme, 
         refetchRealisation, 
+        refetchSuiviResponsable,
         refetchMissionSupervision
     ]);
 

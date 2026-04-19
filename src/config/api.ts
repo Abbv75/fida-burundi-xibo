@@ -19,6 +19,18 @@ export const API_CONFIG = {
     proxy: "/api-suivi",
     baseUrl: import.meta.env.VITE_SUIVI_URL || "https://suivi.fc-psfe.org",
   },
+  "suivi-piparvb": {
+    proxy: "/api-suivi-piparvb",
+    baseUrl: "https://suivipiparvb.fidaburundi.org",
+  },
+  "suivi-proder": {
+    proxy: "/api-suivi-proder",
+    baseUrl: "https://suiviproder.fidaburundi.org",
+  },
+  "suivi-paifarb": {
+    proxy: "/api-suivi-paifarb",
+    baseUrl: "https://suivipaifarb.fidaburundi.org",
+  },
 };
 
 export const getApiUrl = (key: keyof typeof API_CONFIG, path: string) => {

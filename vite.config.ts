@@ -29,6 +29,24 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-sise/, ''),
       },
+      '/api-suivi-piparvb': {
+        target: 'https://suivipiparvb.fidaburundi.org',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api-suivi-piparvb/, ''),
+      },
+      '/api-suivi-proder': {
+        target: 'https://suiviproder.fidaburundi.org',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api-suivi-proder/, ''),
+      },
+      '/api-suivi-paifarb': {
+        target: 'https://suivipaifarb.fidaburundi.org',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api-suivi-paifarb/, ''),
+      },
       '/api-suivi': {
         target: 'https://suivi.fc-psfe.org',
         changeOrigin: true,
