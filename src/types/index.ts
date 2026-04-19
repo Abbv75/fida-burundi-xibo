@@ -92,21 +92,6 @@ export interface PRODUIT_T {
 
 
 
-export interface SUIVI_INDICATEUR_DONNEE_ANNEE_T {
-  annee: number;
-  cible: number;
-  realisation: number;
-}
-
-export interface SUIVI_INDICATEUR_T {
-  id_ref_ind: number;
-  code_ref_ind: string;
-  intitule: string;
-  referentiel: number;
-  projet: string;
-  donnees_annees: SUIVI_INDICATEUR_DONNEE_ANNEE_T[];
-}
-
 export interface API_mobile_activite_T {
   code: string;
   libelle: string;
