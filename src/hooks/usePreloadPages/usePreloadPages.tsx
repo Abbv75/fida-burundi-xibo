@@ -4,10 +4,7 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviIndicateurs,
-    registerAvancementActivite,
-    registerAvancementAction,
-    registerAvancementProgramme
+    registerSuiviIndicateurs
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
@@ -77,13 +74,7 @@ export const usePreloadPages = () => {
                 duration: 25000 
             });
 
-            // 4. Global Progress (Activite, Action, Programme)
-            try {
-                const activitePages = registerAvancementActivite(data.API_mobile_activiteData);
-                const actionPages = registerAvancementAction(data.API_mobile_actionData);
-                const programmePages = registerAvancementProgramme(data.API_mobile_programmeData);
-                allPages.push(...activitePages, ...actionPages, ...programmePages);
-            } catch (e) { console.error("Failed to register Global Progress:", e); }
+
 
             // INTERLEAVE: Impact Finance (Reliable Data from Search)
             allPages.push({ 

@@ -5,7 +5,7 @@ import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviPTBAProgramme } from '../service/suiviPTBAProgramme';
 import { useRealisationCumule } from '../service/realisationCumule';
 
-import { useApiMobileAction, useApiMobileActivite, useApiMobileProgramme } from '../service/be_repport_api';
+
 import { useMissionSupervision } from '../service/mission_supervision';
 import { useCallback } from 'react';
 
@@ -19,9 +19,9 @@ export const useLoadData = () => {
     const { refetch: refetchPTBAProgramme } = useSuiviPTBAProgramme();
     const { refetch: refetchRealisation } = useRealisationCumule();
 
-    const { refetch: refetchActivite } = useApiMobileActivite();
-    const { refetch: refetchAction } = useApiMobileAction();
-    const { refetch: refetchProgramme } = useApiMobileProgramme();
+
+
+
     const { refetch: refetchMissionSupervision } = useMissionSupervision();
 
     const loadData = useCallback(async () => {
@@ -33,9 +33,9 @@ export const useLoadData = () => {
             { data: ptbaProgramme },
             { data: realisationCumule },
 
-            { data: activite },
-            { data: action },
-            { data: programme },
+
+
+
             { data: missionSupervision }
         ] = await Promise.all([
             refetchIndicateurs(),
@@ -44,9 +44,9 @@ export const useLoadData = () => {
             refetchPTBAProgramme(),
             refetchRealisation(),
 
-            refetchActivite(),
-            refetchAction(),
-            refetchProgramme(),
+
+
+
             refetchMissionSupervision()
         ]);
 
@@ -57,9 +57,9 @@ export const useLoadData = () => {
             suiviPTBAProgramme: ptbaProgramme || undefined,
             realisationCumuleData: realisationCumule || undefined,
 
-            API_mobile_activiteData: activite || [],
-            API_mobile_actionData: action || [],
-            API_mobile_programmeData: programme || [],
+
+
+
             missionSupervisionData: missionSupervision || []
         });
     }, [
@@ -69,9 +69,6 @@ export const useLoadData = () => {
         refetchPTBAConsolide, 
         refetchPTBAProgramme, 
         refetchRealisation, 
-        refetchActivite, 
-        refetchAction, 
-        refetchProgramme,
         refetchMissionSupervision
     ]);
 

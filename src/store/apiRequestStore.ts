@@ -14,9 +14,9 @@ interface ApiRequestState {
   suiviPTBAProgramme?: SUIVI_PTBA_PROGRAMME_T;
   realisationCumuleData?: REALISATION_CUMULE_T;
 
-  API_mobile_activiteData: API_mobile_activite_T[];
-  API_mobile_actionData: API_mobile_activite_T[];
-  API_mobile_programmeData: API_mobile_activite_T[];
+
+
+
   missionSupervisionData: MISSION_SUPERVISION_T[];
 }
 
@@ -26,8 +26,8 @@ export const useApiRequestStore = create<ApiRequestState>((set) => ({
   suiviProjetsData: [],
   suiviPTBAConsolide: [],
 
-  API_mobile_activiteData: [],
-  API_mobile_actionData: [],
-  API_mobile_programmeData: [],
+
+
+
   missionSupervisionData: [],
 }));
