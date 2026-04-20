@@ -101,7 +101,13 @@ export const usePreloadPages = () => {
             });
 
             if (data.missionSupervisionData.length > 0) {
-                allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
+                data.missionSupervisionData.forEach((_, index) => {
+                    allPages.push({ 
+                        id: `mission-supervision-${index}`, 
+                        component: <MissionSupervision projectIndex={index} />, 
+                        duration: 30000 
+                    });
+                });
             }
 
             // 3. ALL SUIVI ACTIVITE RESPONSABLES (Continuous block at the end)
