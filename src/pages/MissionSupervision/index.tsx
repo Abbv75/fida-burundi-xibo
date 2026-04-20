@@ -1,14 +1,178 @@
 import Highcharts, { Options } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { Box, Stack, Typography } from "@mui/joy";
-import Marquee from "react-fast-marquee";
+import { Box, Stack, Typography, Sheet, Grid, Divider } from "@mui/joy";
 import { format, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 import { useApiRequestStore } from "../../store/apiRequestStore";
+import { MISSION_SUPERVISION_T } from "../../types";
+
+const formatMissionDate = (dateStr: string) => {
+    try {
+        return format(parseISO(dateStr), "d MMMM yyyy", { locale: fr });
+    } catch (e) {
+        return dateStr;
+    }
+};
+
+const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
+    const stats = item.recommandations.statistiques;
+    const data = [
+        { name: "Mise en œuvre", y: stats.execute, color: '#4CAF50', pct: stats.pourcentages.execute },
+        { name: "Partiellement mise en œuvre", y: stats.encours, color: '#FF9800', pct: stats.pourcentages.encours },
+        { name: "Non exécuté", y: stats.non_execute, color: '#F44336', pct: stats.pourcentages.non_execute },
+        { name: "Délai non échu", y: stats.non_entame, color: '#9E9E9E', pct: stats.pourcentages.non_entame },
+    ];
+
+    const pieOptions: Options = {
+        chart: {
+            type: "pie",
+            backgroundColor: "transparent",
+            height: "250px",  // Augmenté pour une meilleure visibilité
+            margin: [0, 0, 0, 0],
+            animation: false,
+        },
+        title: { text: "" },
+        plotOptions: {
+            pie: {
+                innerSize: '50%',
+                borderWidth: 0,
+                borderRadius: 10,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.percentage:.1f}%',
+                    style: { color: '#fff', fontSize: '0.9vw', textOutline: 'none', fontWeight: 'bold' },
+                    distance: 10
+                },
+                showInLegend: false,
+            }
+        },
+        series: [{
+            name: "Récommandations",
+            colorByPoint: true,
+            data: data,
+            type: 'pie'
+        }],
+        credits: { enabled: false },
+    };
+
+    return (
+        <Sheet
+            variant="soft"
+            sx={{
+                background: 'rgba(255, 255, 255, 0.05)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: 'xl',
+                p: 1,
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                boxSizing: 'border-box',
+                gap: 0.5
+            }}
+        >
+            <Stack
+                gap={2}
+                direction={'row'}
+                alignItems={'center'}
+            >
+                {/* Header: Uniquement le sigle du projet */}
+                <Typography sx={{
+                    color: '#FFD700',
+                    fontSize: '2.2vw',
+                    fontWeight: '900',
+                    textAlign: 'center',
+                    textShadow: '1px 1px 4px rgba(0,0,0,0.5)',
+                    mb: 0.5,
+                    textWrap: 'nowrap'
+                }}>
+                    {item.projet.sigle}
+                </Typography>
+
+                <Divider sx={{
+                    height: '100%',
+                    width: '2px',
+                    // borderColor: "#FFD700",
+                    background: "white",
+                }} />
+
+                <Typography sx={{
+                    color: 'white',
+                    fontSize: '0.9vw',
+                    fontStyle: 'italic',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                }}>
+                    {item?.derniere_mission?.type} : {item?.derniere_mission?.objet}
+                </Typography>
+            </Stack>
+            {/* Contenu vertical: Tableau (Haut) et Camembert (Bas) */}
+            <Box sx={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: 0,
+                gap: 1,
+                mt: 3
+            }}>
+
+                {/* Tableau en haut */}
+                <Box sx={{ 
+                    borderRadius: 'lg', 
+                    overflow: 'hidden', 
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'rgba(255,255,255,0.02)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', color: '#fff' }}>
+                        <thead>
+                            <tr style={{ backgroundColor: 'rgba(255,255,255,0.05)', borderBottom: '2px solid rgba(255,255,255,0.2)' }}>
+                                <th style={{ textAlign: 'left', padding: '10px 14px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1vw', letterSpacing: '0.05em', fontWeight: '900' }}>État de mise en œuvre</th>
+                                <th style={{ textAlign: 'center', padding: '10px 14px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1vw', letterSpacing: '0.05em', fontWeight: '900' }}>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((d, i) => (
+                                <tr key={i} style={{ borderBottom: i === data.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
+                                    <td style={{ padding: '8px 14px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                        <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: d.color, boxShadow: `0 0 12px ${d.color}`, flexShrink: 0 }} />
+                                        <Typography sx={{ color: '#fff', fontSize: '1.2vw', fontWeight: 500, lineHeight: 1.2 }}>{d.name}</Typography>
+                                    </td>
+                                    <td style={{ textAlign: 'center', padding: '8px 14px' }}>
+                                        <Typography sx={{ color: '#fff', fontSize: '1.3vw', fontWeight: '900', textShadow: '0 0 10px rgba(255,255,255,0.2)' }}>{d.y}</Typography>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </Box>
+
+                {/* Camembert en bas */}
+                <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 0 }}>
+                    <Box sx={{ width: '100%', height: '250px' }}>
+                        <HighchartsReact highcharts={Highcharts} options={pieOptions} containerProps={{ style: { height: '100%', width: '100%' } }} />
+                    </Box>
+                </Box>
+            </Box>
+
+            {/* Légende bas: Dernière mission et Date */}
+            {item.derniere_mission && (
+                <Typography sx={{
+                    color: '#FFD700',
+                    fontSize: '1vw',
+                    fontWeight: '900',
+                    textAlign : 'end'
+                }}>
+                    Dernière date: {formatMissionDate(item.derniere_mission.fin)}
+                </Typography>
+            )}
+        </Sheet>
+    );
+};
 
 export default function MissionSupervision() {
     const { missionSupervisionData } = useApiRequestStore();
-    
+
     if (!missionSupervisionData || missionSupervisionData.length === 0) {
         return (
             <Stack sx={{ height: '70vh', justifyContent: 'center', alignItems: 'center' }}>
@@ -19,150 +183,24 @@ export default function MissionSupervision() {
         );
     }
 
-    const categories = missionSupervisionData.map(item => item.projet.sigle);
-    const fullNames = missionSupervisionData.map(item => item.projet.intitule);
-
-    const executeData = missionSupervisionData.map(item => item.recommandations.statistiques.execute);
-    const encoursData = missionSupervisionData.map(item => item.recommandations.statistiques.encours);
-    const nonExecuteData = missionSupervisionData.map(item => item.recommandations.statistiques.non_execute);
-    const nonEntameData = missionSupervisionData.map(item => item.recommandations.statistiques.non_entame);
-
-    const formatMissionDate = (dateStr: string) => {
-        try {
-            return format(parseISO(dateStr), "d MMMM yyyy", { locale: fr });
-        } catch (e) {
-            return dateStr;
-        }
-    };
-
-    const options: Options = {
-        chart: {
-            type: "column",
-            backgroundColor: "transparent",
-            animation: false,
-            spacingBottom: 50, 
-            spacingTop: 10,
-            spacingLeft: 10,
-            spacingRight: 10,
-        },
-        title: { text: "" },
-        xAxis: {
-            categories,
-            labels: { 
-                style: { 
-                    fontSize: "1.4vw", 
-                    fontWeight: '900',
-                    color: '#FFD700', 
-                    textOutline: '2px rgba(0,0,0,0.8)'
-                },
-                padding: 10
-            },
-            lineColor: 'rgba(255,255,255,0.3)',
-        },
-        yAxis: {
-            min: 0,
-            title: { 
-                text: "Nombre de récommandations",
-                style: { color: '#fff', fontSize: '1vw', fontWeight: 'bold' }
-            },
-            labels: {
-                style: { color: '#fff', fontSize: '1vw' }
-            },
-            gridLineColor: 'rgba(255,255,255,0.15)',
-            stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color: '#fff',
-                    fontSize: '1.2vw',
-                    textOutline: '2px rgba(0,0,0,0.5)'
-                }
-            }
-        },
-        legend: {
-            enabled: true,
-            itemStyle: { fontSize: "1.1vw", color: '#fff', fontWeight: 'bold' },
-            itemHoverStyle: { color: '#FFD700' },
-            align: 'center',
-            verticalAlign: 'bottom',
-            layout: 'horizontal',
-            y: 35
-        },
-        tooltip: {
-            useHTML: true,
-            headerFormat: '<div style="font-size: 1.2vw; font-weight: bold; color: {point.color}">{point.key}</div>',
-            pointFormat: '<div style="font-size: 1vw">{series.name}: <b>{point.y}</b></div>',
-            footerFormat: '<div style="font-size: 0.8vw; font-style: italic; margin-top: 5px; opacity: 0.8; max-width: 300px">{point.fullName}</div>'
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                borderRadius: 4,
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    style: {
-                        color: 'white',
-                        textOutline: '2px rgba(0,0,0,0.5)',
-                        fontSize: '1.1vw',
-                        fontWeight: 'bold'
-                    },
-                    formatter: function() {
-                        return this.y && this.y > 0 ? this.y : null;
-                    }
-                }
-            },
-            series: {
-                keys: ['y', 'fullName'] 
-            }
-        },
-        series: [
-            {
-                name: "Mise en œuvre",
-                data: executeData.map((y, i) => [y, fullNames[i]]),
-                color: '#4CAF50', 
-                type: 'column'
-            },
-            {
-                name: "Partiellement mise en œuvre",
-                data: encoursData.map((y, i) => [y, fullNames[i]]),
-                color: '#FF9800', 
-                type: 'column'
-            },
-            {
-                name: "Non exécuté",
-                data: nonExecuteData.map((y, i) => [y, fullNames[i]]),
-                color: '#F44336', 
-                type: 'column'
-            },
-            {
-                name: "Délai d'exécution non échu",
-                data: nonEntameData.map((y, i) => [y, fullNames[i]]),
-                color: '#9E9E9E', 
-                type: 'column'
-            }
-        ],
-        credits: { enabled: false },
-    };
-
     return (
-        <Stack 
-            sx={{ 
-                gap: '10vh', 
-                px: 4, 
-                py: 1, 
-                height: '100%', 
-                overflow: 'hidden', 
-                justifyContent: 'flex-start',
+        <Stack
+            sx={{
+                gap: 2,
+                px: 3,
+                py: 2,
+                height: '100vh',
+                overflow: 'hidden',
                 boxSizing: 'border-box',
-                position: 'relative'
+                position: 'relative',
+                background: 'transparent'
             }}
         >
-            <Box sx={{ textAlign: 'center', mb: 0.5 }}>
+            <Box sx={{ textAlign: 'center', mb: 1 }}>
                 <Typography
                     level="h1"
                     sx={{
-                        fontSize: "2.5vw", 
+                        fontSize: "2.8vw",
                         fontWeight: "900",
                         color: "#fff",
                         textShadow: "2px 2px 10px rgba(0,0,0,0.8)",
@@ -174,66 +212,27 @@ export default function MissionSupervision() {
                 <Typography
                     level="h4"
                     sx={{
-                        fontSize: "1.1vw", 
+                        fontSize: "1.3vw",
                         fontWeight: "500",
                         color: "#ffd700",
                         textTransform: "uppercase",
                         letterSpacing: "0.15rem",
                         textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
-                        mt: -0.5 
+                        mt: -0.5
                     }}
                 >
                     État des recommandations par projet
                 </Typography>
             </Box>
 
-            <Box 
-                sx={{ 
-                    flex: 1, 
-                    minHeight: 0,
-                    position: 'relative',
-                    width: '100%',
-                }}
-            >
-                <HighchartsReact 
-                    highcharts={Highcharts} 
-                    options={options} 
-                    containerProps={{ 
-                        style: { 
-                            height: "100%", 
-                            width: "100%", 
-                            position: 'absolute'
-                        } 
-                    }}
-                />
-            </Box>
-
-            {/* Scrolling Mission Info */}
-            <Box sx={{ bgcolor: 'rgba(0,0,0,0.3)', py: 0.5, mb: 1, borderRadius: '8px' }}>
-                <Marquee gradient={false} speed={50}>
-                    {missionSupervisionData.map((item, idx) => {
-                        const m = item.derniere_mission;
-                        if (!m) return null;
-                        return (
-                            <Typography 
-                                key={idx} 
-                                sx={{ 
-                                    color: '#fff', 
-                                    fontSize: '1vw', 
-                                    mx: 6, 
-                                    display: 'flex', 
-                                    alignItems: 'center',
-                                    gap: 1
-                                }}
-                            >
-                                <span style={{ color: '#FFD700', fontWeight: 'bold' }}>• {item.projet.sigle} :</span>
-                                Dernière mission de {m.type} effectuée du {formatMissionDate(m.debut)} au {formatMissionDate(m.fin)}. 
-                                <span style={{ fontStyle: 'italic', opacity: 0.9 }}> {m.objet}</span>
-                            </Typography>
-                        );
-                    })}
-                </Marquee>
-            </Box>
+            <Grid container spacing={2} sx={{ flex: 1, minHeight: 0 }}>
+                {missionSupervisionData.map((item, idx) => (
+                    <Grid key={idx} xs={4} sx={{ height: '100%' }}>
+                        <ProjectSection item={item} />
+                    </Grid>
+                ))}
+            </Grid>
         </Stack>
     );
 }
+
