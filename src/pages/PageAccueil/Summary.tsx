@@ -19,8 +19,8 @@ const Summary: React.FC = () => {
                 <Stack direction="row" gap={6} justifyContent="center" sx={{ mt: 2 }}>
                     {[
                         { name: "PIPARV-B", desc: "Production & Vulnérabilité" },
-                        { name: "PRODER", desc: "Entrepreneuriat Rural" },
                         { name: "PAIFAR-B", desc: "Inclusion Financière" },
+                        { name: "PRODER", desc: "Entrepreneuriat Rural" },
                     ].map((prog) => (
                         <Stack
                             key={prog.name}

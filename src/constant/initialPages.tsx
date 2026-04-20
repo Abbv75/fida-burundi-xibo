@@ -15,13 +15,13 @@ export default [
         duration: 25000,
     },
     {
-        id: "accueil-proder",
-        component: <Proder />,
+        id: "accueil-paifarb",
+        component: <Paifarb />,
         duration: 25000,
     },
     {
-        id: "accueil-paifarb",
-        component: <Paifarb />,
+        id: "accueil-proder",
+        component: <Proder />,
         duration: 25000,
     },
 ];
