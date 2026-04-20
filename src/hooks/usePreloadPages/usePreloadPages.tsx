@@ -48,8 +48,8 @@ export const usePreloadPages = () => {
             // 1. HOME PAGES
             if (homeSummary) allPages.push(homeSummary);
             if (homePiparvb) allPages.push(homePiparvb);
-            if (homeProder) allPages.push(homeProder);
             if (homePaifarb) allPages.push(homePaifarb);
+            if (homeProder) allPages.push(homeProder);
 
             // 2. MIXED STATS & INTERMEDIATE (Impact) PAGES
             
@@ -70,6 +70,19 @@ export const usePreloadPages = () => {
                 allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
             }
 
+            // PAIFAR-B Context
+            allPages.push({ 
+                id: "impact-paifarb", 
+                component: <FeatureSlide 
+                    title="Inclusion PAIFAR-B"
+                    subtitle="Digitalisation et Accès aux Services Financiers"
+                    description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
+                    image={IMAGES.burundi_financial_inclusion}
+                    highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
+                />, 
+                duration: 25000 
+            });
+
             // PRODER Context
             allPages.push({ 
                 id: "impact-proder", 
@@ -87,22 +100,18 @@ export const usePreloadPages = () => {
                 allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
             }
 
-            // PAIFAR-B Context
-            allPages.push({ 
-                id: "impact-paifarb", 
-                component: <FeatureSlide 
-                    title="Inclusion PAIFAR-B"
-                    subtitle="Digitalisation et Accès aux Services Financiers"
-                    description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
-                    image={IMAGES.burundi_financial_inclusion}
-                    highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
-                />, 
-                duration: 25000 
+            // Mission Supervision Pages in specific order: PIPARVB -> PAIFAR-B -> PRODER
+            const MISSION_ORDER = ["PIPARVB", "PAIFAR-B", "PRODER"];
+            MISSION_ORDER.forEach(sigle => {
+                const itemIndex = data.missionSupervisionData.findIndex(d => d.projet.sigle === sigle);
+                if (itemIndex !== -1) {
+                    allPages.push({ 
+                        id: `mission-supervision-${sigle}`, 
+                        component: <MissionSupervision projectIndex={itemIndex} />, 
+                        duration: 30000 
+                    });
+                }
             });
-
-            if (data.missionSupervisionData.length > 0) {
-                allPages.push({ id: "mission-supervision-1", component: <MissionSupervision />, duration: 30000 });
-            }
 
             // 3. ALL SUIVI ACTIVITE RESPONSABLES (Continuous block at the end)
             allPages.push(...responsablePages);
