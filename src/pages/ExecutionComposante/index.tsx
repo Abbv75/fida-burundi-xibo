@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, Sheet } from "@mui/joy";
 import { EXECUTION_COMPOSANTE_ITEM_T, EXECUTION_COMPOSANTE_PROJET_T } from "../../types";
 import { ProgressBar } from "../SuiviProjets/components/Utils";
+import LinearProgressCustom from "../../components/LinearProgressCustom";
 
 interface ExecutionComposanteProps {
     project: EXECUTION_COMPOSANTE_PROJET_T['projet'];
@@ -21,15 +22,6 @@ interface ExecutionComposanteProps {
         compCount: number;
     };
 }
-
-const RateDisplay = ({ value, color = "#2ecc71" }: { value: number, color?: string }) => (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2px', width: '100%' }}>
-        <Typography sx={{ fontSize: '1.1vw', color: '#fff', fontWeight: 800, textAlign: 'center' }}>
-            {Math.round(value)}%
-        </Typography>
-        <ProgressBar val={value} color={color} />
-    </Box>
-);
 
 export default function ExecutionComposante({
     project,
@@ -137,17 +129,17 @@ export default function ExecutionComposante({
                                     <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
                                         <td style={tdStyle}>{comp.code}: {comp.intitule}</td>
                                         <td style={tdProgressStyle}>
-                                            <RateDisplay value={comp.financier.taux_consommation} color="#f39c12" />
+                                            <LinearProgressCustom value={comp.financier.taux_consommation} progressColor="#f39c12" />
                                         </td>
                                         <td style={tdCenterStyle}>{comp.physique.total_activites}</td>
                                         <td style={tdCenterStyle}>{comp.physique.realisees}</td>
                                         <td style={tdProgressStyle}>
-                                            <RateDisplay value={comp.physique.taux_avancement} color="#2ecc71" />
+                                            <LinearProgressCustom value={comp.physique.taux_avancement} progressColor="#2ecc71" />
                                         </td>
                                         <td style={tdGlobalStyle}>{comp.global.total_activites}</td>
                                         <td style={tdGlobalStyle}>{comp.global.realisees || '-'}</td>
                                         <td style={tdGlobalProgressStyle}>
-                                            <RateDisplay value={comp.global.taux_avancement} color="#3498db" />
+                                            <LinearProgressCustom value={comp.global.taux_avancement} progressColor="#3498db" />
                                         </td>
                                     </tr>
                                 ))}
@@ -157,17 +149,17 @@ export default function ExecutionComposante({
                                     <tr style={{ backgroundColor: 'rgba(255,255,255,0.1)', fontWeight: '900' }}>
                                         <td style={tdStyle}>Total</td>
                                         <td style={tdProgressStyle}>
-                                            <RateDisplay value={avgTauxCons} color="#f39c12" />
+                                            <LinearProgressCustom value={avgTauxCons} progressColor="#f39c12" />
                                         </td>
                                         <td style={tdCenterStyle}>{totals.totalAct}</td>
                                         <td style={tdCenterStyle}>{totals.realisees}</td>
                                         <td style={tdProgressStyle}>
-                                            <RateDisplay value={avgTauxPhys} color="#2ecc71" />
+                                            <LinearProgressCustom value={avgTauxPhys} progressColor="#2ecc71" />
                                         </td>
                                         <td style={tdGlobalStyle}>{totals.totalGlobal}</td>
                                         <td style={tdGlobalStyle}>{totals.realiseesGlobal}</td>
                                         <td style={tdGlobalProgressStyle}>
-                                            <RateDisplay value={avgTauxGlobal} color="#3498db" />
+                                            <LinearProgressCustom value={avgTauxGlobal} progressColor="#3498db" />
                                         </td>
                                     </tr>
                                 </tfoot>
