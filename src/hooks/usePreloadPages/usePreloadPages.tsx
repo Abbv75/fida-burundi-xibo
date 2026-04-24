@@ -9,7 +9,6 @@ import {
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
-import ExecutionComposante from '../../pages/ExecutionComposante';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
 import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
