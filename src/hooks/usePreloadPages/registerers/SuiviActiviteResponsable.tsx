@@ -1,4 +1,3 @@
-import React from 'react';
 import { PAGE_T, SUIVI_ACTIVITE_RESPONSABLE_DATA_T, SUIVI_ACTIVITE_RESPONSABLE_ITEM_T } from "../../../types";
 import SuiviActiviteResponsableComponent from "../../../pages/SuiviActiviteResponsable";
 

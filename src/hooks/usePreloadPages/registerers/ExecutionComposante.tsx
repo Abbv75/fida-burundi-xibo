@@ -2,7 +2,7 @@ import React from 'react';
 import { PAGE_T, EXECUTION_COMPOSANTE_PROJET_T, EXECUTION_COMPOSANTE_ITEM_T } from "../../../types";
 import ExecutionComposanteComponent from "../../../pages/ExecutionComposante";
 
-const CHUNK_SIZE = 6;
+const CHUNK_SIZE = 5;
 
 const chunkArray = (arr: EXECUTION_COMPOSANTE_ITEM_T[], size: number) => {
     const chunks = [];
