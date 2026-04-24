@@ -41,7 +41,7 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
                 }}>
                     {item.projet.sigle}
                 </Typography>
-                
+
                 <Box sx={{ height: '4vw', width: '3px', background: 'rgba(255,255,255,0.3)', borderRadius: '2px' }} />
 
                 <Typography sx={{
@@ -57,9 +57,9 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
 
             <Grid container spacing={6} sx={{ flex: 1, alignItems: 'center', minHeight: 0 }}>
                 <Grid xs={5}>
-                    <Box sx={{ 
-                        borderRadius: 'xl', 
-                        overflow: 'hidden', 
+                    <Box sx={{
+                        borderRadius: 'xl',
+                        overflow: 'hidden',
                         border: '1px solid rgba(255,255,255,0.15)',
                         background: 'rgba(255,255,255,0.03)',
                         boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
@@ -100,14 +100,33 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
             </Grid>
 
             {item.derniere_mission && (
-                <Typography sx={{
-                    color: '#FFD700',
-                    fontSize: '1vw',
-                    fontWeight: '900',
-                    textAlign : 'end'
-                }}>
-                    Dernière date: {formatMissionDate(item.derniere_mission.fin)}
-                </Typography>
+                <Stack
+                    direction="row"
+                    alignItems={"flex-end"}
+                    justifyContent="flex-end"
+                    gap={2}
+                >
+                    <Typography sx={{
+                        color: '#FFD700',
+                        fontSize: '1vw',
+                        fontWeight: '900',
+                    }}>
+                        Date début: {formatMissionDate(item.derniere_mission.debut)}
+                    </Typography>
+                    <Box
+                        width={20}
+                        sx={{ aspectRatio: 1 }}
+                        bgcolor={'#FFD700'}
+                        borderRadius={30}
+                    />
+                    <Typography sx={{
+                        color: '#FFD700',
+                        fontSize: '1vw',
+                        fontWeight: '900',
+                    }}>
+                        Date fin: {formatMissionDate(item.derniere_mission.fin)}
+                    </Typography>
+                </Stack>
             )}
         </Sheet>
     );
