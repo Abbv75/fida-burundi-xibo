@@ -1,10 +1,10 @@
-import Highcharts, { Options } from "highcharts";
+import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { Box, Stack, Typography, Sheet, Grid } from "@mui/joy";
 import { formatMissionDate } from "../../helpers";
 import { MISSION_SUPERVISION_T } from "../../types";
 
-import { useProjectStats } from "./useProjectStats";
+import { useProjectStats } from "./hooks/useProjectStats";
 
 export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
     const { data, pieOptions } = useProjectStats(item);
