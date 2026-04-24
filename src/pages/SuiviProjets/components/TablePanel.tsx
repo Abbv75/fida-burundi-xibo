@@ -34,7 +34,7 @@ export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (
                 borderBottom: "1px solid rgba(255,255,255,0.1)",
             }}
         >
-            {["Projet", "Taux d'exécution", "Taux de réalisation"].map((h) => (
+            {["Projet", "Taux d'exécution physique", "Taux de réalisation financière"].map((h) => (
                 <Typography
                     key={h}
                     sx={{
