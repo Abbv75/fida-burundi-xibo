@@ -69,6 +69,7 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
                                 <tr style={{ backgroundColor: 'rgba(255,255,255,0.08)', borderBottom: '3px solid rgba(255,255,255,0.2)' }}>
                                     <th style={{ textAlign: 'left', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>État de mise en œuvre</th>
                                     <th style={{ textAlign: 'center', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>Nombre</th>
+                                    <th style={{ textAlign: 'center', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>Taux</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +80,10 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
                                             <Typography sx={{ color: '#fff', fontSize: '1.4vw', fontWeight: 600, lineHeight: 1.2 }}>{d.name}</Typography>
                                         </td>
                                         <td style={{ textAlign: 'center', padding: '14px 20px' }}>
-                                            <Typography sx={{ color: '#fff', fontSize: '1.8vw', fontWeight: '900', textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>{d.y}</Typography>
+                                            <Typography sx={{ color: '#fff', fontSize: '1.5vw', fontWeight: '900', textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>{d.y}</Typography>
+                                        </td>
+                                        <td style={{ textAlign: 'center', padding: '14px 20px' }}>
+                                            <Typography sx={{ color: '#fff', fontSize: '1.5vw', fontWeight: '900', textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>{d.pct}%</Typography>
                                         </td>
                                     </tr>
                                 ))}
