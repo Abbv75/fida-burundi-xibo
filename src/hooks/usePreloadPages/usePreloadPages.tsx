@@ -4,7 +4,8 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviActiviteResponsable
+    registerSuiviActiviteResponsable,
+    registerExecutionComposante
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
@@ -100,8 +101,8 @@ export const usePreloadPages = () => {
                 allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
             }
 
-            // Mission Supervision Pages in specific order: PIPARVB -> PAIFAR-B -> PRODER
-            const MISSION_ORDER = ["PIPARVB", "PAIFAR-B", "PRODER"];
+            // Mission Supervision Pages in specific order: PIPARV-B -> PAIFAR-B -> PRODER
+            const MISSION_ORDER = ["PIPARV-B", "PAIFAR-B", "PRODER"];
             MISSION_ORDER.forEach(sigle => {
                 const itemIndex = data.missionSupervisionData.findIndex(d => d.projet.sigle === sigle);
                 if (itemIndex !== -1) {
@@ -110,6 +111,13 @@ export const usePreloadPages = () => {
                         component: <MissionSupervision projectIndex={itemIndex} />, 
                         duration: 30000 
                     });
+                }
+
+                // Add Paginated Execution Composante for the same project
+                const projectExecData = data.executionComposanteData.find(d => d.projet.sigle_projet === sigle);
+                if (projectExecData) {
+                    const compPages = registerExecutionComposante([projectExecData]);
+                    allPages.push(...compPages);
                 }
             });
 

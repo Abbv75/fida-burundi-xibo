@@ -1,9 +1,9 @@
 import { Options } from "highcharts";
-import { MISSION_SUPERVISION_T } from "../../types";
+import { MISSION_SUPERVISION_T } from "../../../types";
 
 export const useProjectStats = (item: MISSION_SUPERVISION_T) => {
     const stats = item.recommandations.statistiques;
-    
+
     const data = [
         { name: "Mise en œuvre", y: stats.execute, color: '#4CAF50', pct: stats.pourcentages.execute },
         { name: "Partiellement mise en œuvre", y: stats.encours, color: '#FF9800', pct: stats.pourcentages.encours },

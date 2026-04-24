@@ -15,7 +15,7 @@ export default function SuiviPTBAConsolide() {
                     Suivi PTBA Consolidé (Burundi)
                 </Typography>
                 <Typography sx={{ color: "#ffd700", fontWeight: 600, fontSize: "1vw", textTransform: "uppercase", mt: 0.5 }}>
-                    Performance globale par piliers · PIPARV-B · PRODER · PAIFAR-B
+                    Performance globale par piliers · PIPARV-B · PAIFAR-B · PRODER
                 </Typography>
             </Box>
 
