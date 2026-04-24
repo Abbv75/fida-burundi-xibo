@@ -2,9 +2,8 @@ import { useApiRequestStore } from '../store/apiRequestStore';
 import { useSuiviProjets } from '../service/suiviProjets';
 import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviActiviteResponsable } from '../service/suiviActiviteResponsable';
-
-
 import { useMissionSupervision } from '../service/mission_supervision';
+import { useExecutionComposante } from '../service/executionComposante';
 import { useCallback } from 'react';
 
 export const useLoadData = () => {
@@ -14,11 +13,8 @@ export const useLoadData = () => {
     const { refetch: refetchProjets } = useSuiviProjets();
     const { refetch: refetchPTBAConsolide } = useSuiviPTBAConsolide();
     const { refetch: refetchSuiviResponsable } = useSuiviActiviteResponsable();
-
-
-
-
     const { refetch: refetchMissionSupervision } = useMissionSupervision();
+    const { refetch: refetchExecutionComposante } = useExecutionComposante();
 
     const loadData = useCallback(async () => {
         // We trigger refetch for all and wait for the results
@@ -26,26 +22,30 @@ export const useLoadData = () => {
             { data: suiviProjets },
             { data: ptbaConsolide },
             { data: suiviResponsable },
-            { data: missionSupervision }
+            { data: missionSupervision },
+            { data: executionComposante }
         ] = await Promise.all([
             refetchProjets(),
             refetchPTBAConsolide(),
             refetchSuiviResponsable(),
-            refetchMissionSupervision()
+            refetchMissionSupervision(),
+            refetchExecutionComposante()
         ]);
 
         set({
             suiviProjetsData: suiviProjets || [],
             suiviPTBAConsolide: ptbaConsolide || [],
             suiviActiviteResponsableData: suiviResponsable || { piparvb: [], proder: [], paifarb: [] },
-            missionSupervisionData: missionSupervision || []
+            missionSupervisionData: missionSupervision || [],
+            executionComposanteData: executionComposante || []
         });
     }, [
         set, 
         refetchProjets,
         refetchPTBAConsolide, 
         refetchSuiviResponsable,
-        refetchMissionSupervision
+        refetchMissionSupervision,
+        refetchExecutionComposante
     ]);
 
     return { loadData };

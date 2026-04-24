@@ -4,10 +4,12 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviActiviteResponsable
+    registerSuiviActiviteResponsable,
+    registerExecutionComposante
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
+import ExecutionComposante from '../../pages/ExecutionComposante';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
 import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
@@ -110,6 +112,13 @@ export const usePreloadPages = () => {
                         component: <MissionSupervision projectIndex={itemIndex} />, 
                         duration: 30000 
                     });
+                }
+
+                // Add Paginated Execution Composante for the same project
+                const projectExecData = data.executionComposanteData.find(d => d.projet.sigle_projet === sigle);
+                if (projectExecData) {
+                    const compPages = registerExecutionComposante([projectExecData]);
+                    allPages.push(...compPages);
                 }
             });
 

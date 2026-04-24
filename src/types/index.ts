@@ -158,3 +158,34 @@ export interface SUIVI_ACTIVITE_RESPONSABLE_DATA_T {
   proder: SUIVI_ACTIVITE_RESPONSABLE_ITEM_T[];
   paifarb: SUIVI_ACTIVITE_RESPONSABLE_ITEM_T[];
 }
+
+export interface EXECUTION_COMPOSANTE_ITEM_T {
+  code: string;
+  intitule: string;
+  financier: {
+    budget_annuel: number;
+    depense_annuelle: number;
+    taux_consommation: number;
+  };
+  physique: {
+    total_activites: number;
+    realisees: number;
+    en_cours: number;
+    taux_avancement: number;
+  };
+  global: {
+    total_activites: number;
+    realisees: number;
+    taux_avancement: number;
+  };
+}
+
+export interface EXECUTION_COMPOSANTE_PROJET_T {
+  projet: {
+    id_projet: string;
+    intitule_projet: string;
+    sigle_projet: string;
+  };
+  annee_reference: string;
+  composantes: EXECUTION_COMPOSANTE_ITEM_T[];
+}
