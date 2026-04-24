@@ -88,6 +88,19 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
                                     </tr>
                                 ))}
                             </tbody>
+                            <tfoot style={{ borderTop: '3px solid rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.05)' }}>
+                                <tr>
+                                    <td style={{ padding: '16px 20px' }}>
+                                        <Typography sx={{ color: '#FFD700', fontSize: '1.4vw', fontWeight: '900', textTransform: 'uppercase' }}>Total</Typography>
+                                    </td>
+                                    <td style={{ textAlign: 'center', padding: '16px 20px' }}>
+                                        <Typography sx={{ color: '#FFD700', fontSize: '1.6vw', fontWeight: '900' }}>{item.recommandations.total}</Typography>
+                                    </td>
+                                    <td style={{ textAlign: 'center', padding: '16px 20px' }}>
+                                        <Typography sx={{ color: '#FFD700', fontSize: '1.6vw', fontWeight: '900' }}>100%</Typography>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </Box>
                 </Grid>

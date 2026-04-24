@@ -1,6 +1,5 @@
 import { Box, Stack, Typography, Sheet } from "@mui/joy";
 import { EXECUTION_COMPOSANTE_ITEM_T, EXECUTION_COMPOSANTE_PROJET_T } from "../../types";
-import { ProgressBar } from "../SuiviProjets/components/Utils";
 import LinearProgressCustom from "../../components/LinearProgressCustom";
 
 interface ExecutionComposanteProps {
