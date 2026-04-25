@@ -105,10 +105,10 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
         <Box
             sx={{
                 height: "100%",
-                background: "rgba(0,0,0,0.25)",
+                background: "rgba(0,0,0,0.35)",
                 backdropFilter: "blur(12px)",
                 borderRadius: "20px",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.12)",
                 display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
@@ -119,15 +119,15 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 sx={{
                     px: "1.5vw",
                     py: "1vw",
-                    borderBottom: "1px solid rgba(255,255,255,0.05)",
-                    background: "rgba(255,255,255,0.03)",
+                    borderBottom: "1px solid rgba(255,255,255,0.1)",
+                    background: "rgba(0, 60, 25, 0.7)",
                 }}
             >
                 <Typography
                     sx={{
-                        color: "#fff",
+                        color: "#ffd700",
                         fontSize: "1.1vw",
-                        fontWeight: 800,
+                        fontWeight: 900,
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
                     }}
@@ -136,7 +136,7 @@ export const ChartPanel: React.FC<ChartPanelProps> = ({ projets }) => {
                 </Typography>
                 <Typography
                     sx={{
-                        color: "rgba(255,255,255,0.5)",
+                        color: "rgba(255,255,255,0.7)",
                         fontSize: "0.75vw",
                     }}
                 >

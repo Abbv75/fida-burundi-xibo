@@ -13,11 +13,11 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
         <Sheet
             variant="soft"
             sx={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                backdropFilter: 'blur(10px)',
+                background: 'rgba(0,0,0,0.35)',
+                backdropFilter: 'blur(12px)',
                 borderRadius: 'xl',
                 p: 2,
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
                 display: 'flex',
                 flexDirection: 'column',
                 height: '100%',
@@ -66,7 +66,7 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
                     }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', color: '#fff' }}>
                             <thead>
-                                <tr style={{ backgroundColor: 'rgba(255,255,255,0.08)', borderBottom: '3px solid rgba(255,255,255,0.2)' }}>
+                                <tr style={{ backgroundColor: 'rgba(0, 60, 25, 0.7)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                                     <th style={{ textAlign: 'left', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>État de mise en œuvre</th>
                                     <th style={{ textAlign: 'center', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>Nombre</th>
                                     <th style={{ textAlign: 'center', padding: '16px 20px', color: '#FFD700', textTransform: 'uppercase', fontSize: '1.2vw', letterSpacing: '0.08em', fontWeight: '900' }}>Taux</th>
