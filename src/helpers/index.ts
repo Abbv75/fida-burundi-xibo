@@ -14,3 +14,20 @@ export const formatMissionDate = (dateStr: string) => {
         return dateStr;
     }
 };
+
+/**
+ * Calcule la valeur en pourcentage
+ */
+export const getPercentageValue = (value: string | number, total: string | number) => {
+    const v = Number(value);
+    const t = Number(total);
+    if (t === 0) return 0;
+    return Math.round((v / t) * 100);
+};
+
+/**
+ * Formate une valeur en pourcentage avec le symbole %
+ */
+export const formatPercent = (value: string | number, total: string | number) => {
+    return `${getPercentageValue(value, total)}%`;
+};
