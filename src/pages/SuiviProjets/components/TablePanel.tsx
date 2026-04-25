@@ -1,12 +1,8 @@
 import React from "react";
 import { Box, Typography } from "@mui/joy";
-import { ProjetSimpleEntry } from "../../../service/suiviProjets";
 import { PALETTE } from "./constants";
-import { fmt, ProgressBar } from "./Utils";
-
-interface TablePanelProps {
-    projets: ProjetSimpleEntry[];
-}
+import { TablePanelProps } from "../types";
+import LinearProgressCustom from "../../../components/LinearProgressCustom";
 
 export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (
     <Box
@@ -108,32 +104,22 @@ export const TablePanel: React.FC<TablePanelProps> = ({ projets }) => (
 
                         {/* Taux d'exécution */}
                         <Box>
-                            <Typography
-                                sx={{
-                                    color,
-                                    fontWeight: 700,
-                                    fontSize: "0.95vw",
-                                    mb: "0.2vw",
-                                }}
-                            >
-                                {fmt(p.taux_execution)}
-                            </Typography>
-                            <ProgressBar val={p.taux_execution} color={color} />
+                            <LinearProgressCustom 
+                                value={p.taux_execution} 
+                                progressColor={color} 
+                                fontSize="0.95vw" 
+                                height="0.7vw" 
+                            />
                         </Box>
 
                         {/* Taux de réalisation */}
                         <Box>
-                            <Typography
-                                sx={{
-                                    color: "#ffd700",
-                                    fontWeight: 700,
-                                    fontSize: "0.95vw",
-                                    mb: "0.2vw",
-                                }}
-                            >
-                                {fmt(p.taux_realisation)}
-                            </Typography>
-                            <ProgressBar val={p.taux_realisation} color="#ffd700" />
+                            <LinearProgressCustom 
+                                value={p.taux_realisation} 
+                                progressColor="#ffd700" 
+                                fontSize="0.95vw" 
+                                height="0.7vw" 
+                            />
                         </Box>
                     </Box>
                 );

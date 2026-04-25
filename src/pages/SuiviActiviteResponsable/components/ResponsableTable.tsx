@@ -1,11 +1,10 @@
 import React from 'react';
 import { Box, Typography, Table } from '@mui/joy';
 import { ResponsableTableProps } from '../types';
-import { ProgressBar } from '../../SuiviProjets/components/Utils';
-import { getPercentageValue, formatPercent } from '../../../helpers';
+import LinearProgressCustom from '../../../components/LinearProgressCustom';
+import { getPercentageValue } from '../../../helpers';
 
 export const ResponsableTable: React.FC<ResponsableTableProps> = ({ data }) => {
-
     return (
         <Table
             stickyHeader
@@ -53,38 +52,32 @@ export const ResponsableTable: React.FC<ResponsableTableProps> = ({ data }) => {
                             <td style={{ textAlign: 'right', fontFamily: 'monospace', fontSize: '1.1vw' }}>{item.activites_prevues}</td>
                             <td style={{ textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700 }}>{item.activites_realisees}</Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: '#2ecc71', fontWeight: 700 }}>
-                                        {formatPercent(item.activites_realisees, item.activites_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.activites_realisees, item.activites_prevues)} color="#2ecc71" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.activites_realisees, item.activites_prevues)} 
+                                    progressColor="#2ecc71" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                             <td style={{ textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700 }}>{item.activites_en_cours}</Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: '#f39c12', fontWeight: 700 }}>
-                                        {formatPercent(item.activites_en_cours, item.activites_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.activites_en_cours, item.activites_prevues)} color="#f39c12" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.activites_en_cours, item.activites_prevues)} 
+                                    progressColor="#f39c12" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                             <td style={{ textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700, color: Number(item.activites_en_retard) > 0 ? '#ff4d4d' : 'inherit' }}>
                                     {item.activites_en_retard}
                                 </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: Number(item.activites_en_retard) > 0 ? '#ff4d4d88' : 'rgba(255,255,255,0.4)', fontWeight: 700 }}>
-                                        {formatPercent(item.activites_en_retard, item.activites_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.activites_en_retard, item.activites_prevues)} color="#ff4d4d" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.activites_en_retard, item.activites_prevues)} 
+                                    progressColor="#ff4d4d" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                         </tr>
                         <tr style={{ borderBottom: '3px solid rgba(255,255,255,0.2)' }}>
@@ -92,38 +85,32 @@ export const ResponsableTable: React.FC<ResponsableTableProps> = ({ data }) => {
                             <td style={{ backgroundColor: "rgba(255,255,255,0.02)", textAlign: 'right', fontFamily: 'monospace', fontSize: '1.1vw' }}>{item.taches_prevues}</td>
                             <td style={{ backgroundColor: "rgba(255,255,255,0.02)", textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700 }}>{item.taches_realisees}</Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: '#2ecc71', fontWeight: 700 }}>
-                                        {formatPercent(item.taches_realisees, item.taches_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.taches_realisees, item.taches_prevues)} color="#2ecc71" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.taches_realisees, item.taches_prevues)} 
+                                    progressColor="#2ecc71" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                             <td style={{ backgroundColor: "rgba(255,255,255,0.02)", textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700 }}>{item.taches_en_cours}</Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: '#f39c12', fontWeight: 700 }}>
-                                        {formatPercent(item.taches_en_cours, item.taches_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.taches_en_cours, item.taches_prevues)} color="#f39c12" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.taches_en_cours, item.taches_prevues)} 
+                                    progressColor="#f39c12" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                             <td style={{ backgroundColor: "rgba(255,255,255,0.02)", textAlign: 'right', fontFamily: 'monospace' }}>
                                 <Box sx={{ fontSize: '1.1vw', fontWeight: 700, color: Number(item.taches_en_retard) > 0 ? '#ff4d4d' : 'inherit' }}>
                                     {item.taches_en_retard}
                                 </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: '0.5vw', justifyContent: 'flex-end', mt: '2px' }}>
-                                    <Typography sx={{ fontSize: '0.8vw', color: Number(item.taches_en_retard) > 0 ? '#ff4d4d88' : 'rgba(255,255,255,0.4)', fontWeight: 700 }}>
-                                        {formatPercent(item.taches_en_retard, item.taches_prevues)}
-                                    </Typography>
-                                    <Box sx={{ flex: 1 }}>
-                                        <ProgressBar val={getPercentageValue(item.taches_en_retard, item.taches_prevues)} color="#ff4d4d" />
-                                    </Box>
-                                </Box>
+                                <LinearProgressCustom 
+                                    value={getPercentageValue(item.taches_en_retard, item.taches_prevues)} 
+                                    progressColor="#ff4d4d" 
+                                    fontSize="0.8vw" 
+                                    height="0.6vw" 
+                                />
                             </td>
                         </tr>
                     </React.Fragment>
