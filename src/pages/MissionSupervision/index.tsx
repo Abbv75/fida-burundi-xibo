@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, Grid } from "@mui/joy";
 import { useApiRequestStore } from "../../store/apiRequestStore";
 import { ProjectSection } from "./ProjectSection";
+import { motion } from "framer-motion";
 
 export default function MissionSupervision({ projectIndex = -1 }: { projectIndex?: number }) {
     const { missionSupervisionData } = useApiRequestStore();
@@ -34,36 +35,47 @@ export default function MissionSupervision({ projectIndex = -1 }: { projectIndex
                 background: 'transparent'
             }}
         >
-            <Box sx={{ textAlign: 'center', mb: 1 }}>
-                <Typography
-                    level="h1"
-                    sx={{
-                        fontSize: "2.8vw",
-                        fontWeight: "900",
-                        color: "#fff",
-                        textShadow: "2px 2px 10px rgba(0,0,0,0.8)",
-                        mb: 0
-                    }}
-                >
-                    Missions de Supervision
-                </Typography>
-                <Typography
-                    level="h4"
-                    sx={{
-                        fontSize: "1.3vw",
-                        fontWeight: "500",
-                        color: "#ffd700",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.15rem",
-                        textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
-                        mt: -0.5
-                    }}
-                >
-                    État des recommandations {projectIndex !== -1 ? `pour ${displayData[0].projet.sigle}` : 'par projet'}
-                </Typography>
-            </Box>
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                <Box sx={{ textAlign: 'center', mb: 1 }}>
+                    <Typography
+                        level="h1"
+                        sx={{
+                            fontSize: "2.8vw",
+                            fontWeight: "900",
+                            color: "#fff",
+                            textShadow: "2px 2px 10px rgba(0,0,0,0.8)",
+                            mb: 0
+                        }}
+                    >
+                        Missions de Supervision
+                    </Typography>
+                    <Typography
+                        level="h4"
+                        sx={{
+                            fontSize: "1.3vw",
+                            fontWeight: "500",
+                            color: "#ffd700",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.15rem",
+                            textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
+                            mt: -0.5
+                        }}
+                    >
+                        État des recommandations {projectIndex !== -1 ? `pour ${displayData[0].projet.sigle}` : 'par projet'}
+                    </Typography>
+                </Box>
+            </motion.div>
 
-            <Box sx={{ flex: 1, minHeight: 0, display: 'flex', gap: 2 }}>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                style={{ flex: 1, minHeight: 0, display: 'flex', gap: '16px' }}
+            >
                 {projectIndex === -1 ? (
                     <Grid container spacing={2} sx={{ flex: 1 }}>
                         {displayData.map((item, idx) => (
@@ -77,7 +89,7 @@ export default function MissionSupervision({ projectIndex = -1 }: { projectIndex
                         <ProjectSection item={displayData[0]} />
                     </Box>
                 )}
-            </Box>
+            </motion.div>
         </Stack>
     );
 }

@@ -4,6 +4,7 @@ import { useSuiviPTBAConsolide } from '../service/suiviPTBAConsolide';
 import { useSuiviActiviteResponsable } from '../service/suiviActiviteResponsable';
 import { useMissionSupervision } from '../service/mission_supervision';
 import { useExecutionComposante } from '../service/executionComposante';
+import { useIndicateurs } from '../service/indicateur';
 import { useCallback } from 'react';
 
 export const useLoadData = () => {
@@ -15,6 +16,7 @@ export const useLoadData = () => {
     const { refetch: refetchSuiviResponsable } = useSuiviActiviteResponsable();
     const { refetch: refetchMissionSupervision } = useMissionSupervision();
     const { refetch: refetchExecutionComposante } = useExecutionComposante();
+    const { refetch: refetchIndicateurs } = useIndicateurs();
 
     const loadData = useCallback(async () => {
         // We trigger refetch for all and wait for the results
@@ -23,13 +25,15 @@ export const useLoadData = () => {
             { data: ptbaConsolide },
             { data: suiviResponsable },
             { data: missionSupervision },
-            { data: executionComposante }
+            { data: executionComposante },
+            { data: indicateurs }
         ] = await Promise.all([
             refetchProjets(),
             refetchPTBAConsolide(),
             refetchSuiviResponsable(),
             refetchMissionSupervision(),
-            refetchExecutionComposante()
+            refetchExecutionComposante(),
+            refetchIndicateurs()
         ]);
 
         set({
@@ -37,7 +41,8 @@ export const useLoadData = () => {
             suiviPTBAConsolide: ptbaConsolide || [],
             suiviActiviteResponsableData: suiviResponsable || { piparvb: [], proder: [], paifarb: [] },
             missionSupervisionData: missionSupervision || [],
-            executionComposanteData: executionComposante || []
+            executionComposanteData: executionComposante || [],
+            indicateurData: indicateurs || []
         });
     }, [
         set, 
@@ -45,7 +50,8 @@ export const useLoadData = () => {
         refetchPTBAConsolide, 
         refetchSuiviResponsable,
         refetchMissionSupervision,
-        refetchExecutionComposante
+        refetchExecutionComposante,
+        refetchIndicateurs
     ]);
 
     return { loadData };

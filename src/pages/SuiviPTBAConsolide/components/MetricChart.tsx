@@ -60,17 +60,17 @@ export const MetricChart: React.FC<MetricChartProps> = ({ title, description, da
     return (
         <Box sx={{
             height: "100%",
-            background: "rgba(255,255,255,0.03)",
-            backdropFilter: "blur(10px)",
+            background: "rgba(0,0,0,0.35)",
+            backdropFilter: "blur(12px)",
             borderRadius: "16px",
-            border: "1px solid rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.12)",
             display: "flex",
             flexDirection: "column",
             overflow: "hidden"
         }}>
-            <Box sx={{ p: "1vw", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "1.1vw" }}>{title}</Typography>
-                <Typography sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.7vw" }}>{description}</Typography>
+            <Box sx={{ p: "1vw", background: "rgba(0, 60, 25, 0.7)", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+                <Typography sx={{ color: "#ffd700", fontWeight: 900, fontSize: "1.1vw", textTransform: "uppercase", letterSpacing: "0.05em" }}>{title}</Typography>
+                <Typography sx={{ color: "rgba(255,255,255,0.7)", fontSize: "0.7vw" }}>{description}</Typography>
             </Box>
             <Box sx={{ flex: 1, position: "relative" }}>
                 <HighchartsReact

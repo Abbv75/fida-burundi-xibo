@@ -3,6 +3,7 @@ import { Box, Stack, Typography, Grid } from "@mui/joy";
 import { useApiRequestStore } from "../../store/apiRequestStore";
 import { TablePanel } from "./components/TablePanel";
 import { ChartPanel } from "./components/ChartPanel";
+import { motion } from "framer-motion";
 
 export default function SuiviProjets() {
     const { suiviProjetsData: projets } = useApiRequestStore();
@@ -38,33 +39,39 @@ export default function SuiviProjets() {
             }}
         >
             {/* ── Title ── */}
-            <Box sx={{ textAlign: "center", flexShrink: 0 }}>
-                <Typography
-                    level="h1"
-                    sx={{
-                        fontSize: "2.4vw",
-                        fontWeight: 900,
-                        color: "#fff",
-                        textShadow: "2px 2px 15px rgba(0,0,0,0.6)",
-                        lineHeight: 1.2,
-                    }}
-                >
-                    Suivi des Projets (Consolidé)
-                </Typography>
-                <Typography
-                    sx={{
-                        fontSize: "1vw",
-                        fontWeight: 600,
-                        color: "#ffd700",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.12em",
-                        opacity: 0.85,
-                        mt: "0.3vw",
-                    }}
-                >
-                    Aperçu financier et exécution · {projets.length} projets actifs
-                </Typography>
-            </Box>
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            >
+                <Box sx={{ textAlign: "center", flexShrink: 0 }}>
+                    <Typography
+                        level="h1"
+                        sx={{
+                            fontSize: "2.4vw",
+                            fontWeight: 900,
+                            color: "#fff",
+                            textShadow: "2px 2px 15px rgba(0,0,0,0.6)",
+                            lineHeight: 1.2,
+                        }}
+                    >
+                        Suivi des Projets (Consolidé)
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: "1vw",
+                            fontWeight: 600,
+                            color: "#ffd700",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.12em",
+                            opacity: 0.85,
+                            mt: "0.3vw",
+                        }}
+                    >
+                        Aperçu financier et exécution · {projets.length} projets actifs
+                    </Typography>
+                </Box>
+            </motion.div>
 
             {/* ── Content: Table (left) + Chart (right) ── */}
             <Grid
@@ -73,13 +80,27 @@ export default function SuiviProjets() {
                 sx={{ flex: 1, minHeight: 0, overflow: "hidden" }}
             >
                 {/* Left: Table */}
-                <Grid xs={12} md={7} >
-                    <TablePanel projets={projets} />
+                <Grid xs={12} md={7} sx={{ display: 'flex' }} flex={1}>
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+                    >
+                        <TablePanel projets={projets} />
+                    </motion.div>
                 </Grid>
 
                 {/* Right: Chart */}
                 <Grid xs={12} md={5} sx={{ display: 'flex' }} flex={1} >
-                    <ChartPanel projets={projets} />
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+                    >
+                        <ChartPanel projets={projets} />
+                    </motion.div>
                 </Grid>
             </Grid>
         </Stack>
