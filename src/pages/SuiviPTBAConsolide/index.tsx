@@ -1,13 +1,13 @@
 import { Box, Stack, Typography, Grid } from "@mui/joy";
-import { useApiRequestStore } from "../../store/apiRequestStore";
 import { MetricChart } from "./components/MetricChart";
 import { METRICS, PTBA_PALETTE } from "./components/constants";
 import { motion } from "framer-motion";
+import { useSuiviPTBAConsolide } from "./hooks/useSuiviPTBAConsolide";
 
 export default function SuiviPTBAConsolide() {
-    const { suiviPTBAConsolide: data } = useApiRequestStore();
+    const { data, hasData } = useSuiviPTBAConsolide();
 
-    if (!data || data.length === 0) return null;
+    if (!hasData) return null;
 
     return (
         <Stack sx={{ height: "100%", px: "3vw", py: "2vw", gap: "1.5vw", boxSizing: "border-box" }}>
