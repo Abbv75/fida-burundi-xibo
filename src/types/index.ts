@@ -189,3 +189,18 @@ export interface EXECUTION_COMPOSANTE_PROJET_T {
   annee_reference: string;
   composantes: EXECUTION_COMPOSANTE_ITEM_T[];
 }
+
+export interface INDICATEUR_ITEM_T {
+  code: string;
+  intitule: string;
+  total_prevu: number;
+  total_realise: number;
+  pourcentage: number;
+}
+
+export interface INDICATEUR_PROJET_T {
+  projet: {
+    sigle: string;
+  };
+  indicateurs: INDICATEUR_ITEM_T[];
+}

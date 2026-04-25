@@ -5,7 +5,8 @@ import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
     registerSuiviActiviteResponsable,
-    registerExecutionComposante
+    registerExecutionComposante,
+    registerIndicateurs
 } from './registerers';
 import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
@@ -118,6 +119,13 @@ export const usePreloadPages = () => {
                 if (projectExecData) {
                     const compPages = registerExecutionComposante([projectExecData]);
                     allPages.push(...compPages);
+                }
+
+                // Add Paginated Indicateurs for the same project
+                const projectIndData = data.indicateurData.find(d => d.projet.sigle === sigle);
+                if (projectIndData) {
+                    const indPages = registerIndicateurs([projectIndData]);
+                    allPages.push(...indPages);
                 }
             });
 
