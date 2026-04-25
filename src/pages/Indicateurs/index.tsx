@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography, Sheet } from "@mui/joy";
 import { INDICATEUR_ITEM_T, INDICATEUR_PROJET_T } from "../../types";
+import LinearProgressCustom from "../../components/LinearProgressCustom";
 
 interface IndicateursProps {
     project: INDICATEUR_PROJET_T['projet'];
@@ -9,57 +10,12 @@ interface IndicateursProps {
     totalPages?: number;
 }
 
-const ProgressBarNumber = ({ value, max, color = "#d4e6b5" }: { value: number, max: number, color?: string }) => {
-    const percentage = max > 0 ? (value / max) * 100 : 0;
-    return (
-        <Box sx={{ position: 'relative', width: '100%', height: '1.8vw', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
-            <Box sx={{ 
-                position: 'absolute', 
-                left: 0, 
-                top: 0, 
-                height: '100%', 
-                width: `${Math.min(100, percentage)}%`, 
-                backgroundColor: color,
-                opacity: 0.8
-            }} />
-            <Typography sx={{ 
-                position: 'relative', 
-                zIndex: 1, 
-                textAlign: 'right', 
-                pr: 1, 
-                lineHeight: '1.8vw', 
-                fontSize: '1vw', 
-                fontWeight: '900', 
-                color: '#000' 
-            }}>
-                {value.toLocaleString()}
-            </Typography>
-        </Box>
-    );
-};
-
-const PercentageBadge = ({ value }: { value: number }) => {
-    const color = value >= 100 ? '#2ecc71' : value >= 50 ? '#f39c12' : '#c0392b';
-    return (
-        <Box sx={{ 
-            backgroundColor: color, 
-            color: '#fff', 
-            borderRadius: '6px', 
-            px: 1, 
-            py: 0.5, 
-            textAlign: 'center', 
-            fontWeight: '800', 
-            fontSize: '0.9vw',
-            minWidth: '4vw'
-        }}>
-            {value.toFixed(2).replace('.', ',')}%
-        </Box>
-    );
-};
-
 export default function Indicateurs({ project, indicateurs, currentPage = 1, totalPages = 1 }: IndicateursProps) {
-    // Find max previsto for bars scaling on this page
-    const maxPrevu = Math.max(...indicateurs.map(i => i.total_prevu), 1);
+    const getProgressColor = (value: number) => {
+        if (value >= 100) return '#2ecc71';
+        if (value >= 50) return '#f39c12';
+        return '#c0392b';
+    };
 
     return (
         <Stack
@@ -136,21 +92,26 @@ export default function Indicateurs({ project, indicateurs, currentPage = 1, tot
                                     <th style={{ ...thStyle, textAlign: 'left', width: '60%' }}>Indicateur</th>
                                     <th style={{ ...thStyle, width: '12%' }}>Total Prévu</th>
                                     <th style={{ ...thStyle, width: '12%' }}>Total Réalisé</th>
-                                    <th style={{ ...thStyle, width: '8%' }}>(%)</th>
+                                    <th style={{ ...thStyle, width: '16%' }}>Progression (%)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {indicateurs.map((ind, i) => (
                                     <tr key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
                                         <td style={{ ...tdStyle, fontWeight: '500' }}>{ind.code}: {ind.intitule}</td>
-                                        <td style={tdStyle}>
-                                            <ProgressBarNumber value={ind.total_prevu} max={maxPrevu} />
+                                        <td style={{ ...tdStyle, textAlign: 'right', fontWeight: '800', fontSize: '1.1vw' }}>
+                                            {ind.total_prevu.toLocaleString()}
                                         </td>
-                                        <td style={tdStyle}>
-                                            <ProgressBarNumber value={ind.total_realise} max={maxPrevu} />
+                                        <td style={{ ...tdStyle, textAlign: 'right', fontWeight: '800', fontSize: '1.1vw' }}>
+                                            {ind.total_realise.toLocaleString()}
                                         </td>
                                         <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                            <PercentageBadge value={ind.pourcentage} />
+                                            <LinearProgressCustom 
+                                                value={ind.pourcentage} 
+                                                progressColor={getProgressColor(ind.pourcentage)}
+                                                fontSize="0.9vw"
+                                                height="0.8vw"
+                                            />
                                         </td>
                                     </tr>
                                 ))}

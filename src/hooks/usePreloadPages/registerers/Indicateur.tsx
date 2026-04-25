@@ -2,7 +2,7 @@ import React from 'react';
 import { PAGE_T, INDICATEUR_PROJET_T, INDICATEUR_ITEM_T } from "../../../types";
 import IndicateursComponent from "../../../pages/Indicateurs";
 
-const CHUNK_SIZE = 10;
+const CHUNK_SIZE = 8;
 
 const chunkArray = (arr: INDICATEUR_ITEM_T[], size: number) => {
     const chunks = [];
