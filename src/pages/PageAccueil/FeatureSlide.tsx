@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Typography, Box } from "@mui/joy";
 import SlideLayout from "./Layout";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface FeatureSlideProps {
     title: string;
@@ -12,7 +12,7 @@ interface FeatureSlideProps {
 }
 
 const FeatureSlide: React.FC<FeatureSlideProps> = ({ title, subtitle, description, image, highlights }) => {
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -23,7 +23,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({ title, subtitle, descriptio
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,
@@ -31,6 +31,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({ title, subtitle, descriptio
             transition: { duration: 0.5, ease: "easeOut" }
         }
     };
+
 
     return (
         <SlideLayout

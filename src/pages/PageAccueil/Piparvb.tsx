@@ -4,7 +4,7 @@ import { IMAGES } from "../../constant";
 import SlideLayout from "./Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling, faWater, faUsersGear, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const Piparvb: React.FC = () => {
     const points = [
@@ -14,7 +14,7 @@ const Piparvb: React.FC = () => {
         { icon: faLocationDot, title: "Zones d'Action", text: "Impact direct à Karusi, Kayanza, Gitega, Ngozi et Muyinga." },
     ];
 
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -22,7 +22,7 @@ const Piparvb: React.FC = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,

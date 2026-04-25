@@ -3,10 +3,10 @@ import { Stack, Typography } from "@mui/joy";
 import { IMAGES } from "../../constant";
 import SlideLayout from "./Layout";
 import { CardMedia } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const Summary: React.FC = () => {
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -14,7 +14,7 @@ const Summary: React.FC = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,
