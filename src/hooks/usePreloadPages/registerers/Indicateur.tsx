@@ -1,4 +1,3 @@
-import React from 'react';
 import { PAGE_T, INDICATEUR_PROJET_T, INDICATEUR_ITEM_T } from "../../../types";
 import IndicateursComponent from "../../../pages/Indicateurs";
 
