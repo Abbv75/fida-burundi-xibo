@@ -12,6 +12,7 @@ import { PAGE_T } from '../../types';
 import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
+import SuiviPTBAProjet from '../../pages/SuiviPTBAProjet';
 import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
 import { IMAGES } from '../../constant';
 
@@ -136,6 +137,16 @@ export const usePreloadPages = () => {
                 if (items.length > 0) {
                     const taskPages = registerSuiviActiviteResponsableByProject(items, sigle, prefix);
                     allPages.push(...taskPages);
+                }
+
+                // F. PTBA Projet
+                const projectPTBA = data.suiviPTBAConsolide.find(p => p.sigle === sigle || p.pays === sigle);
+                if (projectPTBA) {
+                    allPages.push({ 
+                        id: `suivi-ptba-projet-${sigle}`, 
+                        component: <SuiviPTBAProjet project={projectPTBA} />, 
+                        duration: 35000 
+                    });
                 }
             });
 
