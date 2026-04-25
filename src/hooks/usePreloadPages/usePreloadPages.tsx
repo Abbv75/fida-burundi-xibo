@@ -4,7 +4,7 @@ import { usePageLooperStore } from '../../store/usePageLooperStore';
 import { useApiRequestStore } from '../../store/apiRequestStore';
 import INITIAL_PAGES from '../../constant/initialPages';
 import {
-    registerSuiviActiviteResponsable,
+    registerSuiviActiviteResponsableByProject,
     registerExecutionComposante,
     registerIndicateurs
 } from './registerers';
@@ -45,92 +45,109 @@ export const usePreloadPages = () => {
             const homeProder = INITIAL_PAGES.find(p => p.id === "accueil-proder");
             const homePaifarb = INITIAL_PAGES.find(p => p.id === "accueil-paifarb");
 
-            const responsablePages = registerSuiviActiviteResponsable(data.suiviActiviteResponsableData);
 
-            // 1. HOME PAGES
+            // 1. ALL HOME PAGES
             if (homeSummary) allPages.push(homeSummary);
             if (homePiparvb) allPages.push(homePiparvb);
             if (homePaifarb) allPages.push(homePaifarb);
             if (homeProder) allPages.push(homeProder);
 
-            // 2. MIXED STATS & INTERMEDIATE (Impact) PAGES
-            
-            // PIPARV-B Context
-            allPages.push({ 
-                id: "impact-agri", 
-                component: <FeatureSlide 
-                    title="Impact PIPARV-B"
-                    subtitle="Résilience et Nutrition au cœur du Plateau Central"
-                    description="Le projet PIPARV-B cible une réduction de 30% de la malnutrition infantile chronique d'ici juin 2025 grâce à l'intensification rizicole."
-                    image={IMAGES.burundi_agriculture_impact}
-                    highlights={["-30% Malnutrition", "5 Provinces clés", "Achèvement 2025"]}
-                />, 
-                duration: 25000 
-            });
-
-            if (data.suiviProjetsData.length > 0) {
-                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
-            }
-
-            // PAIFAR-B Context
-            allPages.push({ 
-                id: "impact-paifarb", 
-                component: <FeatureSlide 
-                    title="Inclusion PAIFAR-B"
-                    subtitle="Digitalisation et Accès aux Services Financiers"
-                    description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
-                    image={IMAGES.burundi_financial_inclusion}
-                    highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
-                />, 
-                duration: 25000 
-            });
-
-            // PRODER Context
-            allPages.push({ 
-                id: "impact-proder", 
-                component: <FeatureSlide 
-                    title="Objectifs PRODER"
-                    subtitle="Propulser l'Entrepreneuriat des Jeunes"
-                    description="Le programme PRODER vise à créer 39 000 emplois décents et soutenir 7 840 micro-entreprises rurales pour 85 000 bénéficiaires directs."
-                    image={IMAGES.burundi_rural_entrepreneurship}
-                    highlights={["39k Emplois", "85k Bénéficiaires", "7 840 Entreprises"]}
-                />, 
-                duration: 25000 
-            });
-
-            if (data.suiviPTBAConsolide.length > 0) {
-                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
-            }
-
-            // Mission Supervision Pages in specific order: PIPARV-B -> PAIFAR-B -> PRODER
+            // 2. DETAILED PROJECT CYCLES (Impact, Mission, Execution, Indicators)
             const MISSION_ORDER = ["PIPARV-B", "PAIFAR-B", "PRODER"];
+            
             MISSION_ORDER.forEach(sigle => {
-                const itemIndex = data.missionSupervisionData.findIndex(d => d.projet.sigle === sigle);
-                if (itemIndex !== -1) {
+                // A. Project Impact Page (FeatureSlide)
+                if (sigle === "PIPARV-B") {
+                    allPages.push({ 
+                        id: "impact-agri", 
+                        component: <FeatureSlide 
+                            title="Impact PIPARV-B"
+                            subtitle="Résilience et Nutrition au cœur du Plateau Central"
+                            description="Le projet PIPARV-B cible une réduction de 30% de la malnutrition infantile chronique d'ici juin 2025 grâce à l'intensification rizicole."
+                            image={IMAGES.burundi_agriculture_impact}
+                            highlights={["-30% Malnutrition", "5 Provinces clés", "Achèvement 2025"]}
+                        />, 
+                        duration: 25000 
+                    });
+                } else if (sigle === "PAIFAR-B") {
+                    allPages.push({ 
+                        id: "impact-paifarb", 
+                        component: <FeatureSlide 
+                            title="Inclusion PAIFAR-B"
+                            subtitle="Digitalisation et Accès aux Services Financiers"
+                            description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
+                            image={IMAGES.burundi_financial_inclusion}
+                            highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
+                        />, 
+                        duration: 25000 
+                    });
+                } else if (sigle === "PRODER") {
+                    allPages.push({ 
+                        id: "impact-proder", 
+                        component: <FeatureSlide 
+                            title="Objectifs PRODER"
+                            subtitle="Propulser l'Entrepreneuriat des Jeunes"
+                            description="Le programme PRODER vise à créer 39 000 emplois décents et soutenir 7 840 micro-entreprises rurales pour 85 000 bénéficiaires directs."
+                            image={IMAGES.burundi_rural_entrepreneurship}
+                            highlights={["39k Emplois", "85k Bénéficiaires", "7 840 Entreprises"]}
+                        />, 
+                        duration: 25000 
+                    });
+                }
+
+                // B. Mission Supervision
+                const missionIndex = data.missionSupervisionData.findIndex(d => d.projet.sigle === sigle);
+                if (missionIndex !== -1) {
                     allPages.push({ 
                         id: `mission-supervision-${sigle}`, 
-                        component: <MissionSupervision projectIndex={itemIndex} />, 
+                        component: <MissionSupervision projectIndex={missionIndex} />, 
                         duration: 30000 
                     });
                 }
 
-                // Add Paginated Execution Composante for the same project
+                // C. Execution Composante
                 const projectExecData = data.executionComposanteData.find(d => d.projet.sigle_projet === sigle);
                 if (projectExecData) {
                     const compPages = registerExecutionComposante([projectExecData]);
                     allPages.push(...compPages);
                 }
 
-                // Add Paginated Indicateurs for the same project
+                // D. Indicateurs
                 const projectIndData = data.indicateurData.find(d => d.projet.sigle === sigle);
                 if (projectIndData) {
                     const indPages = registerIndicateurs([projectIndData]);
                     allPages.push(...indPages);
                 }
+
+                // E. Suivi des Tâches (Responsables)
+                let items: any[] = [];
+                let prefix = "";
+                if (sigle === "PIPARV-B") {
+                    items = data.suiviActiviteResponsableData.piparvb;
+                    prefix = "suivi-activite-responsable-piparvb";
+                } else if (sigle === "PAIFAR-B") {
+                    items = data.suiviActiviteResponsableData.paifarb;
+                    prefix = "suivi-activite-responsable-paifarb";
+                } else if (sigle === "PRODER") {
+                    items = data.suiviActiviteResponsableData.proder;
+                    prefix = "suivi-activite-responsable-proder";
+                }
+
+                if (items.length > 0) {
+                    const taskPages = registerSuiviActiviteResponsableByProject(items, sigle, prefix);
+                    allPages.push(...taskPages);
+                }
             });
 
-            // 3. ALL SUIVI ACTIVITE RESPONSABLES (Continuous block at the end)
-            allPages.push(...responsablePages);
+            // 3. CONSOLIDATED & GLOBAL VIEWS
+            if (data.suiviProjetsData.length > 0) {
+                allPages.push({ id: "suivi-projets-1", component: <SuiviProjets />, duration: 35000 });
+            }
+
+            if (data.suiviPTBAConsolide.length > 0) {
+                allPages.push({ id: "suivi-ptba-consolide-1", component: <SuiviPTBAConsolide />, duration: 40000 });
+            }
+
 
             setPercentageLoadingValue(95);
 
