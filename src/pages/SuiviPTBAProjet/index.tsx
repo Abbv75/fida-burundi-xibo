@@ -1,20 +1,13 @@
 import React from "react";
 import { Stack, Typography, Box, Grid, Sheet } from "@mui/joy";
-import { PTBAConsolideProject } from "../../service/suiviPTBAConsolide";
 import { motion } from "framer-motion";
 import { TableSection } from "./components/TableSection";
 import { ChartSection } from "./components/ChartSection";
-
-interface SuiviPTBAProjetProps {
-    project: PTBAConsolideProject;
-}
+import { usePTBAMetrics } from "./hooks/usePTBAMetrics";
+import { SuiviPTBAProjetProps } from "./types";
 
 const SuiviPTBAProjet: React.FC<SuiviPTBAProjetProps> = ({ project }) => {
-    const dataMetrics = [
-        { name: "Avancement des tâches", value: project.tasks, color: "#3498db" },
-        { name: "Taux des indicateurs", value: project.indicators, color: "#2ecc71" },
-        { name: "Taux des coûts", value: project.costs, color: "#e74c3c" },
-    ];
+    const dataMetrics = usePTBAMetrics(project);
 
     return (
         <Stack sx={{ height: "100%", px: "3vw", py: "2vw", gap: "2vw", boxSizing: "border-box", overflow: "hidden" }}>

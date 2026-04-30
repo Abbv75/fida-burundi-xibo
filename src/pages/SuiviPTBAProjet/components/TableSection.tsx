@@ -1,9 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/joy";
 
-interface TableSectionProps {
-    dataMetrics: { name: string; value: number; color: string }[];
-}
+import { TableSectionProps } from "../types";
 
 export const TableSection: React.FC<TableSectionProps> = ({ dataMetrics }) => {
     return (

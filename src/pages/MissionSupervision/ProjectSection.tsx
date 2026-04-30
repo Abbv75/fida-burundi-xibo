@@ -26,33 +26,51 @@ export const ProjectSection = ({ item }: { item: MISSION_SUPERVISION_T }) => {
             }}
         >
             <Stack
-                gap={3}
                 direction={'row'}
                 alignItems={'center'}
+                justifyContent={'space-between'}
                 sx={{ mb: 2 }}
             >
-                <Typography sx={{
-                    color: '#FFD700',
-                    fontSize: '3vw',
-                    fontWeight: '900',
-                    textAlign: 'center',
-                    textShadow: '2px 2px 10px rgba(0,0,0,0.8)',
-                    textWrap: 'nowrap'
-                }}>
-                    {item.projet.sigle}
-                </Typography>
+                <Stack direction="row" gap={3} alignItems="center">
+                    <Typography sx={{
+                        color: '#FFD700',
+                        fontSize: '3vw',
+                        fontWeight: '900',
+                        textAlign: 'center',
+                        textShadow: '2px 2px 10px rgba(0,0,0,0.8)',
+                        textWrap: 'nowrap'
+                    }}>
+                        {item.projet.sigle}
+                    </Typography>
 
-                <Box sx={{ height: '4vw', width: '3px', background: 'rgba(255,255,255,0.3)', borderRadius: '2px' }} />
+                    <Box sx={{ height: '4vw', width: '3px', background: 'rgba(255,255,255,0.3)', borderRadius: '2px' }} />
 
-                <Typography sx={{
-                    color: 'white',
-                    fontSize: '1.4vw',
-                    fontStyle: 'italic',
-                    fontWeight: '500',
-                    opacity: 0.9
+                    <Typography sx={{
+                        color: 'white',
+                        fontSize: '1.4vw',
+                        fontStyle: 'italic',
+                        fontWeight: '500',
+                        opacity: 0.9
+                    }}>
+                        {item?.derniere_mission?.type} : {item?.derniere_mission?.objet}
+                    </Typography>
+                </Stack>
+
+                <Stack sx={{
+                    bgcolor: 'rgba(255, 215, 0, 0.12)',
+                    p: '12px 24px',
+                    borderRadius: '16px',
+                    border: '1px solid rgba(255, 215, 0, 0.3)',
+                    alignItems: 'center',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
                 }}>
-                    {item?.derniere_mission?.type} : {item?.derniere_mission?.objet}
-                </Typography>
+                    <Typography sx={{ color: '#FFD700', fontSize: '2vw', fontWeight: '900', lineHeight: 1 }}>
+                        {item.recommandations.total}
+                    </Typography>
+                    <Typography sx={{ color: 'white', fontSize: '0.8vw', textTransform: 'uppercase', fontWeight: '800', letterSpacing: '0.05em' }}>
+                        Recommandations
+                    </Typography>
+                </Stack>
             </Stack>
 
             <Grid container spacing={6} sx={{ flex: 1, alignItems: 'center', minHeight: 0 }}>

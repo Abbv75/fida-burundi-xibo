@@ -6,9 +6,9 @@ import { getApiUrl } from "../../config/api";
 
 export interface PTBAConsolideProject {
   sigle: string;
-  tasks: number;     // Avancement des tâches
+  activities: number; // Avancement des activités
   indicators: number; // Taux des indicateurs
-  costs: number;     // Taux des coûts
+  costs: number;      // Taux des coûts
   pays: string;
 }
 
@@ -51,15 +51,15 @@ export const fetchSuiviPTBAConsolide = async (): Promise<SUIVI_PTBA_CONSOLIDE_T>
       const series = graphique.series || [];
 
       // Find values in series array by name or index
-      const findVal = (name: string) => series.find((s: any) => s.nom.includes(name))?.valeur ?? 0;
+      const findVal = (name: string) => series.find((s: any) => s.nom.toLowerCase().includes(name.toLowerCase()))?.valeur ?? 0;
       
-      const tasks = findVal("tâches");
+      const activities = findVal("activités") || findVal("tâches");
       const indicators = findVal("indicateurs");
       const costs = findVal("coûts");
 
       projects.push({
         sigle: p.sigle_projet || p.sigle || "N/A",
-        tasks: Number(tasks),
+        activities: Number(activities),
         indicators: Number(indicators),
         costs: Number(costs),
         pays,

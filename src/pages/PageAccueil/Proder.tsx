@@ -3,15 +3,14 @@ import { Stack, Typography, Grid, Box } from "@mui/joy";
 import { IMAGES } from "../../constant";
 import SlideLayout from "./Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRocket, faChartPie, faBriefcase, faChalkboardUser } from "@fortawesome/free-solid-svg-icons";
+import { faRocket, faBriefcase, faUsersGear } from "@fortawesome/free-solid-svg-icons";
 import { motion, Variants } from "framer-motion";
 
 const Proder: React.FC = () => {
     const points = [
-        { icon: faRocket, title: "Nouveaux Emplois", text: "Favorise la création d'emplois durables pour les jeunes." },
-        { icon: faChartPie, title: "Transformation", text: "Appui à la valeur ajoutée et à l'industrialisation rurale." },
-        { icon: faBriefcase, title: "Micro-Entreprises", text: "Éclosion de structures rurales compétitives et modernes." },
-        { icon: faChalkboardUser, title: "Agribusiness", text: "Accompagnement technique pour une rentabilité optimale." },
+        { icon: faRocket, title: "Composante 1", text: "Développement inclusif des entreprises des jeunes ruraux" },
+        { icon: faBriefcase, title: "Composante 2", text: "Promotion environnement favorable au développement des entreprises agropastorales" },
+        { icon: faUsersGear, title: "Composante 3", text: "Renforcement Institutionnel et Coordination du Programme" },
     ];
 
     const containerVariants: Variants = {
@@ -35,7 +34,7 @@ const Proder: React.FC = () => {
         <SlideLayout
             backgroundImage={IMAGES.burundi_entrepreneur}
             title="PRODER"
-            subtitle="Développement de l’Entrepreneuriat Rural"
+            subtitle="Projet de Développement de l'Entrepreneuriat Rural"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
                 <motion.div

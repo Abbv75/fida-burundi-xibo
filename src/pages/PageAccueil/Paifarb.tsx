@@ -3,15 +3,14 @@ import { Stack, Typography, Grid, Box } from "@mui/joy";
 import { IMAGES } from "../../constant";
 import SlideLayout from "./Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPiggyBank, faHandHoldingHeart, faUsers, faGlobeAfrica } from "@fortawesome/free-solid-svg-icons";
+import { faPiggyBank, faHandHoldingHeart, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { motion, Variants } from "framer-motion";
 
 const Paifarb: React.FC = () => {
     const points = [
-        { icon: faPiggyBank, title: "Services Financiers", text: "Offre de crédit et d'épargne adaptée au milieu rural." },
-        { icon: faHandHoldingHeart, title: "Inclusion Sociale", text: "Inclusion des ménages vulnérables et des femmes." },
-        { icon: faUsers, title: "Renforcement IMF", text: "Renforcement des Institutions de Microfinance." },
-        { icon: faGlobeAfrica, title: "Assurance Agricole", text: "Promotion de la protection contre les risques climatiques." },
+        { icon: faUsers, title: "Composante 1", text: "Contribuer à l'opérationnalisation de la stratégie d'inclusion financière" },
+        { icon: faPiggyBank, title: "Composante 2", text: "Renforcer l'offre de services financiers en milieu rural pour les populations cibles" },
+        { icon: faHandHoldingHeart, title: "Composante 3", text: "Coordination du PAIFAR-B" },
     ];
 
     const containerVariants: Variants = {
@@ -35,7 +34,7 @@ const Paifarb: React.FC = () => {
         <SlideLayout
             backgroundImage={IMAGES.burundi_finance}
             title="PAIFAR-B"
-            subtitle="Inclusion Financière Agricole et Rurale"
+            subtitle="Projet d'Appui à l'Inclusion Financière Agricole et Rurale du Burundi"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
                 <motion.div

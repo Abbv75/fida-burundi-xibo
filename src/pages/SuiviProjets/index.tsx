@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, Stack, Typography, Grid } from "@mui/joy";
-import { useApiRequestStore } from "../../store/apiRequestStore";
 import { TablePanel } from "./components/TablePanel";
 import { ChartPanel } from "./components/ChartPanel";
 import { motion } from "framer-motion";
+import { useSuiviProjets } from "./hooks/useSuiviProjets";
 
 export default function SuiviProjets() {
-    const { suiviProjetsData: projets } = useApiRequestStore();
+    const { projets, hasProjets, count } = useSuiviProjets();
 
-    if (!projets || projets.length === 0) {
+    if (!hasProjets) {
         return (
             <Stack
                 sx={{
@@ -68,7 +68,7 @@ export default function SuiviProjets() {
                             mt: "0.3vw",
                         }}
                     >
-                        Aperçu financier et exécution · {projets.length} projets actifs
+                        Aperçu financier et exécution · {count} projets actifs
                     </Typography>
                 </Box>
             </motion.div>

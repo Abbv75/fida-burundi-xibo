@@ -62,9 +62,9 @@ export const usePreloadPages = () => {
                     allPages.push({ 
                         id: "impact-agri", 
                         component: <FeatureSlide 
-                            title="Impact PIPARV-B"
+                            title="Objectif de Développement du PIPARV-B"
                             subtitle="Résilience et Nutrition au cœur du Plateau Central"
-                            description="Le projet PIPARV-B cible une réduction de 30% de la malnutrition infantile chronique d'ici juin 2025 grâce à l'intensification rizicole."
+                            description="Accroissement de la productivité et de la production agricoles, adoption de systèmes résilients et diversification des opportunités économiques rurales."
                             image={IMAGES.burundi_agriculture_impact}
                             highlights={["-30% Malnutrition", "5 Provinces clés", "Achèvement 2025"]}
                         />, 
@@ -74,9 +74,9 @@ export const usePreloadPages = () => {
                     allPages.push({ 
                         id: "impact-paifarb", 
                         component: <FeatureSlide 
-                            title="Inclusion PAIFAR-B"
+                            title="Objectif de Développement du PAIFAR-B"
                             subtitle="Digitalisation et Accès aux Services Financiers"
-                            description="PAIFAR-B assure une couverture nationale dans 14 provinces, facilitant la transition vers le financement additionnel pour pérenniser l'autonomie rurale."
+                            description="Renforcer l'inclusion financière des populations rurales (les producteurs, les OP, les plus vulnérables y compris les femmes, les jeunes et les microentrepreneurs), agricoles et non agricoles, en comblant les écarts entre la demande et l’offre de services financiers et non financiers."
                             image={IMAGES.burundi_financial_inclusion}
                             highlights={["14 Provinces", "Services Digitaux", "Relais de Financement"]}
                         />, 
@@ -86,9 +86,9 @@ export const usePreloadPages = () => {
                     allPages.push({ 
                         id: "impact-proder", 
                         component: <FeatureSlide 
-                            title="Objectifs PRODER"
+                            title="Objectif de Développement du PRODER"
                             subtitle="Propulser l'Entrepreneuriat des Jeunes"
-                            description="Le programme PRODER vise à créer 39 000 emplois décents et soutenir 7 840 micro-entreprises rurales pour 85 000 bénéficiaires directs."
+                            description="Promouvoir de manière équitable et inclusive l'entreprenariat des jeunes ainsi qu'un environnement propice au développement des entreprises agropastorales et au renforcement de la résilience des pauvres ruraux les plus vulnérables."
                             image={IMAGES.burundi_rural_entrepreneurship}
                             highlights={["39k Emplois", "85k Bénéficiaires", "7 840 Entreprises"]}
                         />, 
