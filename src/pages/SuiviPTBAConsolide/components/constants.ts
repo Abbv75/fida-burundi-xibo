@@ -1,5 +1,5 @@
 export const METRICS = [
-    { key: "tasks" as const, label: "Avancement des tâches", color: "#4CAF50" },
+    { key: "activities" as const, label: "Avancement des activités", color: "#4CAF50" },
     { key: "indicators" as const, label: "Taux des indicateurs", color: "#2196F3" },
     { key: "costs" as const, label: "Taux des coûts", color: "#FF9800" },
 ];
