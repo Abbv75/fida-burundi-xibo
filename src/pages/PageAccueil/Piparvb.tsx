@@ -35,7 +35,7 @@ const Piparvb: React.FC = () => {
         <SlideLayout
             backgroundImage={IMAGES.burundi_rice}
             title="PIPARV-B"
-            subtitle="Intensification Agricole et Réduction de la Vulnérabilité"
+            subtitle="Projet d’Intensification de la Production Agricole et de Réduction de la Vulnérabilité au Burundi"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
                 <motion.div

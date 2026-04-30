@@ -35,7 +35,7 @@ const Proder: React.FC = () => {
         <SlideLayout
             backgroundImage={IMAGES.burundi_entrepreneur}
             title="PRODER"
-            subtitle="Développement de l’Entrepreneuriat Rural"
+            subtitle="Projet de Développement de l'Entrepreneuriat Rural"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
                 <motion.div

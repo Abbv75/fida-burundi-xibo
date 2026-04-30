@@ -35,7 +35,7 @@ const Paifarb: React.FC = () => {
         <SlideLayout
             backgroundImage={IMAGES.burundi_finance}
             title="PAIFAR-B"
-            subtitle="Inclusion Financière Agricole et Rurale"
+            subtitle="Projet d'Appui à l'Inclusion Financière Agricole et Rurale du Burundi"
         >
             <Stack gap={3} sx={{ mt: 1, alignItems: 'center' }}>
                 <motion.div
