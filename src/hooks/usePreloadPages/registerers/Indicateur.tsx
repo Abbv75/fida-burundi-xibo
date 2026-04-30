@@ -1,7 +1,7 @@
 import { PAGE_T, INDICATEUR_PROJET_T, INDICATEUR_ITEM_T } from "../../../types";
 import IndicateursComponent from "../../../pages/Indicateurs";
 
-const CHUNK_SIZE = 8;
+const MAX_INDICATORS = 5;
 
 const chunkArray = (arr: INDICATEUR_ITEM_T[], size: number) => {
     const chunks = [];
@@ -18,7 +18,7 @@ export const registerIndicateurs = (data: INDICATEUR_PROJET_T[]): PAGE_T[] => {
         const { projet, indicateurs } = projectData;
         if (indicateurs.length === 0) return;
 
-        const chunks = chunkArray(indicateurs, CHUNK_SIZE);
+        const chunks = chunkArray(indicateurs.slice(0, MAX_INDICATORS), MAX_INDICATORS);
         chunks.forEach((chunk, index) => {
             pages.push({
                 id: `indicateurs-${projet.sigle}-${index}`,
