@@ -3,15 +3,14 @@ import { Stack, Typography, Grid, Box } from "@mui/joy";
 import { IMAGES } from "../../constant";
 import SlideLayout from "./Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSeedling, faWater, faUsersGear, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faSeedling, faWater, faUsersGear } from "@fortawesome/free-solid-svg-icons";
 import { motion, Variants } from "framer-motion";
 
 const Piparvb: React.FC = () => {
     const points = [
-        { icon: faSeedling, title: "Intensification", text: "Filières Riz, Maïs et Lait pour une productivité accrue." },
-        { icon: faWater, title: "Environnement", text: "Aménagement des bassins versants et protection des sols." },
-        { icon: faUsersGear, title: "Appui Rural", text: "Soutien direct aux coopératives et agriculteurs familiaux." },
-        { icon: faLocationDot, title: "Zones d'Action", text: "Impact direct à Karusi, Kayanza, Gitega, Ngozi et Muyinga." },
+        { icon: faSeedling, title: "Composante 1", text: "Aménagement intégré des Terroirs" },
+        { icon: faUsersGear, title: "Composante 2", text: "Structuration communautaire inclusive, amélioration de la productivité, la Valorisation et la diversification / Développement des Coopératives" },
+        { icon: faWater, title: "Composante 3", text: "Facilitation, Coordination et Gestion du Projet" },
     ];
 
     const containerVariants: Variants = {
