@@ -25,7 +25,7 @@ export const ExecutionTable: React.FC<ExecutionTableProps> = ({
         <table style={{ width: '100%', borderCollapse: 'collapse', color: '#fff', fontSize: '1.1vw' }}>
             <thead>
                 <tr style={{ backgroundColor: 'rgba(0, 60, 25, 0.7)' }}>
-                    <th rowSpan={2} style={thStyle}>Sous/ Composante</th>
+                    <th rowSpan={2} style={thStyle}>Composantes</th>
                     <th colSpan={4} style={thStyle}>Bilan de l'exécution du PTBA au {today}</th>
                     <th colSpan={3} style={{ ...thStyle, backgroundColor: 'rgba(255,255,255,0.1)' }}>Bilan Exécution Physique globale</th>
                 </tr>
