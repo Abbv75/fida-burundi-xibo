@@ -1,15 +1,7 @@
 import { PAGE_T, INDICATEUR_PROJET_T, INDICATEUR_ITEM_T } from "../../../types";
 import IndicateursComponent from "../../../pages/Indicateurs";
 
-const MAX_INDICATORS = 5;
-
-const chunkArray = (arr: INDICATEUR_ITEM_T[], size: number) => {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) {
-        chunks.push(arr.slice(i, i + size));
-    }
-    return chunks;
-};
+const MAX_INDICATORS = 7;
 
 export const registerIndicateurs = (data: INDICATEUR_PROJET_T[]): PAGE_T[] => {
     const pages: PAGE_T[] = [];
@@ -18,19 +10,19 @@ export const registerIndicateurs = (data: INDICATEUR_PROJET_T[]): PAGE_T[] => {
         const { projet, indicateurs } = projectData;
         if (indicateurs.length === 0) return;
 
-        const chunks = chunkArray(indicateurs.slice(0, MAX_INDICATORS), MAX_INDICATORS);
-        chunks.forEach((chunk, index) => {
-            pages.push({
-                id: `indicateurs-${projet.sigle}-${index}`,
-                component: <IndicateursComponent 
-                    project={projet}
-                    indicateurs={chunk}
-                    currentPage={index + 1}
-                    totalPages={chunks.length}
-                />,
-                duration: 35000,
-                preload: true
-            });
+        // Sort by percentage descending and take the top 5
+        const sortedIndicateurs = [...indicateurs]
+            .sort((a, b) => b.pourcentage - a.pourcentage)
+            .slice(0, MAX_INDICATORS);
+
+        pages.push({
+            id: `indicateurs-${projet.sigle}`,
+            component: <IndicateursComponent 
+                project={projet}
+                indicateurs={sortedIndicateurs}
+            />,
+            duration: 35000,
+            preload: true
         });
     });
 
