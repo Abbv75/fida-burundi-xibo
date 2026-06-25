@@ -5,6 +5,7 @@ import { useSuiviActiviteResponsable } from '../service/suiviActiviteResponsable
 import { useMissionSupervision } from '../service/mission_supervision';
 import { useExecutionComposante } from '../service/executionComposante';
 import { useIndicateurs } from '../service/indicateur';
+import { useSuiviPPM } from '../service/suiviPPM';
 import { useCallback } from 'react';
 
 export const useLoadData = () => {
@@ -17,6 +18,7 @@ export const useLoadData = () => {
     const { refetch: refetchMissionSupervision } = useMissionSupervision();
     const { refetch: refetchExecutionComposante } = useExecutionComposante();
     const { refetch: refetchIndicateurs } = useIndicateurs();
+    const { refetch: refetchPPM } = useSuiviPPM();
 
     const loadData = useCallback(async () => {
         // We trigger refetch for all and wait for the results
@@ -26,14 +28,16 @@ export const useLoadData = () => {
             { data: suiviResponsable },
             { data: missionSupervision },
             { data: executionComposante },
-            { data: indicateurs }
+            { data: indicateurs },
+            { data: ppmData }
         ] = await Promise.all([
             refetchProjets(),
             refetchPTBAConsolide(),
             refetchSuiviResponsable(),
             refetchMissionSupervision(),
             refetchExecutionComposante(),
-            refetchIndicateurs()
+            refetchIndicateurs(),
+            refetchPPM()
         ]);
 
         set({
@@ -42,7 +46,8 @@ export const useLoadData = () => {
             suiviActiviteResponsableData: suiviResponsable || { piparvb: [], proder: [], paifarb: [] },
             missionSupervisionData: missionSupervision || [],
             executionComposanteData: executionComposante || [],
-            indicateurData: indicateurs || []
+            indicateurData: indicateurs || [],
+            suiviPPMData: ppmData || []
         });
     }, [
         set, 
@@ -51,7 +56,8 @@ export const useLoadData = () => {
         refetchSuiviResponsable,
         refetchMissionSupervision,
         refetchExecutionComposante,
-        refetchIndicateurs
+        refetchIndicateurs,
+        refetchPPM
     ]);
 
     return { loadData };
