@@ -63,7 +63,7 @@ export const useChartOptions = (projets: ProjetSimpleEntry[]) => {
                     animation: false,
                     dataLabels: {
                         enabled: true,
-                        format: "{y:.1f}%",
+                        format: "{y:.2f}%",
                         style: {
                             color: "#fff",
                             fontWeight: "bold",

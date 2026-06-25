@@ -27,7 +27,7 @@ export const TableSection: React.FC<TableSectionProps> = ({ dataMetrics }) => {
                                 <Typography sx={{ color: '#fff', fontSize: '1.4vw', fontWeight: 600, lineHeight: 1.2 }}>{d.name}</Typography>
                             </td>
                             <td style={{ textAlign: 'center', padding: '18px 20px' }}>
-                                <Typography sx={{ color: '#fff', fontSize: '1.6vw', fontWeight: '900', textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>{d.value.toFixed(1)}%</Typography>
+                                <Typography sx={{ color: '#fff', fontSize: '1.6vw', fontWeight: '900', textShadow: '0 0 15px rgba(255,255,255,0.3)' }}>{d.value.toFixed(2)}%</Typography>
                             </td>
                         </tr>
                     ))}

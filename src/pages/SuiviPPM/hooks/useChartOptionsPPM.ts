@@ -34,7 +34,7 @@ export const useChartOptionsPPM = (data: PPM_CATEGORIE_T[]) => {
                 text: null
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Valeur: {point.y:,.0f} USD',
+                pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b><br/>Valeur: {point.y:,.0f} USD',
                 backgroundColor: 'rgba(0, 0, 0, 0.85)',
                 style: {
                     color: '#F0F0F0'
@@ -46,7 +46,7 @@ export const useChartOptionsPPM = (data: PPM_CATEGORIE_T[]) => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '<b>{point.name}</b>: {point.percentage:.2f} %',
                         style: {
                             color: '#FFFFFF',
                             textOutline: 'none',

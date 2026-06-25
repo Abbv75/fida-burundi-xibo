@@ -27,7 +27,7 @@ export const useProjectStats = (item: MISSION_SUPERVISION_T) => {
                 borderRadius: 15,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name} : {point.percentage:.1f}%',
+                    format: '{point.name} : {point.percentage:.2f}%',
                     style: { color: '#fff', fontSize: '1.2vw', textOutline: 'none', fontWeight: 'bold' },
                     distance: 25
                 },

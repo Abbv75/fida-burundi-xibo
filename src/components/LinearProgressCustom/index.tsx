@@ -25,7 +25,7 @@ const LinearProgressCustom: React.FC<LinearProgressCustomProps> = ({
                 minWidth: '2.5vw',
                 textAlign: 'right'
             }}>
-                {Math.round(safeValue)}%
+                {safeValue.toFixed(2)}%
             </Typography>
             <Box
                 sx={{
