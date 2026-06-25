@@ -4,7 +4,8 @@ import {
   MISSION_SUPERVISION_T, 
   SUIVI_ACTIVITE_RESPONSABLE_DATA_T, 
   EXECUTION_COMPOSANTE_PROJET_T,
-  INDICATEUR_PROJET_T 
+  INDICATEUR_PROJET_T,
+  PPM_DATA_T
 } from '../types';
 
 import { SUIVI_PROJETS_T } from '../service/suiviProjets';
@@ -18,6 +19,7 @@ interface ApiRequestState {
   suiviActiviteResponsableData: SUIVI_ACTIVITE_RESPONSABLE_DATA_T;
   executionComposanteData: EXECUTION_COMPOSANTE_PROJET_T[];
   indicateurData: INDICATEUR_PROJET_T[];
+  suiviPPMData: PPM_DATA_T[];
 }
 
 export const useApiRequestStore = create<ApiRequestState>((set) => ({
@@ -28,4 +30,5 @@ export const useApiRequestStore = create<ApiRequestState>((set) => ({
   suiviActiviteResponsableData: { piparvb: [], proder: [], paifarb: [] },
   executionComposanteData: [],
   indicateurData: [],
+  suiviPPMData: [],
 }));

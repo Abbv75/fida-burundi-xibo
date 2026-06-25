@@ -32,7 +32,7 @@ export const useMetricChartOptions = (data: ChartDataPoint[]) => {
         tooltip: {
             useHTML: true,
             headerFormat: '<div style="font-size:0.9vw;font-weight:bold;color:#ffd700">{point.key}</div>',
-            pointFormat: '<div style="font-size:0.8vw;color:#fff">{series.name}: <b>{point.y:.1f}%</b></div>',
+            pointFormat: '<div style="font-size:0.8vw;color:#fff">{series.name}: <b>{point.y:.2f}%</b></div>',
             backgroundColor: "rgba(0,0,0,0.85)",
             borderWidth: 0,
             borderRadius: 8,
@@ -42,7 +42,7 @@ export const useMetricChartOptions = (data: ChartDataPoint[]) => {
                 borderRadius: 5,
                 dataLabels: {
                     enabled: true,
-                    format: "{y:.0f}%",
+                    format: "{y:.2f}%",
                     style: { fontSize: "0.75vw", color: "#fff", textOutline: "none" }
                 }
             }

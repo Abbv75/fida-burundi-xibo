@@ -13,6 +13,7 @@ import MissionSupervision from '../../pages/MissionSupervision';
 import SuiviProjets from '../../pages/SuiviProjets';
 import SuiviPTBAConsolide from '../../pages/SuiviPTBAConsolide';
 import SuiviPTBAProjet from '../../pages/SuiviPTBAProjet';
+import SuiviPPM from '../../pages/SuiviPPM';
 import FeatureSlide from '../../pages/PageAccueil/FeatureSlide';
 import { IMAGES } from '../../constant';
 
@@ -148,6 +149,25 @@ export const usePreloadPages = () => {
                         duration: 35000 
                     });
                 }
+
+                // G. PPM Projet (valid PPMs belonging to this project)
+                const ppmsForProject = data.suiviPPMData.filter(ppm => {
+                    const ppmSigle = ppm.projet.sigle_projet;
+                    if (sigle === "PIPARV-B") {
+                        return ppmSigle === "PIPARV-B" || ppmSigle === "Fonds Vert Climat" || ppmSigle === "CRI";
+                    }
+                    return ppmSigle === sigle;
+                });
+
+                ppmsForProject.forEach(ppm => {
+                    if (ppm.data && ppm.data.totaux_globaux?.nombre_marches > 0) {
+                        allPages.push({
+                            id: `suivi-ppm-${ppm.projet.sigle_projet}`,
+                            component: <SuiviPPM project={ppm} />,
+                            duration: 35000
+                        });
+                    }
+                });
             });
 
             // 3. CONSOLIDATED & GLOBAL VIEWS

@@ -204,3 +204,56 @@ export interface INDICATEUR_PROJET_T {
   };
   indicateurs: INDICATEUR_ITEM_T[];
 }
+
+export interface PPM_CATEGORIE_T {
+  code_categorie: string;
+  nom_categorie: string | null;
+  nombre_marches: number;
+  cout_total_bif: number;
+  cout_total_usd: number;
+  cout_total_bif_formatted: string;
+  cout_total_usd_formatted: string;
+}
+
+export interface PPM_VERSION_T {
+  id_version: string;
+  info_version: {
+    id_version: string;
+    annee: string;
+  };
+  categories: Record<string, PPM_CATEGORIE_T>;
+  totaux_version: {
+    nombre_marches: number;
+    cout_total_bif: number;
+    cout_total_usd: number;
+    cout_total_bif_formatted: string;
+    cout_total_usd_formatted: string;
+  };
+}
+
+export interface PPM_DATA_T {
+  projet: {
+    id_projet: string;
+    intitule_projet: string;
+    sigle_projet: string;
+  };
+  metadata: any;
+  data: {
+    versions: PPM_VERSION_T[];
+    totaux_par_categorie: PPM_CATEGORIE_T[];
+    totaux_globaux: {
+      nombre_marches: number;
+      cout_total_bif: number;
+      cout_total_usd: number;
+      cout_total_bif_formatted: string;
+      cout_total_usd_formatted: string;
+    };
+  };
+}
+
+export interface PPM_API_RESPONSE_T {
+  success: boolean;
+  message: string;
+  metadata: any;
+  data: PPM_DATA_T[];
+}

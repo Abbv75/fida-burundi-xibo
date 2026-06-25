@@ -12,7 +12,7 @@ const ENDPOINTS = [
 export const fetchIndicateurs = async (): Promise<INDICATEUR_PROJET_T[]> => {
   const results = await Promise.allSettled(
     ENDPOINTS.map(({ key, projet }) =>
-      axios.get(getApiUrl(key, `/ApiConsolide/ApiIndicateur.php?projet=${projet}`)).then(({ data }) => data.data)
+      axios.get(getApiUrl(key, `/ApiConsolide/API_Realisations_cumulees.php?projet=${projet}`)).then(({ data }) => data.data)
     )
   );
 
@@ -20,7 +20,24 @@ export const fetchIndicateurs = async (): Promise<INDICATEUR_PROJET_T[]> => {
 
   results.forEach((result) => {
     if (result.status === "fulfilled" && result.value) {
-      allData.push(result.value);
+      const responseData = result.value;
+      if (responseData.projets && Array.isArray(responseData.projets)) {
+        responseData.projets.forEach((proj: any) => {
+          const mappedProject: INDICATEUR_PROJET_T = {
+            projet: {
+              sigle: proj.projet.sigle_projet,
+            },
+            indicateurs: proj.indicateurs.map((ind: any) => ({
+              code: ind.code,
+              intitule: ind.intitule,
+              total_prevu: ind.cible || 0,
+              total_realise: ind.realise || 0,
+              pourcentage: ind.taux_realisation || 0,
+            })),
+          };
+          allData.push(mappedProject);
+        });
+      }
     }
   });
 
