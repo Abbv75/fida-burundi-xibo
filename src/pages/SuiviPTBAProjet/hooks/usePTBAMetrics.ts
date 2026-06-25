@@ -4,8 +4,8 @@ import { PTBAMetric } from "../types";
 
 export const usePTBAMetrics = (project: PTBAConsolideProject): PTBAMetric[] => {
     return useMemo(() => [
-        { name: "Avancement des activités", value: project.activities, color: "#3498db" },
+        { name: "Avancement des tâches", value: project.activities, color: "#3498db" },
         { name: "Taux des indicateurs", value: project.indicators, color: "#2ecc71" },
-        { name: "Taux des coûts", value: project.costs, color: "#e74c3c" },
+        { name: "Taux de décaissement", value: project.costs, color: "#e74c3c" },
     ], [project]);
 };

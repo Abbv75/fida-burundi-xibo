@@ -91,7 +91,7 @@ export const usePreloadPages = () => {
                             subtitle="Propulser l'Entrepreneuriat des Jeunes"
                             description="Promouvoir de manière équitable et inclusive l'entreprenariat des jeunes ainsi qu'un environnement propice au développement des entreprises agropastorales et au renforcement de la résilience des pauvres ruraux les plus vulnérables."
                             image={IMAGES.burundi_rural_entrepreneurship}
-                            highlights={["39k Emplois", "85k Bénéficiaires", "7 840 Entreprises"]}
+                            highlights={["39k Emplois", "85k Bénéficiaires", "24 000 Entreprises"]}
                         />, 
                         duration: 25000 
                     });
