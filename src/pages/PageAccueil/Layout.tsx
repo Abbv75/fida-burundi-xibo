@@ -38,15 +38,14 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                 sx={{
                     position: "relative",
                     zIndex: 1,
-                    width: "85%",
-                    maxWidth: "1400px",
-                    p: 4, // Slightly reduced padding
+                    width: "95%",
+                    p: "3vw",
                     borderRadius: "24px",
                     background: "rgba(255, 255, 255, 0.1)",
                     backdropFilter: "blur(20px)",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-                    gap: 3, // Slightly reduced gap
+                    gap: "2vw",
                 }}
             >
                 <Stack sx={{ textAlign: "center" }}>

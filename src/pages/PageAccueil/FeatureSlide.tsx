@@ -51,7 +51,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({ title, subtitle, descriptio
                             fontSize: "1.6vw",
                             lineHeight: 1.6,
                             opacity: 0.95,
-                            maxWidth: '1000px',
+                            width: '80%',
                             textShadow: '2px 2px 10px rgba(0,0,0,0.5)'
                         }}
                     >
