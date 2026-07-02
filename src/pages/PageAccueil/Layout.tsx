@@ -38,7 +38,7 @@ const SlideLayout: React.FC<SlideLayoutProps> = ({ backgroundImage, title, subti
                 sx={{
                     position: "relative",
                     zIndex: 1,
-                    width: "95%",
+                    width: "85%",
                     p: "3vw",
                     borderRadius: "24px",
                     background: "rgba(255, 255, 255, 0.1)",
