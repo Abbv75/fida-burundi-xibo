@@ -48,7 +48,7 @@ const Piparvb: React.FC = () => {
                             fontSize: "1.4vw",
                             lineHeight: 1.6,
                             opacity: 0.9,
-                            maxWidth: '900px',
+                            width: '80%',
                             textAlign: 'center'
                         }}
                     >
@@ -60,7 +60,7 @@ const Piparvb: React.FC = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    style={{ width: '100%', maxWidth: '1100px' }}
+                    style={{ width: '90%' }}
                 >
                     <Grid container spacing={3} justifyContent="center" sx={{ width: '100%' }}>
                         {points.map((p, i) => (
