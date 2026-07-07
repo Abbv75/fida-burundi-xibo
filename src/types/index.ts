@@ -109,6 +109,13 @@ export interface API_mobile_activite_T {
   cout_engage: number;
 }
 
+export interface MISSION_STAT_VALUES_T {
+  encours: number;
+  execute: number;
+  non_execute: number;
+  non_entame: number;
+}
+
 export interface MISSION_SUPERVISION_T {
   projet: {
     id: string;
@@ -125,18 +132,9 @@ export interface MISSION_SUPERVISION_T {
   } | null;
   recommandations: {
     total: number;
-    statistiques: {
-      encours: number;
-      execute: number;
-      non_execute: number;
-      non_entame: number;
-      pourcentages: {
-        encours: number;
-        execute: number;
-        non_execute: number;
-        non_entame: number;
-      }
-    }
+    statistiques: MISSION_STAT_VALUES_T & {
+      pourcentages: MISSION_STAT_VALUES_T;
+    };
   };
 }
 
@@ -180,12 +178,14 @@ export interface EXECUTION_COMPOSANTE_ITEM_T {
   };
 }
 
+export interface PROJET_INFO_T {
+  id_projet: string;
+  intitule_projet: string;
+  sigle_projet: string;
+}
+
 export interface EXECUTION_COMPOSANTE_PROJET_T {
-  projet: {
-    id_projet: string;
-    intitule_projet: string;
-    sigle_projet: string;
-  };
+  projet: PROJET_INFO_T;
   annee_reference: string;
   taux_execution_globale_tache: number | string;
   taux_execution_globale: number | string;
@@ -207,14 +207,17 @@ export interface INDICATEUR_PROJET_T {
   indicateurs: INDICATEUR_ITEM_T[];
 }
 
-export interface PPM_CATEGORIE_T {
-  code_categorie: string;
-  nom_categorie: string | null;
+export interface PPM_TOTAL_T {
   nombre_marches: number;
   cout_total_bif: number;
   cout_total_usd: number;
   cout_total_bif_formatted: string;
   cout_total_usd_formatted: string;
+}
+
+export interface PPM_CATEGORIE_T extends PPM_TOTAL_T {
+  code_categorie: string;
+  nom_categorie: string | null;
 }
 
 export interface PPM_VERSION_T {
@@ -224,32 +227,16 @@ export interface PPM_VERSION_T {
     annee: string;
   };
   categories: Record<string, PPM_CATEGORIE_T>;
-  totaux_version: {
-    nombre_marches: number;
-    cout_total_bif: number;
-    cout_total_usd: number;
-    cout_total_bif_formatted: string;
-    cout_total_usd_formatted: string;
-  };
+  totaux_version: PPM_TOTAL_T;
 }
 
 export interface PPM_DATA_T {
-  projet: {
-    id_projet: string;
-    intitule_projet: string;
-    sigle_projet: string;
-  };
+  projet: PROJET_INFO_T;
   metadata: any;
   data: {
     versions: PPM_VERSION_T[];
     totaux_par_categorie: PPM_CATEGORIE_T[];
-    totaux_globaux: {
-      nombre_marches: number;
-      cout_total_bif: number;
-      cout_total_usd: number;
-      cout_total_bif_formatted: string;
-      cout_total_usd_formatted: string;
-    };
+    totaux_globaux: PPM_TOTAL_T;
   };
 }
 
