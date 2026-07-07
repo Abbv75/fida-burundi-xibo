@@ -18,6 +18,8 @@ export interface ExecutionComposanteProps {
         tauxGlobalSum: number;
         compCount: number;
     };
+    taux_execution_globale_tache: number | string;
+    taux_execution_globale: number | string;
 }
 
 export interface ExecutionTableProps {

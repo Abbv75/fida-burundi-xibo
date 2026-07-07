@@ -11,13 +11,23 @@ export default function ExecutionComposante({
     isLastPage = true,
     currentPage = 1,
     totalPages = 1,
-    totals
+    totals,
+    taux_execution_globale_tache,
+    taux_execution_globale
 }: ExecutionComposanteProps) {
     const today = new Date().toLocaleDateString('fr-FR');
 
     const avgTauxCons = totals && totals.budget > 0 ? (totals.depense / totals.budget) * 100 : 0;
-    const avgTauxPhys = totals && totals.compCount > 0 ? totals.tauxPhysSum / totals.compCount : 0;
-    const avgTauxGlobal = totals && totals.compCount > 0 ? totals.tauxGlobalSum / totals.compCount : 0;
+    
+    const parseTaux = (val: number | string | undefined) => {
+        if (typeof val === 'string') {
+            return Number(val.replace(',', '.')) || 0;
+        }
+        return Number(val) || 0;
+    };
+
+    const avgTauxPhys = parseTaux(taux_execution_globale_tache);
+    const avgTauxGlobal = parseTaux(taux_execution_globale);
 
     return (
         <Stack
