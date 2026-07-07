@@ -16,7 +16,7 @@ export const registerExecutionComposante = (data: EXECUTION_COMPOSANTE_PROJET_T[
     const pages: PAGE_T[] = [];
 
     data.forEach((projectData) => {
-        const { projet, annee_reference, composantes } = projectData;
+        const { projet, annee_reference, composantes, taux_execution_globale_tache, taux_execution_globale } = projectData;
         if (composantes.length === 0) return;
 
         // Calculate totals for the project (to be displayed on the last page)
@@ -56,6 +56,8 @@ export const registerExecutionComposante = (data: EXECUTION_COMPOSANTE_PROJET_T[
                     currentPage={index + 1}
                     totalPages={chunks.length}
                     totals={totals}
+                    taux_execution_globale_tache={taux_execution_globale_tache}
+                    taux_execution_globale={taux_execution_globale}
                 />,
                 duration: 30000,
                 preload: true

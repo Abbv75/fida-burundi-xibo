@@ -187,6 +187,8 @@ export interface EXECUTION_COMPOSANTE_PROJET_T {
     sigle_projet: string;
   };
   annee_reference: string;
+  taux_execution_globale_tache: number | string;
+  taux_execution_globale: number | string;
   composantes: EXECUTION_COMPOSANTE_ITEM_T[];
 }
 
